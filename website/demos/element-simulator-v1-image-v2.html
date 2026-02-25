@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Simulator v2 - Image Upload (Density Organized)</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-top: 0;
+            color: #fff;
+        }
+        .info {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .info h2 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        .info p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .simulator-wrapper {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border: 2px solid #444;
+            border-radius: 8px;
+        }
+        .simulator-container {
+            position: relative;
+            background: #1f2224;
+        }
+        .simulator-container.resolution-low {
+            width: 100%;
+            height: 600px;
+        }
+        .simulator-container.resolution-high {
+            width: 200%;
+            height: 1200px;
+            transform: scale(0.5);
+            transform-origin: 0 0;
+        }
+        .simulator-container.resolution-ultra-high {
+            width: 400%;
+            height: 2400px;
+            transform: scale(0.25);
+            transform-origin: 0 0;
+        }
+        .resolution-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .resolution-buttons span {
+            color: #aaa;
+            font-size: 12px;
+            margin-right: 4px;
+        }
+        .resolution-btn {
+            padding: 8px 14px;
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .resolution-btn:hover {
+            background: #444;
+            border-color: #666;
+        }
+        .resolution-btn.active {
+            background: #4CAF50;
+            border-color: #66BB6A;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls h3 {
+            margin: 20px 0 10px 0;
+            font-size: 16px;
+            color: #4CAF50;
+        }
+        .controls > h3:first-child {
+            margin-top: 0;
+        }
+        .density-section {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        .density-section h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #66BB6A;
+            font-size: 14px;
+        }
+        .material-buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .material-button {
+            padding: 8px 12px;
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .material-button:hover {
+            background: #444;
+            border-color: #666;
+        }
+        .material-button.active {
+            background: #4CAF50;
+            border-color: #66BB6A;
+        }
+        .material-button::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .material-button[data-material="0"]::before { background: #1f2224; }
+        .material-button[data-material="1"]::before { background: #383838; }
+        .material-button[data-material="2"]::before { background: #2167ff; }
+        .material-button[data-material="3"]::before { background: #ff6f00; }
+        .material-button[data-material="4"]::before { background: #e6d577; }
+        .material-button[data-material="5"]::before { background: #228b22; }
+        .material-button[data-material="6"]::before { background: #808080; }
+        .material-button[data-material="7"]::before { background: #1a1a1a; }
+        .material-button[data-material="8"]::before { background: #b0e0e6; }
+        .material-button[data-material="9"]::before { background: #ff4400; }
+        .material-button[data-material="10"]::before { background: #c8c8c8; }
+        .material-button[data-material="11"]::before { background: #228b22; }
+        .material-button[data-material-name]::before {
+            background: #888888;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Element Simulator v2 - Image Upload (Density Organized)</h1>
+
+        <div class="info">
+            <h2>Material Organization</h2>
+            <p><strong>Materials are organized by density ranges</strong> to improve image sampling accuracy. This version includes a wider diversity of gases, powders, liquids, and solids with varied colors.</p>
+        </div>
+
+        <div class="simulator-wrapper">
+            <div class="simulator-container resolution-high" id="simulatorContainer">
+                <folk-sand-hybrid id="simulator"></folk-sand-hybrid>
+            </div>
+        </div>
+
+        <div class="controls" style="margin-top: 20px;">
+            <h3>📸 Image Upload</h3>
+            <div class="resolution-buttons">
+                <span>Resolution:</span>
+                <button type="button" class="resolution-btn" data-resolution="low" id="resolutionLow">Low</button>
+                <button type="button" class="resolution-btn active" data-resolution="high" id="resolutionHigh">High</button>
+                <button type="button" class="resolution-btn" data-resolution="ultra-high" id="resolutionUltraHigh">Ultra-high</button>
+            </div>
+            <input type="file" id="imageUpload" accept="image/*" style="margin-bottom: 10px; color: #fff;">
+            <button id="loadImageBtn" style="padding: 10px 20px; background: #4CAF50; border: none; border-radius: 5px; color: white; cursor: pointer; margin-left: 10px;">Load Image</button>
+            <button id="pauseButton" style="padding: 10px 20px; background: #FF9800; border: none; border-radius: 5px; color: white; font-size: 14px; cursor: pointer; font-weight: bold; margin-left: 10px;">
+                ⏸️ Pause
+            </button>
+            <button id="playButton" style="padding: 10px 20px; background: #4CAF50; border: none; border-radius: 5px; color: white; font-size: 14px; cursor: pointer; font-weight: bold; display: none; margin-left: 10px;">
+                ▶️ Play
+            </button>
+            <p style="margin-top: 10px; color: #aaa; font-size: 12px;">
+                Upload an image to convert it to materials based on color matching. Materials are organized by density for better accuracy.
+            </p>
+        </div>
+
+        <div class="controls" id="materialsContainer">
+            <h3>Materials Organized by Density</h3>
+            <p style="color: #aaa; font-size: 12px; margin-bottom: 20px;">Loading materials...</p>
+        </div>
+
+        <div class="status" id="status">
+            Selected: Sand (ID: 4)
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button id="colorSchemeButton" style="padding: 15px 30px; background: #9E9E9E; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; font-weight: bold;">
+                🎨 Original Colors
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { FolkSandHybrid } from '../../packages/labs/dist/folk-sand-hybrid.js';
+
+        const simulator = document.getElementById('simulator');
+        const status = document.getElementById('status');
+        const materialsContainer = document.getElementById('materialsContainer');
+        let selectedMaterial = 4; // Sand
+
+        // Curated list of diverse materials for better image sampling
+        const curatedMaterials = [
+            // Very Light (0-100): Gases
+            { name: 'air', id: 0, type: 'gas' },
+            { name: 'smoke', id: 1, type: 'gas' },
+            { name: 'fire', id: 9, type: 'gas' },
+            { name: 'steam', id: 10, type: 'gas' },
+            { name: 'hydrogen', type: 'gas' },
+            { name: 'helium', type: 'gas' },
+            { name: 'neon', type: 'gas' },
+            { name: 'nitrogen', type: 'gas' },
+            { name: 'oxygen', type: 'gas' },
+            { name: 'methane', type: 'gas' },
+            { name: 'chlorine', type: 'gas' },
+            { name: 'carbon_dioxide', type: 'gas' },
+            { name: 'ammonia', type: 'gas' },
+            { name: 'sulfur_dioxide', type: 'gas' },
+            
+            // Light (100-1000): Light liquids and powders
+            { name: 'liquid_hydrogen', type: 'liquid' },
+            { name: 'liquid_helium', type: 'liquid' },
+            { name: 'liquid_nitrogen', type: 'liquid' },
+            { name: 'liquid_oxygen', type: 'liquid' },
+            { name: 'snow', type: 'powder' },
+            { name: 'dust', type: 'powder' },
+            { name: 'pollen', type: 'powder' },
+            { name: 'ash', type: 'powder' },
+            { name: 'flour', type: 'powder' },
+            { name: 'plant', id: 5, type: 'solid' },
+            { name: 'moss', id: 11, type: 'powder' },
+            
+            // Medium (1000-2000): Most liquids and powders
+            { name: 'water', id: 2, type: 'liquid' },
+            { name: 'ice', id: 8, type: 'powder' },
+            { name: 'sand', id: 4, type: 'powder' },
+            { name: 'dirt', type: 'powder' },
+            { name: 'salt', type: 'powder' },
+            { name: 'sugar', type: 'powder' },
+            { name: 'oil', type: 'liquid' },
+            { name: 'alcohol', type: 'liquid' },
+            { name: 'milk', type: 'liquid' },
+            { name: 'coffee', type: 'liquid' },
+            { name: 'tea', type: 'liquid' },
+            { name: 'blood', type: 'liquid' },
+            { name: 'ink', type: 'liquid' },
+            { name: 'dye', type: 'liquid' },
+            { name: 'acid', type: 'liquid' },
+            { name: 'slime', type: 'liquid' },
+            { name: 'soap', type: 'liquid' },
+            { name: 'glue', type: 'liquid' },
+            { name: 'honey', type: 'liquid' },
+            { name: 'ketchup', type: 'liquid' },
+            { name: 'mayo', type: 'liquid' },
+            { name: 'grease', type: 'liquid' },
+            { name: 'poison', type: 'liquid' },
+            { name: 'antidote', type: 'liquid' },
+            { name: 'antibody', type: 'liquid' },
+            { name: 'vaccine', type: 'liquid' },
+            { name: 'mud', type: 'powder' },
+            { name: 'clay', type: 'powder' },
+            { name: 'gravel', type: 'powder' },
+            { name: 'concrete', type: 'powder' },
+            { name: 'charcoal', type: 'powder' },
+            { name: 'rock', type: 'powder' },
+            { name: 'stone', id: 6, type: 'powder' },
+            
+            // Heavy (2000-5000): Heavy liquids and powders
+            { name: 'lava', id: 3, type: 'liquid' },
+            { name: 'molten_glass', type: 'liquid' },
+            { name: 'mercury', type: 'liquid' },
+            { name: 'molasses', type: 'liquid' },
+            { name: 'melted_chocolate', type: 'liquid' },
+            { name: 'brick', type: 'powder' },
+            { name: 'glass', type: 'solid' },
+            { name: 'diamond', type: 'solid' },
+            { name: 'sulfur', type: 'powder' },
+            { name: 'uranium', type: 'powder' },
+            { name: 'rust', type: 'powder' },
+            
+            // Very Heavy (5000+): Very dense materials
+            { name: 'wall', id: 7, type: 'solid' },
+            { name: 'wood', type: 'solid' },
+        ];
+
+        // Organize materials by density ranges
+        function organizeMaterialsByDensity(materials) {
+            const ranges = {
+                'Very Light (0-100)': [],
+                'Light (100-1000)': [],
+                'Medium (1000-2000)': [],
+                'Heavy (2000-5000)': [],
+                'Very Heavy (5000+)': []
+            };
+
+            materials.forEach(mat => {
+                const density = mat.density || 1000;
+                if (density < 100) {
+                    ranges['Very Light (0-100)'].push(mat);
+                } else if (density < 1000) {
+                    ranges['Light (100-1000)'].push(mat);
+                } else if (density < 2000) {
+                    ranges['Medium (1000-2000)'].push(mat);
+                } else if (density < 5000) {
+                    ranges['Heavy (2000-5000)'].push(mat);
+                } else {
+                    ranges['Very Heavy (5000+)'].push(mat);
+                }
+            });
+
+            return ranges;
+        }
+
+        // Create material buttons dynamically
+        function createMaterialButtons() {
+            if (!simulator || !simulator.getAllMaterialsWithProperties) {
+                setTimeout(createMaterialButtons, 200);
+                return;
+            }
+            
+            try {
+                const allMaterials = simulator.getAllMaterialsWithProperties();
+                
+                // Filter to curated materials
+                const curated = curatedMaterials.map(curated => {
+                    const found = allMaterials.find(m => 
+                        (curated.id !== undefined && m.id === curated.id) || 
+                        (curated.name && m.name === curated.name)
+                    );
+                    return found ? { ...found, type: curated.type } : null;
+                }).filter(m => m !== null);
+
+                // Sort by density within each type
+                curated.sort((a, b) => a.density - b.density);
+
+                // Organize by density ranges
+                const organized = organizeMaterialsByDensity(curated);
+
+                // Clear container
+                materialsContainer.innerHTML = '<h3>Materials Organized by Density</h3>';
+
+                // Create sections for each density range
+                Object.entries(organized).forEach(([rangeName, materials]) => {
+                    if (materials.length === 0) return;
+
+                    const section = document.createElement('div');
+                    section.className = 'density-section';
+                    
+                    const h4 = document.createElement('h4');
+                    h4.textContent = `${rangeName} (${materials.length} materials)`;
+                    section.appendChild(h4);
+
+                    const group = document.createElement('div');
+                    group.className = 'material-buttons-group';
+
+                    materials.forEach(mat => {
+                        const button = document.createElement('button');
+                        button.className = 'material-button';
+                        if (mat.id < 12) {
+                            button.dataset.material = mat.id;
+                        } else {
+                            button.dataset.materialName = mat.name;
+                            button.id = `material-btn-${mat.name}`;
+                        }
+                        button.textContent = mat.name.charAt(0).toUpperCase() + mat.name.slice(1).replace(/_/g, ' ');
+                        
+                        // Set color
+                        const color = simulator.getMaterialColor(mat.name) || '#888888';
+                        if (mat.id >= 12) {
+                            let styleEl = document.getElementById('extended-material-colors-style');
+                            if (!styleEl) {
+                                styleEl = document.createElement('style');
+                                styleEl.id = 'extended-material-colors-style';
+                                document.head.appendChild(styleEl);
+                            }
+                            const selector = `#material-btn-${mat.name}::before`;
+                            const rule = `${selector} { background: ${color} !important; }`;
+                            const sheet = styleEl.sheet;
+                            if (sheet) {
+                                try {
+                                    sheet.insertRule(rule, sheet.cssRules.length);
+                                } catch (e) {
+                                    // Rule might already exist
+                                }
+                            }
+                        }
+
+            button.addEventListener('click', () => {
+                            document.querySelectorAll('.material-button').forEach(b => b.classList.remove('active'));
+                button.classList.add('active');
+                
+                            if (mat.id < 12) {
+                                simulator.setMaterialType(mat.id);
+                                status.textContent = `Selected: ${mat.name} (ID: ${mat.id}, Density: ${mat.density.toFixed(1)})`;
+                } else {
+                                simulator.setMaterialTypeByName(mat.name);
+                                status.textContent = `Selected: ${mat.name} (ID: ${mat.id}, Density: ${mat.density.toFixed(1)})`;
+                            }
+                        });
+
+                        group.appendChild(button);
+                    });
+
+                    section.appendChild(group);
+                    materialsContainer.appendChild(section);
+                });
+
+                console.log(`Created ${curated.length} material buttons organized by density`);
+            } catch (error) {
+                console.error('Error creating material buttons:', error);
+                materialsContainer.innerHTML = '<p style="color: #ff4444;">Error loading materials. Please refresh the page.</p>';
+            }
+        }
+
+        // Resolution: 'low' | 'high' | 'ultra-high'
+        let currentResolution = 'high';
+        const simulatorContainer = document.getElementById('simulatorContainer');
+
+        function setResolution(resolution) {
+            if (!simulatorContainer) return;
+            currentResolution = resolution;
+            simulatorContainer.classList.remove('resolution-low', 'resolution-high', 'resolution-ultra-high');
+            simulatorContainer.classList.add(`resolution-${resolution}`);
+            document.querySelectorAll('.resolution-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.resolution === resolution);
+            });
+            // Give DOM time to apply new size, then trigger resize so simulator recalculates buffer
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    window.dispatchEvent(new Event('resize'));
+                });
+            });
+        }
+
+        // Set up buttons
+        function setupButtons() {
+            if (!simulator) {
+                console.error('Simulator element not found');
+                return;
+            }
+
+            // Resolution buttons
+            ['resolutionLow', 'resolutionHigh', 'resolutionUltraHigh'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.addEventListener('click', () => setResolution(btn.dataset.resolution));
+                }
+            });
+
+            // Image upload
+            const imageUpload = document.getElementById('imageUpload');
+            const loadImageBtn = document.getElementById('loadImageBtn');
+            if (imageUpload && loadImageBtn) {
+                loadImageBtn.addEventListener('click', () => {
+                    const file = imageUpload.files?.[0];
+                    if (!file) {
+                        alert('Please select an image file first');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            if (!simulator || !simulator.fillRegionFromImage) {
+                                alert('Simulator not ready. Please wait a moment and try again.');
+                                return;
+                            }
+                            
+                            const tempCanvas = document.createElement('canvas');
+                            const ctx = tempCanvas.getContext('2d');
+                            if (!ctx) {
+                                alert('Could not create canvas context');
+                                return;
+                            }
+                            
+                            const bufferDims = simulator.getBufferDimensions();
+                            if (!bufferDims) {
+                                alert('Simulator not initialized. Please wait a moment and try again.');
+                                return;
+                            }
+                            
+                            const scale = Math.min(bufferDims.width / img.width, bufferDims.height / img.height);
+                            const scaledWidth = Math.floor(img.width * scale);
+                            const scaledHeight = Math.floor(img.height * scale);
+                            
+                            tempCanvas.width = img.width;
+                            tempCanvas.height = img.height;
+                            ctx.drawImage(img, 0, 0);
+                            
+                            const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                            
+                            const startX = Math.floor((bufferDims.width - scaledWidth) / 2);
+                            const startY = Math.floor((bufferDims.height - scaledHeight) / 2);
+                            
+                            try {
+                                simulator.fillRegionFromImage(
+                                    imageData,
+                                    startX,
+                                    startY,
+                                    scaledWidth,
+                                    scaledHeight,
+                                    img.width,
+                                    img.height
+                                );
+                                status.textContent = `Image loaded! Converted ${scaledWidth}x${scaledHeight} pixels to materials.`;
+                            } catch (error) {
+                                console.error('Error loading image:', error);
+                                alert('Error loading image: ' + error.message);
+                            }
+                        };
+                        img.src = e.target?.result || '';
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Pause/Play
+            const pauseButton = document.getElementById('pauseButton');
+            const playButton = document.getElementById('playButton');
+            if (pauseButton && playButton) {
+                pauseButton.addEventListener('click', () => {
+                    simulator.pause();
+                    pauseButton.style.display = 'none';
+                    playButton.style.display = 'inline-block';
+                });
+                playButton.addEventListener('click', () => {
+                    simulator.play();
+                    pauseButton.style.display = 'inline-block';
+                    playButton.style.display = 'none';
+                });
+            }
+
+            // Color scheme toggle
+            const colorSchemeButton = document.getElementById('colorSchemeButton');
+            if (colorSchemeButton) {
+                let useAlternate = true; // Start with alternate colors enabled
+                colorSchemeButton.addEventListener('click', () => {
+                    useAlternate = !useAlternate;
+                    simulator.setColorScheme(useAlternate);
+                    colorSchemeButton.textContent = useAlternate ? '🎨 Alternate Colors' : '🎨 Original Colors';
+                    colorSchemeButton.style.background = useAlternate ? '#FF6B35' : '#9E9E9E';
+                    // Recreate buttons to update colors
+                    setTimeout(createMaterialButtons, 100);
+                });
+            }
+        }
+
+        // Initialize
+        if (customElements.get('folk-sand-hybrid')) {
+            setupButtons();
+            // Enable alternate colors by default for better image sampling (fewer grey/white materials)
+            setTimeout(() => {
+                simulator.setColorScheme(true);
+                const colorSchemeButton = document.getElementById('colorSchemeButton');
+                if (colorSchemeButton) {
+                    colorSchemeButton.textContent = '🎨 Alternate Colors';
+                    colorSchemeButton.style.background = '#FF6B35';
+                }
+            }, 100);
+            setTimeout(createMaterialButtons, 500);
+        } else {
+            customElements.whenDefined('folk-sand-hybrid').then(() => {
+                setupButtons();
+                // Enable alternate colors by default for better image sampling (fewer grey/white materials)
+                setTimeout(() => {
+                    simulator.setColorScheme(true);
+                    const colorSchemeButton = document.getElementById('colorSchemeButton');
+                    if (colorSchemeButton) {
+                        colorSchemeButton.textContent = '🎨 Alternate Colors';
+                        colorSchemeButton.style.background = '#FF6B35';
+                    }
+                }, 100);
+                setTimeout(createMaterialButtons, 500);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radiance Cascade Demo</title>
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        min-height: 100%;
+        position: relative;
+        margin: 0;
+        overscroll-behavior: none;
+        background: #111;
+      }
+
+      folk-shape {
+        position: absolute;
+        background-color: transparent;
+      }
+
+      #color-indicator {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        z-index: 1000;
+        pointer-events: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      #color-indicator.eraser {
+        background: repeating-conic-gradient(#666 0% 25%, #999 0% 50%) 50% / 8px 8px;
+      }
+
+      #help-text {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        font-family: monospace;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="color-indicator"></div>
+    <div id="help-text">Draw • 0=erase • 1=black • 2-8=colors • 9=white • +/- size • C=clear</div>
+
+    <folk-radiance-cascade id="cascade">
+      <folk-shape x="100" y="100" width="50" height="50"></folk-shape>
+      <folk-shape x="100" y="200" width="50" height="50"></folk-shape>
+      <folk-shape x="100" y="300" width="50" height="50"></folk-shape>
+      <folk-shape x="300" y="150" width="80" height="40"></folk-shape>
+      <folk-shape x="400" y="250" width="60" height="90"></folk-shape>
+      <folk-shape x="200" y="400" width="100" height="100"></folk-shape>
+      <folk-shape x="500" y="100" width="30" height="70" data-color="0"></folk-shape>
+    </folk-radiance-cascade>
+
+    <script type="module">
+      import '@folkjs/labs/standalone/folk-shape';
+      import '@folkjs/labs/standalone/folk-radiance-cascade';
+
+      // Color palette: 0 = eraser, 1 = black, 2-8 = colors, 9 = white
+      const colors = [
+        { name: 'Eraser', css: null, isEraser: true },
+        { name: 'Black', css: '#111' },
+        { name: 'Red', css: '#ff4444' },
+        { name: 'Orange', css: '#ff8833' },
+        { name: 'Yellow', css: '#dddd33' },
+        { name: 'Green', css: '#44dd55' },
+        { name: 'Cyan', css: '#44dddd' },
+        { name: 'Blue', css: '#4466ff' },
+        { name: 'Purple', css: '#aa44ff' },
+        { name: 'White', css: '#ffffff' },
+      ];
+
+      let currentColor = 2; // Start with red
+      let lineThickness = 8;
+      const indicator = document.getElementById('color-indicator');
+      const cascade = document.getElementById('cascade');
+
+      function updateIndicator() {
+        const color = colors[currentColor];
+        if (color.isEraser) {
+          indicator.style.backgroundColor = '';
+          indicator.classList.add('eraser');
+        } else {
+          indicator.classList.remove('eraser');
+          indicator.style.backgroundColor = color.css;
+        }
+      }
+      updateIndicator();
+
+      // Key handling
+      document.addEventListener('keydown', (e) => {
+        const num = parseInt(e.key);
+        if (!isNaN(num) && num >= 0 && num <= 9) {
+          currentColor = num;
+          updateIndicator();
+        }
+        // Thickness controls
+        if (e.key === '=' || e.key === '+') {
+          lineThickness = Math.min(50, lineThickness + 2);
+          updateIndicator();
+        } else if (e.key === '-' || e.key === '_') {
+          lineThickness = Math.max(2, lineThickness - 2);
+          updateIndicator();
+        }
+        // Clear lines
+        if (e.key === 'c' || e.key === 'C') {
+          cascade.clearLines();
+        }
+        // Delete selected shape
+        if (e.key === 'Delete' || e.key === 'Backspace') {
+          const selected = cascade.querySelector('folk-shape[aria-selected="true"]');
+          if (selected) {
+            selected.remove();
+          }
+        }
+      });
+
+      // Freehand drawing - creates line segments as you draw
+      let isDrawing = false;
+      let lastX = 0,
+        lastY = 0;
+      const minSegmentLength = 4; // Minimum distance before creating a new segment
+
+      document.addEventListener('pointerdown', (e) => {
+        // Don't draw if clicking on a shape or UI elements
+        const target = e.target;
+        if (target.tagName === 'FOLK-SHAPE' || target.id === 'color-indicator' || target.id === 'help-text') {
+          return;
+        }
+
+        // Check if click is within the cascade bounds
+        const rect = cascade.getBoundingClientRect();
+        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+          return;
+        }
+
+        isDrawing = true;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        e.preventDefault();
+      });
+
+      document.addEventListener('pointermove', (e) => {
+        if (!isDrawing) return;
+
+        const dx = e.clientX - lastX;
+        const dy = e.clientY - lastY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist >= minSegmentLength) {
+          if (currentColor === 0) {
+            // Eraser mode - remove nearby lines
+            cascade.eraseAt(e.clientX, e.clientY, lineThickness);
+          } else {
+            cascade.addLine(lastX, lastY, e.clientX, e.clientY, currentColor, lineThickness);
+          }
+          lastX = e.clientX;
+          lastY = e.clientY;
+        }
+      });
+
+      document.addEventListener('pointerup', (e) => {
+        if (!isDrawing) return;
+
+        if (currentColor === 0) {
+          cascade.eraseAt(e.clientX, e.clientY, lineThickness);
+        } else {
+          const dx = e.clientX - lastX;
+          const dy = e.clientY - lastY;
+          if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
+            cascade.addLine(lastX, lastY, e.clientX, e.clientY, currentColor, lineThickness);
+          }
+        }
+
+        isDrawing = false;
+      });
+    </script>
+  </body>
+</html>

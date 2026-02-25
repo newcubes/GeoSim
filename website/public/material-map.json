@@ -1,0 +1,2643 @@
+{
+  "materials": {
+    "air": 0,
+    "smoke": 1,
+    "water": 2,
+    "lava": 3,
+    "sand": 4,
+    "plant": 5,
+    "stone": 6,
+    "wall": 7,
+    "ice": 8,
+    "fire": 9,
+    "steam": 10,
+    "moss": 11,
+    "salt_water": 12,
+    "sugar_water": 13,
+    "seltzer": 14,
+    "dirty_water": 15,
+    "pool_water": 16,
+    "algae": 17,
+    "slush": 18,
+    "magma": 19,
+    "slime": 20,
+    "antimolten": 21,
+    "antifluid": 22,
+    "oil": 23,
+    "lamp_oil": 24,
+    "acid": 25,
+    "neutral_acid": 26,
+    "glue": 27,
+    "soda": 28,
+    "strange_matter": 29,
+    "melted_butter": 30,
+    "melted_cheese": 31,
+    "cellulose": 32,
+    "melted_wax": 33,
+    "juice": 34,
+    "broth": 35,
+    "milk": 36,
+    "chocolate_milk": 37,
+    "fruit_milk": 38,
+    "pilk": 39,
+    "eggnog": 40,
+    "yolk": 41,
+    "cream": 42,
+    "nut_milk": 43,
+    "batter": 44,
+    "vinegar": 45,
+    "sauce": 46,
+    "nut_oil": 47,
+    "nut_butter": 48,
+    "jelly": 49,
+    "yogurt": 50,
+    "beans": 51,
+    "alcohol": 52,
+    "molten_tuff": 53,
+    "soap": 54,
+    "bleach": 55,
+    "liquid_chlorine": 56,
+    "dye": 57,
+    "ink": 58,
+    "mercury": 59,
+    "blood": 60,
+    "vaccine": 61,
+    "antibody": 62,
+    "infection": 63,
+    "poison": 64,
+    "antidote": 65,
+    "tea": 66,
+    "coffee": 67,
+    "honey": 68,
+    "sap": 69,
+    "caramel": 70,
+    "molasses": 71,
+    "ketchup": 72,
+    "mayo": 73,
+    "grease": 74,
+    "melted_chocolate": 75,
+    "liquid_hydrogen": 76,
+    "liquid_oxygen": 77,
+    "liquid_nitrogen": 78,
+    "liquid_helium": 79,
+    "liquid_neon": 80,
+    "cyanide": 81,
+    "midas_touch": 82,
+    "nitro": 83,
+    "greek_fire": 84,
+    "tsunami": 85,
+    "primordial_soup": 86,
+    "dirt": 87,
+    "mud": 88,
+    "wet_sand": 89,
+    "rock": 90,
+    "rock_wall": 91,
+    "mudstone": 92,
+    "packed_sand": 93,
+    "dead_plant": 94,
+    "frozen_plant": 95,
+    "grass": 96,
+    "concrete": 97,
+    "bomb": 98,
+    "rime": 99,
+    "snow": 100,
+    "packed_snow": 101,
+    "wood": 102,
+    "glass": 103,
+    "rad_glass": 104,
+    "meat": 105,
+    "rotten_meat": 106,
+    "cured_meat": 107,
+    "cooked_meat": 108,
+    "frozen_meat": 109,
+    "salt": 110,
+    "sugar": 111,
+    "flour": 112,
+    "smash": 113,
+    "gravel": 114,
+    "cement": 115,
+    "dust": 116,
+    "cell": 117,
+    "cancer": 118,
+    "dna": 119,
+    "worm": 120,
+    "frozen_worm": 121,
+    "flea": 122,
+    "termite": 123,
+    "ant": 124,
+    "spider": 125,
+    "web": 126,
+    "fly": 127,
+    "firefly": 128,
+    "bee": 129,
+    "hive": 130,
+    "stink_bug": 131,
+    "dead_bug": 132,
+    "body": 133,
+    "head": 134,
+    "bird": 135,
+    "rat": 136,
+    "frog": 137,
+    "frozen_frog": 138,
+    "tadpole": 139,
+    "fish": 140,
+    "frozen_fish": 141,
+    "slug": 142,
+    "snail": 143,
+    "fuse": 144,
+    "bone": 145,
+    "ball": 146,
+    "balloon": 147,
+    "antipowder": 148,
+    "ash": 149,
+    "charcoal": 150,
+    "tinder": 151,
+    "sawdust": 152,
+    "hail": 153,
+    "stained_glass": 154,
+    "clay": 155,
+    "clay_soil": 156,
+    "brick": 157,
+    "ruins": 158,
+    "adobe": 159,
+    "sapling": 160,
+    "pinecone": 161,
+    "evergreen": 162,
+    "cactus": 163,
+    "kelp": 164,
+    "coral": 165,
+    "grass_seed": 166,
+    "wheat_seed": 167,
+    "straw": 168,
+    "porcelain": 169,
+    "paper": 170,
+    "pollen": 171,
+    "flower_seed": 172,
+    "pistil": 173,
+    "petal": 174,
+    "tree_branch": 175,
+    "vine": 176,
+    "bamboo_plant": 177,
+    "gray_goo": 178,
+    "malware": 179,
+    "clone_powder": 180,
+    "floating_cloner": 181,
+    "virus": 182,
+    "ice_nine": 183,
+    "permafrost": 184,
+    "mushroom_spore": 185,
+    "mushroom_stalk": 186,
+    "mushroom_gill": 187,
+    "mushroom_cap": 188,
+    "hyphae": 189,
+    "mycelium": 190,
+    "mulch": 191,
+    "ant_wall": 192,
+    "lichen": 193,
+    "plastic": 194,
+    "cloth": 195,
+    "wax": 196,
+    "incense": 197,
+    "insulation": 198,
+    "sponge": 199,
+    "bamboo": 200,
+    "pyrite": 201,
+    "egg": 202,
+    "hard_yolk": 203,
+    "dough": 204,
+    "homunculus": 205,
+    "butter": 206,
+    "cheese": 207,
+    "rotten_cheese": 208,
+    "cheese_powder": 209,
+    "chocolate": 210,
+    "chocolate_powder": 211,
+    "grape": 212,
+    "herb": 213,
+    "lettuce": 214,
+    "pickle": 215,
+    "tomato": 216,
+    "pumpkin": 217,
+    "pumpkin_seed": 218,
+    "corn": 219,
+    "popcorn": 220,
+    "corn_seed": 221,
+    "potato": 222,
+    "baked_potato": 223,
+    "mashed_potato": 224,
+    "potato_seed": 225,
+    "root": 226,
+    "fiber": 227,
+    "yeast": 228,
+    "bread": 229,
+    "toast": 230,
+    "gingerbread": 231,
+    "crumb": 232,
+    "baked_batter": 233,
+    "wheat": 234,
+    "rice": 235,
+    "candy": 236,
+    "coffee_bean": 237,
+    "coffee_ground": 238,
+    "nut": 239,
+    "nut_meat": 240,
+    "baking_soda": 241,
+    "ice_cream": 242,
+    "dry_ice": 243,
+    "nitrogen_ice": 244,
+    "particleboard": 245,
+    "skin": 246,
+    "hair": 247,
+    "basalt": 248,
+    "tuff": 249,
+    "sodium": 250,
+    "calcium": 251,
+    "limestone": 252,
+    "quicklime": 253,
+    "slaked_lime": 254,
+    "potassium": 255,
+    "magnesium": 256,
+    "lye": 257,
+    "thermite": 258,
+    "slag": 259,
+    "amalgam": 260,
+    "sulfur": 261,
+    "copper_sulfate": 262,
+    "fallout": 263,
+    "uranium": 264,
+    "diamond": 265,
+    "gold_coin": 266,
+    "rust": 267,
+    "oxidized_copper": 268,
+    "alga": 269,
+    "metal_scrap": 270,
+    "glass_shard": 271,
+    "rad_shard": 272,
+    "brick_rubble": 273,
+    "baked_clay": 274,
+    "clay_shard": 275,
+    "porcelain_shard": 276,
+    "feather": 277,
+    "confetti": 278,
+    "glitter": 279,
+    "bead": 280,
+    "color_sand": 281,
+    "caustic_potash": 282,
+    "sodium_acetate": 283,
+    "borax": 284,
+    "epsom_salt": 285,
+    "potassium_salt": 286,
+    "tnt": 287,
+    "c4": 288,
+    "grenade": 289,
+    "dynamite": 290,
+    "gunpowder": 291,
+    "firework": 292,
+    "nuke": 293,
+    "h_bomb": 294,
+    "dirty_bomb": 295,
+    "emp_bomb": 296,
+    "fireball": 297,
+    "rocket": 298,
+    "antibomb": 299,
+    "cold_bomb": 300,
+    "hot_bomb": 301,
+    "antimatter_bomb": 302,
+    "party_popper": 303,
+    "flashbang": 304,
+    "smoke_grenade": 305,
+    "landmine": 306,
+    "earthquake": 307,
+    "blaster": 308,
+    "armageddon": 309,
+    "pressure_plate": 310,
+    "plasma": 311,
+    "cold_fire": 312,
+    "sun": 313,
+    "plague": 314,
+    "antifire": 315,
+    "antigas": 316,
+    "light": 317,
+    "liquid_light": 318,
+    "laser": 319,
+    "pointer": 320,
+    "hydrogen": 321,
+    "oxygen": 322,
+    "nitrogen": 323,
+    "helium": 324,
+    "anesthesia": 325,
+    "carbon_dioxide": 326,
+    "bubble": 327,
+    "ammonia": 328,
+    "propane": 329,
+    "methane": 330,
+    "foam": 331,
+    "acid_gas": 332,
+    "antimatter": 333,
+    "dioxin": 334,
+    "chlorine": 335,
+    "neon": 336,
+    "smog": 337,
+    "stench": 338,
+    "fragrance": 339,
+    "ozone": 340,
+    "cloud": 341,
+    "rain_cloud": 342,
+    "snow_cloud": 343,
+    "hail_cloud": 344,
+    "thunder_cloud": 345,
+    "acid_cloud": 346,
+    "sandstorm": 347,
+    "pyrocumulus": 348,
+    "fire_cloud": 349,
+    "rad_cloud": 350,
+    "rad_steam": 351,
+    "color_smoke": 352,
+    "spray_paint": 353,
+    "radiation": 354,
+    "neutron": 355,
+    "proton": 356,
+    "electric": 357,
+    "lightning": 358,
+    "bless": 359,
+    "god_ray": 360,
+    "heat_ray": 361,
+    "freeze_ray": 362,
+    "pop": 363,
+    "explosion": 364,
+    "n_explosion": 365,
+    "supernova": 366,
+    "positron": 367,
+    "ember": 368,
+    "fw_ember": 369,
+    "flash": 370,
+    "tornado": 371
+  },
+  "categories": {
+    "liquids": [
+      {
+        "name": "water",
+        "id": 2,
+        "color": "#2167ff",
+        "state": "liquid"
+      },
+      {
+        "name": "salt_water",
+        "id": 12,
+        "color": "#4d85ff",
+        "state": "liquid"
+      },
+      {
+        "name": "sugar_water",
+        "id": 13,
+        "color": "#8eaae6",
+        "state": "liquid"
+      },
+      {
+        "name": "seltzer",
+        "id": 14,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "dirty_water",
+        "id": 15,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "pool_water",
+        "id": 16,
+        "color": "#a8d2e3",
+        "state": "liquid"
+      },
+      {
+        "name": "slush",
+        "id": 18,
+        "color": "#81bcd4",
+        "state": "liquid"
+      },
+      {
+        "name": "magma",
+        "id": 19,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "slime",
+        "id": 20,
+        "color": "#81cf63",
+        "state": "liquid"
+      },
+      {
+        "name": "oil",
+        "id": 23,
+        "color": "#470e00",
+        "state": "liquid"
+      },
+      {
+        "name": "lamp_oil",
+        "id": 24,
+        "color": "#b3b38b",
+        "state": "liquid"
+      },
+      {
+        "name": "acid",
+        "id": 25,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "neutral_acid",
+        "id": 26,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "glue",
+        "id": 27,
+        "color": "#f0f0f0",
+        "state": "liquid"
+      },
+      {
+        "name": "soda",
+        "id": 28,
+        "color": "#422016",
+        "state": "liquid"
+      },
+      {
+        "name": "melted_wax",
+        "id": 33,
+        "color": "#d4c196",
+        "state": "liquid"
+      },
+      {
+        "name": "juice",
+        "id": 34,
+        "color": "#f0bf3d",
+        "state": "liquid"
+      },
+      {
+        "name": "milk",
+        "id": 36,
+        "color": "#fafafa",
+        "state": "liquid"
+      },
+      {
+        "name": "chocolate_milk",
+        "id": 37,
+        "color": "#664934",
+        "state": "liquid"
+      },
+      {
+        "name": "fruit_milk",
+        "id": 38,
+        "color": "#c9988f",
+        "state": "liquid"
+      },
+      {
+        "name": "pilk",
+        "id": 39,
+        "color": "#e9cba3",
+        "state": "liquid"
+      },
+      {
+        "name": "eggnog",
+        "id": 40,
+        "color": "#ddbf98",
+        "state": "liquid"
+      },
+      {
+        "name": "cream",
+        "id": 42,
+        "color": "#f7f7f7",
+        "state": "liquid"
+      },
+      {
+        "name": "nut_milk",
+        "id": 43,
+        "color": "#D7D1C3",
+        "state": "liquid"
+      },
+      {
+        "name": "vinegar",
+        "id": 45,
+        "color": "#ffecb3",
+        "state": "liquid"
+      },
+      {
+        "name": "alcohol",
+        "id": 52,
+        "color": "#c9c5b1",
+        "state": "liquid"
+      },
+      {
+        "name": "soap",
+        "id": 54,
+        "color": "#f2f2f2",
+        "state": "liquid"
+      },
+      {
+        "name": "bleach",
+        "id": 55,
+        "color": "#ffffff",
+        "state": "liquid"
+      },
+      {
+        "name": "dye",
+        "id": 57,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "ink",
+        "id": 58,
+        "color": "#171717",
+        "state": "liquid"
+      },
+      {
+        "name": "mercury",
+        "id": 59,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "blood",
+        "id": 60,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "vaccine",
+        "id": 61,
+        "color": "#e0d0ad",
+        "state": "liquid"
+      },
+      {
+        "name": "antibody",
+        "id": 62,
+        "color": "#ff4040",
+        "state": "liquid"
+      },
+      {
+        "name": "infection",
+        "id": 63,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "poison",
+        "id": 64,
+        "color": "#00ff00",
+        "state": "liquid"
+      },
+      {
+        "name": "antidote",
+        "id": 65,
+        "color": "#c9b836",
+        "state": "liquid"
+      },
+      {
+        "name": "tea",
+        "id": 66,
+        "color": "#6c4317",
+        "state": "liquid"
+      },
+      {
+        "name": "coffee",
+        "id": 67,
+        "color": "#24100b",
+        "state": "liquid"
+      },
+      {
+        "name": "honey",
+        "id": 68,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "sap",
+        "id": 69,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "caramel",
+        "id": 70,
+        "color": "#e89a51",
+        "state": "liquid"
+      },
+      {
+        "name": "molasses",
+        "id": 71,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "ketchup",
+        "id": 72,
+        "color": "#ff3119",
+        "state": "liquid"
+      },
+      {
+        "name": "mayo",
+        "id": 73,
+        "color": "#fcffbd",
+        "state": "liquid"
+      },
+      {
+        "name": "grease",
+        "id": 74,
+        "color": "#cf9251",
+        "state": "liquid"
+      },
+      {
+        "name": "liquid_hydrogen",
+        "id": 76,
+        "color": "#97afcf",
+        "state": "liquid"
+      },
+      {
+        "name": "liquid_oxygen",
+        "id": 77,
+        "color": "#00ad99",
+        "state": "liquid"
+      },
+      {
+        "name": "liquid_nitrogen",
+        "id": 78,
+        "color": "#d3e1e3",
+        "state": "liquid"
+      },
+      {
+        "name": "cyanide",
+        "id": 81,
+        "color": "#b6ccb6",
+        "state": "liquid"
+      },
+      {
+        "name": "cement",
+        "id": 115,
+        "color": "#b5b5b5",
+        "state": "solid"
+      },
+      {
+        "name": "foam",
+        "id": 331,
+        "color": "#cad2e3",
+        "state": "gas"
+      },
+      {
+        "name": "lava",
+        "id": 3,
+        "color": "#ff6f00",
+        "state": "liquid"
+      }
+    ],
+    "life": [
+      {
+        "name": "algae",
+        "id": 17,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "cellulose",
+        "id": 32,
+        "color": "#c7d4c9",
+        "state": "liquid"
+      },
+      {
+        "name": "primordial_soup",
+        "id": 86,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "plant",
+        "id": 5,
+        "color": "#00bf00",
+        "state": "solid"
+      },
+      {
+        "name": "dead_plant",
+        "id": 94,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "frozen_plant",
+        "id": 95,
+        "color": "#00bf8c",
+        "state": "solid"
+      },
+      {
+        "name": "grass",
+        "id": 96,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "cell",
+        "id": 117,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "cancer",
+        "id": 118,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "dna",
+        "id": 119,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "worm",
+        "id": 120,
+        "color": "#d34c37",
+        "state": "solid"
+      },
+      {
+        "name": "frozen_worm",
+        "id": 121,
+        "color": "#37d3b6",
+        "state": "solid"
+      },
+      {
+        "name": "flea",
+        "id": 122,
+        "color": "#9e4732",
+        "state": "solid"
+      },
+      {
+        "name": "termite",
+        "id": 123,
+        "color": "#f5a056",
+        "state": "solid"
+      },
+      {
+        "name": "ant",
+        "id": 124,
+        "color": "#5e0b04",
+        "state": "solid"
+      },
+      {
+        "name": "spider",
+        "id": 125,
+        "color": "#4f2d2d",
+        "state": "solid"
+      },
+      {
+        "name": "web",
+        "id": 126,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "fly",
+        "id": 127,
+        "color": "#4c4e42",
+        "state": "solid"
+      },
+      {
+        "name": "firefly",
+        "id": 128,
+        "color": "#684841",
+        "state": "solid"
+      },
+      {
+        "name": "bee",
+        "id": 129,
+        "color": "#c4b100",
+        "state": "solid"
+      },
+      {
+        "name": "hive",
+        "id": 130,
+        "color": "#a6a479",
+        "state": "solid"
+      },
+      {
+        "name": "stink_bug",
+        "id": 131,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "dead_bug",
+        "id": 132,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "body",
+        "id": 133,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "head",
+        "id": 134,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "bird",
+        "id": 135,
+        "color": "#997457",
+        "state": "solid"
+      },
+      {
+        "name": "rat",
+        "id": 136,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "frog",
+        "id": 137,
+        "color": "#607300",
+        "state": "solid"
+      },
+      {
+        "name": "frozen_frog",
+        "id": 138,
+        "color": "#007349",
+        "state": "solid"
+      },
+      {
+        "name": "tadpole",
+        "id": 139,
+        "color": "#87b574",
+        "state": "solid"
+      },
+      {
+        "name": "fish",
+        "id": 140,
+        "color": "#ac8650",
+        "state": "solid"
+      },
+      {
+        "name": "frozen_fish",
+        "id": 141,
+        "color": "#50ac86",
+        "state": "solid"
+      },
+      {
+        "name": "slug",
+        "id": 142,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "snail",
+        "id": 143,
+        "color": "#5c3104",
+        "state": "solid"
+      },
+      {
+        "name": "bone",
+        "id": 145,
+        "color": "#d9d9d9",
+        "state": "solid"
+      },
+      {
+        "name": "sapling",
+        "id": 160,
+        "color": "#3e9c3e",
+        "state": "solid"
+      },
+      {
+        "name": "pinecone",
+        "id": 161,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "evergreen",
+        "id": 162,
+        "color": "#006300",
+        "state": "solid"
+      },
+      {
+        "name": "cactus",
+        "id": 163,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "kelp",
+        "id": 164,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "coral",
+        "id": 165,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "grass_seed",
+        "id": 166,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "wheat_seed",
+        "id": 167,
+        "color": "#b6c981",
+        "state": "solid"
+      },
+      {
+        "name": "pollen",
+        "id": 171,
+        "color": "#ffffc0",
+        "state": "solid"
+      },
+      {
+        "name": "flower_seed",
+        "id": 172,
+        "color": "#0e990e",
+        "state": "solid"
+      },
+      {
+        "name": "pistil",
+        "id": 173,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "petal",
+        "id": 174,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "tree_branch",
+        "id": 175,
+        "color": "#a0522d",
+        "state": "solid"
+      },
+      {
+        "name": "vine",
+        "id": 176,
+        "color": "#005900",
+        "state": "solid"
+      },
+      {
+        "name": "bamboo_plant",
+        "id": 177,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "mushroom_spore",
+        "id": 185,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "mushroom_stalk",
+        "id": 186,
+        "color": "#d1d1d1",
+        "state": "solid"
+      },
+      {
+        "name": "mushroom_gill",
+        "id": 187,
+        "color": "#d4cfa9",
+        "state": "solid"
+      },
+      {
+        "name": "mushroom_cap",
+        "id": 188,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "hyphae",
+        "id": 189,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "lichen",
+        "id": 193,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "homunculus",
+        "id": 205,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "pumpkin_seed",
+        "id": 218,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "corn_seed",
+        "id": 221,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "potato_seed",
+        "id": 225,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "root",
+        "id": 226,
+        "color": "#80715b",
+        "state": "solid"
+      },
+      {
+        "name": "fiber",
+        "id": 227,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "plague",
+        "id": 314,
+        "color": "#36005c",
+        "state": "gas"
+      },
+      {
+        "name": "moss",
+        "id": 11,
+        "color": "#1f2224",
+        "state": "solid"
+      }
+    ],
+    "special": [
+      {
+        "name": "antimolten",
+        "id": 21,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "antifluid",
+        "id": 22,
+        "color": "#d1dbeb",
+        "state": "liquid"
+      },
+      {
+        "name": "strange_matter",
+        "id": 29,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "midas_touch",
+        "id": 82,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "ball",
+        "id": 146,
+        "color": "#e35693",
+        "state": "solid"
+      },
+      {
+        "name": "balloon",
+        "id": 147,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "antipowder",
+        "id": 148,
+        "color": "#ebd1d8",
+        "state": "solid"
+      },
+      {
+        "name": "gray_goo",
+        "id": 178,
+        "color": "#c0c0c0",
+        "state": "solid"
+      },
+      {
+        "name": "malware",
+        "id": 179,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "virus",
+        "id": 182,
+        "color": "#cc00ff",
+        "state": "solid"
+      },
+      {
+        "name": "ice_nine",
+        "id": 183,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "sun",
+        "id": 313,
+        "color": "#ffffbd",
+        "state": "gas"
+      },
+      {
+        "name": "antifire",
+        "id": 315,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "antigas",
+        "id": 316,
+        "color": "#e6fffc",
+        "state": "gas"
+      },
+      {
+        "name": "pointer",
+        "id": 320,
+        "color": "#ff0000",
+        "state": "gas"
+      },
+      {
+        "name": "antimatter",
+        "id": 333,
+        "color": "#a89ba8",
+        "state": "gas"
+      }
+    ],
+    "states": [
+      {
+        "name": "melted_butter",
+        "id": 30,
+        "color": "#ffe240",
+        "state": "liquid"
+      },
+      {
+        "name": "melted_cheese",
+        "id": 31,
+        "color": "#fcdb53",
+        "state": "liquid"
+      },
+      {
+        "name": "molten_tuff",
+        "id": 53,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "liquid_chlorine",
+        "id": 56,
+        "color": "#f4d217",
+        "state": "liquid"
+      },
+      {
+        "name": "melted_chocolate",
+        "id": 75,
+        "color": "#3b160b",
+        "state": "liquid"
+      },
+      {
+        "name": "liquid_helium",
+        "id": 79,
+        "color": "#e3d3d3",
+        "state": "liquid"
+      },
+      {
+        "name": "liquid_neon",
+        "id": 80,
+        "color": "#d1d1d1",
+        "state": "liquid"
+      }
+    ],
+    "food": [
+      {
+        "name": "broth",
+        "id": 35,
+        "color": "#dbb169",
+        "state": "liquid"
+      },
+      {
+        "name": "yolk",
+        "id": 41,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "batter",
+        "id": 44,
+        "color": "#d4bc85",
+        "state": "liquid"
+      },
+      {
+        "name": "sauce",
+        "id": 46,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "nut_oil",
+        "id": 47,
+        "color": "#E7D784",
+        "state": "liquid"
+      },
+      {
+        "name": "nut_butter",
+        "id": 48,
+        "color": "#cd9141",
+        "state": "liquid"
+      },
+      {
+        "name": "jelly",
+        "id": 49,
+        "color": "#A35298",
+        "state": "liquid"
+      },
+      {
+        "name": "yogurt",
+        "id": 50,
+        "color": "#f0efe6",
+        "state": "liquid"
+      },
+      {
+        "name": "beans",
+        "id": 51,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "meat",
+        "id": 105,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "rotten_meat",
+        "id": 106,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "cured_meat",
+        "id": 107,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "cooked_meat",
+        "id": 108,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "frozen_meat",
+        "id": 109,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "salt",
+        "id": 110,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "sugar",
+        "id": 111,
+        "color": "#f2f2f2",
+        "state": "solid"
+      },
+      {
+        "name": "flour",
+        "id": 112,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "egg",
+        "id": 202,
+        "color": "#e0d3ab",
+        "state": "solid"
+      },
+      {
+        "name": "hard_yolk",
+        "id": 203,
+        "color": "#dead43",
+        "state": "solid"
+      },
+      {
+        "name": "dough",
+        "id": 204,
+        "color": "#bfac91",
+        "state": "solid"
+      },
+      {
+        "name": "butter",
+        "id": 206,
+        "color": "#ffe46b",
+        "state": "solid"
+      },
+      {
+        "name": "cheese",
+        "id": 207,
+        "color": "#fcba03",
+        "state": "solid"
+      },
+      {
+        "name": "rotten_cheese",
+        "id": 208,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "cheese_powder",
+        "id": 209,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "chocolate",
+        "id": 210,
+        "color": "#4d2818",
+        "state": "solid"
+      },
+      {
+        "name": "chocolate_powder",
+        "id": 211,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "grape",
+        "id": 212,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "herb",
+        "id": 213,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "lettuce",
+        "id": 214,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "pickle",
+        "id": 215,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "tomato",
+        "id": 216,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "pumpkin",
+        "id": 217,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "corn",
+        "id": 219,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "popcorn",
+        "id": 220,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "potato",
+        "id": 222,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "baked_potato",
+        "id": 223,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "mashed_potato",
+        "id": 224,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "yeast",
+        "id": 228,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "bread",
+        "id": 229,
+        "color": "#debd8c",
+        "state": "solid"
+      },
+      {
+        "name": "toast",
+        "id": 230,
+        "color": "#c08655",
+        "state": "solid"
+      },
+      {
+        "name": "gingerbread",
+        "id": 231,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "crumb",
+        "id": 232,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "baked_batter",
+        "id": 233,
+        "color": "#fcdf7e",
+        "state": "solid"
+      },
+      {
+        "name": "wheat",
+        "id": 234,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "rice",
+        "id": 235,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "candy",
+        "id": 236,
+        "color": "#e6cab1",
+        "state": "solid"
+      },
+      {
+        "name": "coffee_bean",
+        "id": 237,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "coffee_ground",
+        "id": 238,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "nut",
+        "id": 239,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "nut_meat",
+        "id": 240,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "baking_soda",
+        "id": 241,
+        "color": "#ededed",
+        "state": "solid"
+      },
+      {
+        "name": "ice_cream",
+        "id": 242,
+        "color": "#888888",
+        "state": "solid"
+      }
+    ],
+    "weapons": [
+      {
+        "name": "nitro",
+        "id": 83,
+        "color": "#47c900",
+        "state": "liquid"
+      },
+      {
+        "name": "greek_fire",
+        "id": 84,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "tsunami",
+        "id": 85,
+        "color": "#888888",
+        "state": "liquid"
+      },
+      {
+        "name": "bomb",
+        "id": 98,
+        "color": "#524c41",
+        "state": "solid"
+      },
+      {
+        "name": "tnt",
+        "id": 287,
+        "color": "#c92a2a",
+        "state": "solid"
+      },
+      {
+        "name": "c4",
+        "id": 288,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "grenade",
+        "id": 289,
+        "color": "#5e5c57",
+        "state": "solid"
+      },
+      {
+        "name": "dynamite",
+        "id": 290,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "gunpowder",
+        "id": 291,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "firework",
+        "id": 292,
+        "color": "#c44f45",
+        "state": "solid"
+      },
+      {
+        "name": "nuke",
+        "id": 293,
+        "color": "#534636",
+        "state": "solid"
+      },
+      {
+        "name": "h_bomb",
+        "id": 294,
+        "color": "#533636",
+        "state": "solid"
+      },
+      {
+        "name": "dirty_bomb",
+        "id": 295,
+        "color": "#415336",
+        "state": "solid"
+      },
+      {
+        "name": "emp_bomb",
+        "id": 296,
+        "color": "#418273",
+        "state": "solid"
+      },
+      {
+        "name": "fireball",
+        "id": 297,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "rocket",
+        "id": 298,
+        "color": "#ff6f47",
+        "state": "solid"
+      },
+      {
+        "name": "antibomb",
+        "id": 299,
+        "color": "#adb3be",
+        "state": "solid"
+      },
+      {
+        "name": "cold_bomb",
+        "id": 300,
+        "color": "#43646e",
+        "state": "solid"
+      },
+      {
+        "name": "hot_bomb",
+        "id": 301,
+        "color": "#6c436e",
+        "state": "solid"
+      },
+      {
+        "name": "antimatter_bomb",
+        "id": 302,
+        "color": "#6e4343",
+        "state": "solid"
+      },
+      {
+        "name": "party_popper",
+        "id": 303,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "flashbang",
+        "id": 304,
+        "color": "#65665c",
+        "state": "solid"
+      },
+      {
+        "name": "smoke_grenade",
+        "id": 305,
+        "color": "#65665c",
+        "state": "solid"
+      },
+      {
+        "name": "landmine",
+        "id": 306,
+        "color": "#856c7d",
+        "state": "solid"
+      },
+      {
+        "name": "earthquake",
+        "id": 307,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "blaster",
+        "id": 308,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "armageddon",
+        "id": 309,
+        "color": "#a62900",
+        "state": "solid"
+      },
+      {
+        "name": "tornado",
+        "id": 371,
+        "color": "#888888",
+        "state": "gas"
+      }
+    ],
+    "land": [
+      {
+        "name": "sand",
+        "id": 4,
+        "color": "#e6d577",
+        "state": "solid"
+      },
+      {
+        "name": "dirt",
+        "id": 87,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "mud",
+        "id": 88,
+        "color": "#382417",
+        "state": "solid"
+      },
+      {
+        "name": "wet_sand",
+        "id": 89,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "rock",
+        "id": 90,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "rock_wall",
+        "id": 91,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "mudstone",
+        "id": 92,
+        "color": "#4a341e",
+        "state": "solid"
+      },
+      {
+        "name": "packed_sand",
+        "id": 93,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "snow",
+        "id": 100,
+        "color": "#e1f8fc",
+        "state": "solid"
+      },
+      {
+        "name": "packed_snow",
+        "id": 101,
+        "color": "#bcdde3",
+        "state": "solid"
+      },
+      {
+        "name": "gravel",
+        "id": 114,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "clay",
+        "id": 155,
+        "color": "#d4c59c",
+        "state": "solid"
+      },
+      {
+        "name": "clay_soil",
+        "id": 156,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "permafrost",
+        "id": 184,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "mycelium",
+        "id": 190,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "mulch",
+        "id": 191,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "ant_wall",
+        "id": 192,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "basalt",
+        "id": 248,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "tuff",
+        "id": 249,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "limestone",
+        "id": 252,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "quicklime",
+        "id": 253,
+        "color": "#e9ebe7",
+        "state": "solid"
+      },
+      {
+        "name": "slaked_lime",
+        "id": 254,
+        "color": "#A8A19D",
+        "state": "solid"
+      },
+      {
+        "name": "stone",
+        "id": 6,
+        "color": "#14161a",
+        "state": "solid"
+      },
+      {
+        "name": "ice",
+        "id": 8,
+        "color": "#e0f0ff",
+        "state": "solid"
+      }
+    ],
+    "powders": [
+      {
+        "name": "concrete",
+        "id": 97,
+        "color": "#ababab",
+        "state": "solid"
+      },
+      {
+        "name": "dust",
+        "id": 116,
+        "color": "#666666",
+        "state": "solid"
+      },
+      {
+        "name": "ash",
+        "id": 149,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "charcoal",
+        "id": 150,
+        "color": "#2b2b2b",
+        "state": "solid"
+      },
+      {
+        "name": "tinder",
+        "id": 151,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "sawdust",
+        "id": 152,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "hail",
+        "id": 153,
+        "color": "#c5e9f0",
+        "state": "solid"
+      },
+      {
+        "name": "wax",
+        "id": 196,
+        "color": "#fff3d6",
+        "state": "solid"
+      },
+      {
+        "name": "incense",
+        "id": 197,
+        "color": "#361f19",
+        "state": "solid"
+      },
+      {
+        "name": "sodium",
+        "id": 250,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "calcium",
+        "id": 251,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "potassium",
+        "id": 255,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "magnesium",
+        "id": 256,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "lye",
+        "id": 257,
+        "color": "#c5d3eb",
+        "state": "solid"
+      },
+      {
+        "name": "thermite",
+        "id": 258,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "slag",
+        "id": 259,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "amalgam",
+        "id": 260,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "sulfur",
+        "id": 261,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "copper_sulfate",
+        "id": 262,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "uranium",
+        "id": 264,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "diamond",
+        "id": 265,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "gold_coin",
+        "id": 266,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "rust",
+        "id": 267,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "oxidized_copper",
+        "id": 268,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "alga",
+        "id": 269,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "metal_scrap",
+        "id": 270,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "glass_shard",
+        "id": 271,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "rad_shard",
+        "id": 272,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "brick_rubble",
+        "id": 273,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "baked_clay",
+        "id": 274,
+        "color": "#b85746",
+        "state": "solid"
+      },
+      {
+        "name": "clay_shard",
+        "id": 275,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "porcelain_shard",
+        "id": 276,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "feather",
+        "id": 277,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "confetti",
+        "id": 278,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "glitter",
+        "id": 279,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "bead",
+        "id": 280,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "color_sand",
+        "id": 281,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "caustic_potash",
+        "id": 282,
+        "color": "#feffe8",
+        "state": "solid"
+      },
+      {
+        "name": "sodium_acetate",
+        "id": 283,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "borax",
+        "id": 284,
+        "color": "#ffffff",
+        "state": "solid"
+      },
+      {
+        "name": "epsom_salt",
+        "id": 285,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "potassium_salt",
+        "id": 286,
+        "color": "#888888",
+        "state": "solid"
+      }
+    ],
+    "solids": [
+      {
+        "name": "ice",
+        "id": 8,
+        "color": "#b2daeb",
+        "state": "solid"
+      },
+      {
+        "name": "rime",
+        "id": 99,
+        "color": "#e6f2f7",
+        "state": "solid"
+      },
+      {
+        "name": "wood",
+        "id": 102,
+        "color": "#a0522d",
+        "state": "solid"
+      },
+      {
+        "name": "glass",
+        "id": 103,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "rad_glass",
+        "id": 104,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "stained_glass",
+        "id": 154,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "brick",
+        "id": 157,
+        "color": "#cb4141",
+        "state": "solid"
+      },
+      {
+        "name": "ruins",
+        "id": 158,
+        "color": "#5c5c5c",
+        "state": "solid"
+      },
+      {
+        "name": "adobe",
+        "id": 159,
+        "color": "#8a6249",
+        "state": "solid"
+      },
+      {
+        "name": "straw",
+        "id": 168,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "porcelain",
+        "id": 169,
+        "color": "#e1e4dd",
+        "state": "solid"
+      },
+      {
+        "name": "paper",
+        "id": 170,
+        "color": "#f0f0f0",
+        "state": "solid"
+      },
+      {
+        "name": "plastic",
+        "id": 194,
+        "color": "#c5dede",
+        "state": "solid"
+      },
+      {
+        "name": "cloth",
+        "id": 195,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "insulation",
+        "id": 198,
+        "color": "#b8aea5",
+        "state": "solid"
+      },
+      {
+        "name": "sponge",
+        "id": 199,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "bamboo",
+        "id": 200,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "pyrite",
+        "id": 201,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "dry_ice",
+        "id": 243,
+        "color": "#e6e6e6",
+        "state": "solid"
+      },
+      {
+        "name": "nitrogen_ice",
+        "id": 244,
+        "color": "#e6e6e6",
+        "state": "solid"
+      },
+      {
+        "name": "particleboard",
+        "id": 245,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "skin",
+        "id": 246,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "hair",
+        "id": 247,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "wall",
+        "id": 7,
+        "color": "#1f2224",
+        "state": "solid"
+      }
+    ],
+    "tools": [
+      {
+        "name": "smash",
+        "id": 113,
+        "color": "#ae4cd9",
+        "state": "solid"
+      }
+    ],
+    "machines": [
+      {
+        "name": "fuse",
+        "id": 144,
+        "color": "#825d38",
+        "state": "solid"
+      },
+      {
+        "name": "clone_powder",
+        "id": 180,
+        "color": "#f0f000",
+        "state": "solid"
+      },
+      {
+        "name": "floating_cloner",
+        "id": 181,
+        "color": "#c7c787",
+        "state": "solid"
+      },
+      {
+        "name": "pressure_plate",
+        "id": 310,
+        "color": "#8a8a84",
+        "state": "solid"
+      }
+    ],
+    "energy": [
+      {
+        "name": "fallout",
+        "id": 263,
+        "color": "#888888",
+        "state": "solid"
+      },
+      {
+        "name": "fire",
+        "id": 9,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "plasma",
+        "id": 311,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "cold_fire",
+        "id": 312,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "light",
+        "id": 317,
+        "color": "#fffdcf",
+        "state": "gas"
+      },
+      {
+        "name": "liquid_light",
+        "id": 318,
+        "color": "#bdbc9d",
+        "state": "gas"
+      },
+      {
+        "name": "laser",
+        "id": 319,
+        "color": "#ff0000",
+        "state": "gas"
+      },
+      {
+        "name": "radiation",
+        "id": 354,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "neutron",
+        "id": 355,
+        "color": "#a6ffff",
+        "state": "gas"
+      },
+      {
+        "name": "proton",
+        "id": 356,
+        "color": "#ffa6a6",
+        "state": "gas"
+      },
+      {
+        "name": "electric",
+        "id": 357,
+        "color": "#fffba6",
+        "state": "gas"
+      },
+      {
+        "name": "lightning",
+        "id": 358,
+        "color": "#ffffed",
+        "state": "gas"
+      },
+      {
+        "name": "bless",
+        "id": 359,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "god_ray",
+        "id": 360,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "heat_ray",
+        "id": 361,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "freeze_ray",
+        "id": 362,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "pop",
+        "id": 363,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "explosion",
+        "id": 364,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "n_explosion",
+        "id": 365,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "supernova",
+        "id": 366,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "positron",
+        "id": 367,
+        "color": "#a6bfff",
+        "state": "gas"
+      },
+      {
+        "name": "ember",
+        "id": 368,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "fw_ember",
+        "id": 369,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "flash",
+        "id": 370,
+        "color": "#fffdcf",
+        "state": "gas"
+      }
+    ],
+    "gases": [
+      {
+        "name": "steam",
+        "id": 10,
+        "color": "#abd6ff",
+        "state": "gas"
+      },
+      {
+        "name": "smoke",
+        "id": 1,
+        "color": "#383838",
+        "state": "gas"
+      },
+      {
+        "name": "hydrogen",
+        "id": 321,
+        "color": "#558bcf",
+        "state": "gas"
+      },
+      {
+        "name": "oxygen",
+        "id": 322,
+        "color": "#99c7ff",
+        "state": "gas"
+      },
+      {
+        "name": "nitrogen",
+        "id": 323,
+        "color": "#b8d1d4",
+        "state": "gas"
+      },
+      {
+        "name": "helium",
+        "id": 324,
+        "color": "#a69494",
+        "state": "gas"
+      },
+      {
+        "name": "anesthesia",
+        "id": 325,
+        "color": "#d3e1e3",
+        "state": "gas"
+      },
+      {
+        "name": "carbon_dioxide",
+        "id": 326,
+        "color": "#2f2f2f",
+        "state": "gas"
+      },
+      {
+        "name": "bubble",
+        "id": 327,
+        "color": "#afc7fa",
+        "state": "gas"
+      },
+      {
+        "name": "ammonia",
+        "id": 328,
+        "color": "#bab6a9",
+        "state": "gas"
+      },
+      {
+        "name": "propane",
+        "id": 329,
+        "color": "#cfcfcf",
+        "state": "gas"
+      },
+      {
+        "name": "methane",
+        "id": 330,
+        "color": "#9f9f9f",
+        "state": "gas"
+      },
+      {
+        "name": "acid_gas",
+        "id": 332,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "dioxin",
+        "id": 334,
+        "color": "#b8b8b8",
+        "state": "gas"
+      },
+      {
+        "name": "chlorine",
+        "id": 335,
+        "color": "#a5ac50",
+        "state": "gas"
+      },
+      {
+        "name": "neon",
+        "id": 336,
+        "color": "#bababa",
+        "state": "gas"
+      },
+      {
+        "name": "smog",
+        "id": 337,
+        "color": "#989398",
+        "state": "gas"
+      },
+      {
+        "name": "stench",
+        "id": 338,
+        "color": "#6ab066",
+        "state": "gas"
+      },
+      {
+        "name": "fragrance",
+        "id": 339,
+        "color": "#967bb6",
+        "state": "gas"
+      },
+      {
+        "name": "ozone",
+        "id": 340,
+        "color": "#80a4ff",
+        "state": "gas"
+      },
+      {
+        "name": "cloud",
+        "id": 341,
+        "color": "#d5dce6",
+        "state": "gas"
+      },
+      {
+        "name": "rain_cloud",
+        "id": 342,
+        "color": "#636b78",
+        "state": "gas"
+      },
+      {
+        "name": "snow_cloud",
+        "id": 343,
+        "color": "#7e8691",
+        "state": "gas"
+      },
+      {
+        "name": "hail_cloud",
+        "id": 344,
+        "color": "#7e8691",
+        "state": "gas"
+      },
+      {
+        "name": "thunder_cloud",
+        "id": 345,
+        "color": "#494f5b",
+        "state": "gas"
+      },
+      {
+        "name": "acid_cloud",
+        "id": 346,
+        "color": "#637865",
+        "state": "gas"
+      },
+      {
+        "name": "sandstorm",
+        "id": 347,
+        "color": "#c2b576",
+        "state": "gas"
+      },
+      {
+        "name": "pyrocumulus",
+        "id": 348,
+        "color": "#2e2e2e",
+        "state": "gas"
+      },
+      {
+        "name": "fire_cloud",
+        "id": 349,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "rad_cloud",
+        "id": 350,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "rad_steam",
+        "id": 351,
+        "color": "#abffe4",
+        "state": "gas"
+      },
+      {
+        "name": "color_smoke",
+        "id": 352,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "spray_paint",
+        "id": 353,
+        "color": "#888888",
+        "state": "gas"
+      },
+      {
+        "name": "air",
+        "id": 0,
+        "color": "#1f2224",
+        "state": "gas"
+      }
+    ]
+  },
+  "total": 372
+}

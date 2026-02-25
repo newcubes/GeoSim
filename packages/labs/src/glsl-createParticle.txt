@@ -1,0 +1,1492 @@
+vec4 createParticle(float id)
+{
+	if (id == AIR)
+	{
+		return vec4(0.0, 0.0, 0.0, AIR);
+	}
+	else if (id == SMOKE)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.0, SMOKE);
+	}
+	else if (id == WATER)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.0, WATER);
+	}
+	else if (id == LAVA)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.0, LAVA);
+	}
+	else if (id == SAND)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.0, SAND);
+	}
+	else if (id == PLANT)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.5, PLANT);
+	}
+	else if (id == STONE)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.0, STONE);
+	}
+	else if (id == WALL)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.0, WALL);
+	}
+	else if (id == ICE)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.0, ICE);
+	}
+	else if (id == FIRE)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.5 + hash13(vec3(gl_FragCoord.xy, float(frame) + 1.0)) * 0.5, FIRE);
+	}
+	else if (id == STEAM)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), 0.0, 0.0, STEAM);
+	}
+	else if (id == MOSS)
+	{
+		return vec4(hash13(vec3(gl_FragCoord.xy, float(frame))), hash13(vec3(gl_FragCoord.xy, float(frame) + 2.0)), 0.3, MOSS);
+	}
+	else if (id == SALT_WATER)
+	{
+		return vec4(0.302, 0.522, 1.000, SALT_WATER);
+	}
+	else if (id == SUGAR_WATER)
+	{
+		return vec4(0.557, 0.667, 0.902, SUGAR_WATER);
+	}
+	else if (id == SELTZER)
+	{
+		return vec4(0.533, 0.533, 0.533, SELTZER);
+	}
+	else if (id == DIRTY_WATER)
+	{
+		return vec4(0.533, 0.533, 0.533, DIRTY_WATER);
+	}
+	else if (id == POOL_WATER)
+	{
+		return vec4(0.659, 0.824, 0.890, POOL_WATER);
+	}
+	else if (id == ALGAE)
+	{
+		return vec4(0.533, 0.533, 0.533, ALGAE);
+	}
+	else if (id == SLUSH)
+	{
+		return vec4(0.506, 0.737, 0.831, SLUSH);
+	}
+	else if (id == MAGMA)
+	{
+		return vec4(0.533, 0.533, 0.533, MAGMA);
+	}
+	else if (id == SLIME)
+	{
+		return vec4(0.506, 0.812, 0.388, SLIME);
+	}
+	else if (id == ANTIMOLTEN)
+	{
+		return vec4(0.533, 0.533, 0.533, ANTIMOLTEN);
+	}
+	else if (id == ANTIFLUID)
+	{
+		return vec4(0.820, 0.859, 0.922, ANTIFLUID);
+	}
+	else if (id == OIL)
+	{
+		return vec4(0.278, 0.055, 0.000, OIL);
+	}
+	else if (id == LAMP_OIL)
+	{
+		return vec4(0.702, 0.702, 0.545, LAMP_OIL);
+	}
+	else if (id == ACID)
+	{
+		return vec4(0.533, 0.533, 0.533, ACID);
+	}
+	else if (id == NEUTRAL_ACID)
+	{
+		return vec4(0.533, 0.533, 0.533, NEUTRAL_ACID);
+	}
+	else if (id == GLUE)
+	{
+		return vec4(0.941, 0.941, 0.941, GLUE);
+	}
+	else if (id == SODA)
+	{
+		return vec4(0.259, 0.125, 0.086, SODA);
+	}
+	else if (id == STRANGE_MATTER)
+	{
+		return vec4(0.533, 0.533, 0.533, STRANGE_MATTER);
+	}
+	else if (id == MELTED_BUTTER)
+	{
+		return vec4(1.000, 0.886, 0.251, MELTED_BUTTER);
+	}
+	else if (id == MELTED_CHEESE)
+	{
+		return vec4(0.988, 0.859, 0.325, MELTED_CHEESE);
+	}
+	else if (id == CELLULOSE)
+	{
+		return vec4(0.780, 0.831, 0.788, CELLULOSE);
+	}
+	else if (id == MELTED_WAX)
+	{
+		return vec4(0.831, 0.757, 0.588, MELTED_WAX);
+	}
+	else if (id == JUICE)
+	{
+		return vec4(0.941, 0.749, 0.239, JUICE);
+	}
+	else if (id == BROTH)
+	{
+		return vec4(0.859, 0.694, 0.412, BROTH);
+	}
+	else if (id == MILK)
+	{
+		return vec4(0.980, 0.980, 0.980, MILK);
+	}
+	else if (id == CHOCOLATE_MILK)
+	{
+		return vec4(0.400, 0.286, 0.204, CHOCOLATE_MILK);
+	}
+	else if (id == FRUIT_MILK)
+	{
+		return vec4(0.788, 0.596, 0.561, FRUIT_MILK);
+	}
+	else if (id == PILK)
+	{
+		return vec4(0.914, 0.796, 0.639, PILK);
+	}
+	else if (id == EGGNOG)
+	{
+		return vec4(0.867, 0.749, 0.596, EGGNOG);
+	}
+	else if (id == YOLK)
+	{
+		return vec4(0.533, 0.533, 0.533, YOLK);
+	}
+	else if (id == CREAM)
+	{
+		return vec4(0.969, 0.969, 0.969, CREAM);
+	}
+	else if (id == NUT_MILK)
+	{
+		return vec4(0.843, 0.820, 0.765, NUT_MILK);
+	}
+	else if (id == BATTER)
+	{
+		return vec4(0.831, 0.737, 0.522, BATTER);
+	}
+	else if (id == VINEGAR)
+	{
+		return vec4(1.000, 0.925, 0.702, VINEGAR);
+	}
+	else if (id == SAUCE)
+	{
+		return vec4(0.533, 0.533, 0.533, SAUCE);
+	}
+	else if (id == NUT_OIL)
+	{
+		return vec4(0.906, 0.843, 0.518, NUT_OIL);
+	}
+	else if (id == NUT_BUTTER)
+	{
+		return vec4(0.804, 0.569, 0.255, NUT_BUTTER);
+	}
+	else if (id == JELLY)
+	{
+		return vec4(0.639, 0.322, 0.596, JELLY);
+	}
+	else if (id == YOGURT)
+	{
+		return vec4(0.941, 0.937, 0.902, YOGURT);
+	}
+	else if (id == BEANS)
+	{
+		return vec4(0.533, 0.533, 0.533, BEANS);
+	}
+	else if (id == ALCOHOL)
+	{
+		return vec4(0.788, 0.773, 0.694, ALCOHOL);
+	}
+	else if (id == MOLTEN_TUFF)
+	{
+		return vec4(0.533, 0.533, 0.533, MOLTEN_TUFF);
+	}
+	else if (id == SOAP)
+	{
+		return vec4(0.949, 0.949, 0.949, SOAP);
+	}
+	else if (id == BLEACH)
+	{
+		return vec4(1.000, 1.000, 1.000, BLEACH);
+	}
+	else if (id == LIQUID_CHLORINE)
+	{
+		return vec4(0.957, 0.824, 0.090, LIQUID_CHLORINE);
+	}
+	else if (id == DYE)
+	{
+		return vec4(0.533, 0.533, 0.533, DYE);
+	}
+	else if (id == INK)
+	{
+		return vec4(0.090, 0.090, 0.090, INK);
+	}
+	else if (id == MERCURY)
+	{
+		return vec4(0.533, 0.533, 0.533, MERCURY);
+	}
+	else if (id == BLOOD)
+	{
+		return vec4(0.533, 0.533, 0.533, BLOOD);
+	}
+	else if (id == VACCINE)
+	{
+		return vec4(0.878, 0.816, 0.678, VACCINE);
+	}
+	else if (id == ANTIBODY)
+	{
+		return vec4(1.000, 0.251, 0.251, ANTIBODY);
+	}
+	else if (id == INFECTION)
+	{
+		return vec4(0.533, 0.533, 0.533, INFECTION);
+	}
+	else if (id == POISON)
+	{
+		return vec4(0.000, 1.000, 0.000, POISON);
+	}
+	else if (id == ANTIDOTE)
+	{
+		return vec4(0.788, 0.722, 0.212, ANTIDOTE);
+	}
+	else if (id == TEA)
+	{
+		return vec4(0.424, 0.263, 0.090, TEA);
+	}
+	else if (id == COFFEE)
+	{
+		return vec4(0.141, 0.063, 0.043, COFFEE);
+	}
+	else if (id == HONEY)
+	{
+		return vec4(0.533, 0.533, 0.533, HONEY);
+	}
+	else if (id == SAP)
+	{
+		return vec4(0.533, 0.533, 0.533, SAP);
+	}
+	else if (id == CARAMEL)
+	{
+		return vec4(0.910, 0.604, 0.318, CARAMEL);
+	}
+	else if (id == MOLASSES)
+	{
+		return vec4(0.533, 0.533, 0.533, MOLASSES);
+	}
+	else if (id == KETCHUP)
+	{
+		return vec4(1.000, 0.192, 0.098, KETCHUP);
+	}
+	else if (id == MAYO)
+	{
+		return vec4(0.988, 1.000, 0.741, MAYO);
+	}
+	else if (id == GREASE)
+	{
+		return vec4(0.812, 0.573, 0.318, GREASE);
+	}
+	else if (id == MELTED_CHOCOLATE)
+	{
+		return vec4(0.231, 0.086, 0.043, MELTED_CHOCOLATE);
+	}
+	else if (id == LIQUID_HYDROGEN)
+	{
+		return vec4(0.592, 0.686, 0.812, LIQUID_HYDROGEN);
+	}
+	else if (id == LIQUID_OXYGEN)
+	{
+		return vec4(0.000, 0.678, 0.600, LIQUID_OXYGEN);
+	}
+	else if (id == LIQUID_NITROGEN)
+	{
+		return vec4(0.827, 0.882, 0.890, LIQUID_NITROGEN);
+	}
+	else if (id == LIQUID_HELIUM)
+	{
+		return vec4(0.890, 0.827, 0.827, LIQUID_HELIUM);
+	}
+	else if (id == LIQUID_NEON)
+	{
+		return vec4(0.820, 0.820, 0.820, LIQUID_NEON);
+	}
+	else if (id == CYANIDE)
+	{
+		return vec4(0.714, 0.800, 0.714, CYANIDE);
+	}
+	else if (id == MIDAS_TOUCH)
+	{
+		return vec4(0.533, 0.533, 0.533, MIDAS_TOUCH);
+	}
+	else if (id == NITRO)
+	{
+		return vec4(0.278, 0.788, 0.000, NITRO);
+	}
+	else if (id == GREEK_FIRE)
+	{
+		return vec4(0.533, 0.533, 0.533, GREEK_FIRE);
+	}
+	else if (id == TSUNAMI)
+	{
+		return vec4(0.533, 0.533, 0.533, TSUNAMI);
+	}
+	else if (id == PRIMORDIAL_SOUP)
+	{
+		return vec4(0.533, 0.533, 0.533, PRIMORDIAL_SOUP);
+	}
+	else if (id == DIRT)
+	{
+		return vec4(0.533, 0.533, 0.533, DIRT);
+	}
+	else if (id == MUD)
+	{
+		return vec4(0.220, 0.141, 0.090, MUD);
+	}
+	else if (id == WET_SAND)
+	{
+		return vec4(0.533, 0.533, 0.533, WET_SAND);
+	}
+	else if (id == ROCK)
+	{
+		return vec4(0.533, 0.533, 0.533, ROCK);
+	}
+	else if (id == ROCK_WALL)
+	{
+		return vec4(0.533, 0.533, 0.533, ROCK_WALL);
+	}
+	else if (id == MUDSTONE)
+	{
+		return vec4(0.290, 0.204, 0.118, MUDSTONE);
+	}
+	else if (id == PACKED_SAND)
+	{
+		return vec4(0.533, 0.533, 0.533, PACKED_SAND);
+	}
+	else if (id == DEAD_PLANT)
+	{
+		return vec4(0.533, 0.533, 0.533, DEAD_PLANT);
+	}
+	else if (id == FROZEN_PLANT)
+	{
+		return vec4(0.000, 0.749, 0.549, FROZEN_PLANT);
+	}
+	else if (id == GRASS)
+	{
+		return vec4(0.533, 0.533, 0.533, GRASS);
+	}
+	else if (id == CONCRETE)
+	{
+		return vec4(0.671, 0.671, 0.671, CONCRETE);
+	}
+	else if (id == BOMB)
+	{
+		return vec4(0.322, 0.298, 0.255, BOMB);
+	}
+	else if (id == RIME)
+	{
+		return vec4(0.902, 0.949, 0.969, RIME);
+	}
+	else if (id == SNOW)
+	{
+		return vec4(0.882, 0.973, 0.988, SNOW);
+	}
+	else if (id == PACKED_SNOW)
+	{
+		return vec4(0.737, 0.867, 0.890, PACKED_SNOW);
+	}
+	else if (id == WOOD)
+	{
+		return vec4(0.627, 0.322, 0.176, WOOD);
+	}
+	else if (id == GLASS)
+	{
+		return vec4(0.533, 0.533, 0.533, GLASS);
+	}
+	else if (id == RAD_GLASS)
+	{
+		return vec4(0.533, 0.533, 0.533, RAD_GLASS);
+	}
+	else if (id == MEAT)
+	{
+		return vec4(0.533, 0.533, 0.533, MEAT);
+	}
+	else if (id == ROTTEN_MEAT)
+	{
+		return vec4(0.533, 0.533, 0.533, ROTTEN_MEAT);
+	}
+	else if (id == CURED_MEAT)
+	{
+		return vec4(0.533, 0.533, 0.533, CURED_MEAT);
+	}
+	else if (id == COOKED_MEAT)
+	{
+		return vec4(0.533, 0.533, 0.533, COOKED_MEAT);
+	}
+	else if (id == FROZEN_MEAT)
+	{
+		return vec4(0.533, 0.533, 0.533, FROZEN_MEAT);
+	}
+	else if (id == SALT)
+	{
+		return vec4(0.533, 0.533, 0.533, SALT);
+	}
+	else if (id == SUGAR)
+	{
+		return vec4(0.949, 0.949, 0.949, SUGAR);
+	}
+	else if (id == FLOUR)
+	{
+		return vec4(0.533, 0.533, 0.533, FLOUR);
+	}
+	else if (id == SMASH)
+	{
+		return vec4(0.682, 0.298, 0.851, SMASH);
+	}
+	else if (id == GRAVEL)
+	{
+		return vec4(0.533, 0.533, 0.533, GRAVEL);
+	}
+	else if (id == CEMENT)
+	{
+		return vec4(0.710, 0.710, 0.710, CEMENT);
+	}
+	else if (id == DUST)
+	{
+		return vec4(0.400, 0.400, 0.400, DUST);
+	}
+	else if (id == CELL)
+	{
+		return vec4(0.533, 0.533, 0.533, CELL);
+	}
+	else if (id == CANCER)
+	{
+		return vec4(0.533, 0.533, 0.533, CANCER);
+	}
+	else if (id == DNA)
+	{
+		return vec4(0.533, 0.533, 0.533, DNA);
+	}
+	else if (id == WORM)
+	{
+		return vec4(0.827, 0.298, 0.216, WORM);
+	}
+	else if (id == FROZEN_WORM)
+	{
+		return vec4(0.216, 0.827, 0.714, FROZEN_WORM);
+	}
+	else if (id == FLEA)
+	{
+		return vec4(0.620, 0.278, 0.196, FLEA);
+	}
+	else if (id == TERMITE)
+	{
+		return vec4(0.961, 0.627, 0.337, TERMITE);
+	}
+	else if (id == ANT)
+	{
+		return vec4(0.369, 0.043, 0.016, ANT);
+	}
+	else if (id == SPIDER)
+	{
+		return vec4(0.310, 0.176, 0.176, SPIDER);
+	}
+	else if (id == WEB)
+	{
+		return vec4(0.533, 0.533, 0.533, WEB);
+	}
+	else if (id == FLY)
+	{
+		return vec4(0.298, 0.306, 0.259, FLY);
+	}
+	else if (id == FIREFLY)
+	{
+		return vec4(0.408, 0.282, 0.255, FIREFLY);
+	}
+	else if (id == BEE)
+	{
+		return vec4(0.769, 0.694, 0.000, BEE);
+	}
+	else if (id == HIVE)
+	{
+		return vec4(0.651, 0.643, 0.475, HIVE);
+	}
+	else if (id == STINK_BUG)
+	{
+		return vec4(0.533, 0.533, 0.533, STINK_BUG);
+	}
+	else if (id == DEAD_BUG)
+	{
+		return vec4(0.533, 0.533, 0.533, DEAD_BUG);
+	}
+	else if (id == BODY)
+	{
+		return vec4(0.533, 0.533, 0.533, BODY);
+	}
+	else if (id == HEAD)
+	{
+		return vec4(0.533, 0.533, 0.533, HEAD);
+	}
+	else if (id == BIRD)
+	{
+		return vec4(0.600, 0.455, 0.341, BIRD);
+	}
+	else if (id == RAT)
+	{
+		return vec4(0.533, 0.533, 0.533, RAT);
+	}
+	else if (id == FROG)
+	{
+		return vec4(0.376, 0.451, 0.000, FROG);
+	}
+	else if (id == FROZEN_FROG)
+	{
+		return vec4(0.000, 0.451, 0.286, FROZEN_FROG);
+	}
+	else if (id == TADPOLE)
+	{
+		return vec4(0.529, 0.710, 0.455, TADPOLE);
+	}
+	else if (id == FISH)
+	{
+		return vec4(0.675, 0.525, 0.314, FISH);
+	}
+	else if (id == FROZEN_FISH)
+	{
+		return vec4(0.314, 0.675, 0.525, FROZEN_FISH);
+	}
+	else if (id == SLUG)
+	{
+		return vec4(0.533, 0.533, 0.533, SLUG);
+	}
+	else if (id == SNAIL)
+	{
+		return vec4(0.361, 0.192, 0.016, SNAIL);
+	}
+	else if (id == FUSE)
+	{
+		return vec4(0.510, 0.365, 0.220, FUSE);
+	}
+	else if (id == BONE)
+	{
+		return vec4(0.851, 0.851, 0.851, BONE);
+	}
+	else if (id == BALL)
+	{
+		return vec4(0.890, 0.337, 0.576, BALL);
+	}
+	else if (id == BALLOON)
+	{
+		return vec4(0.533, 0.533, 0.533, BALLOON);
+	}
+	else if (id == ANTIPOWDER)
+	{
+		return vec4(0.922, 0.820, 0.847, ANTIPOWDER);
+	}
+	else if (id == ASH)
+	{
+		return vec4(0.533, 0.533, 0.533, ASH);
+	}
+	else if (id == CHARCOAL)
+	{
+		return vec4(0.169, 0.169, 0.169, CHARCOAL);
+	}
+	else if (id == TINDER)
+	{
+		return vec4(0.533, 0.533, 0.533, TINDER);
+	}
+	else if (id == SAWDUST)
+	{
+		return vec4(0.533, 0.533, 0.533, SAWDUST);
+	}
+	else if (id == HAIL)
+	{
+		return vec4(0.773, 0.914, 0.941, HAIL);
+	}
+	else if (id == STAINED_GLASS)
+	{
+		return vec4(0.533, 0.533, 0.533, STAINED_GLASS);
+	}
+	else if (id == CLAY)
+	{
+		return vec4(0.831, 0.773, 0.612, CLAY);
+	}
+	else if (id == CLAY_SOIL)
+	{
+		return vec4(0.533, 0.533, 0.533, CLAY_SOIL);
+	}
+	else if (id == BRICK)
+	{
+		return vec4(0.796, 0.255, 0.255, BRICK);
+	}
+	else if (id == RUINS)
+	{
+		return vec4(0.361, 0.361, 0.361, RUINS);
+	}
+	else if (id == ADOBE)
+	{
+		return vec4(0.541, 0.384, 0.286, ADOBE);
+	}
+	else if (id == SAPLING)
+	{
+		return vec4(0.243, 0.612, 0.243, SAPLING);
+	}
+	else if (id == PINECONE)
+	{
+		return vec4(0.533, 0.533, 0.533, PINECONE);
+	}
+	else if (id == EVERGREEN)
+	{
+		return vec4(0.000, 0.388, 0.000, EVERGREEN);
+	}
+	else if (id == CACTUS)
+	{
+		return vec4(0.533, 0.533, 0.533, CACTUS);
+	}
+	else if (id == KELP)
+	{
+		return vec4(0.533, 0.533, 0.533, KELP);
+	}
+	else if (id == CORAL)
+	{
+		return vec4(0.533, 0.533, 0.533, CORAL);
+	}
+	else if (id == GRASS_SEED)
+	{
+		return vec4(0.533, 0.533, 0.533, GRASS_SEED);
+	}
+	else if (id == WHEAT_SEED)
+	{
+		return vec4(0.714, 0.788, 0.506, WHEAT_SEED);
+	}
+	else if (id == STRAW)
+	{
+		return vec4(0.533, 0.533, 0.533, STRAW);
+	}
+	else if (id == PORCELAIN)
+	{
+		return vec4(0.882, 0.894, 0.867, PORCELAIN);
+	}
+	else if (id == PAPER)
+	{
+		return vec4(0.941, 0.941, 0.941, PAPER);
+	}
+	else if (id == POLLEN)
+	{
+		return vec4(1.000, 1.000, 0.753, POLLEN);
+	}
+	else if (id == FLOWER_SEED)
+	{
+		return vec4(0.055, 0.600, 0.055, FLOWER_SEED);
+	}
+	else if (id == PISTIL)
+	{
+		return vec4(0.533, 0.533, 0.533, PISTIL);
+	}
+	else if (id == PETAL)
+	{
+		return vec4(0.533, 0.533, 0.533, PETAL);
+	}
+	else if (id == TREE_BRANCH)
+	{
+		return vec4(0.627, 0.322, 0.176, TREE_BRANCH);
+	}
+	else if (id == VINE)
+	{
+		return vec4(0.000, 0.349, 0.000, VINE);
+	}
+	else if (id == BAMBOO_PLANT)
+	{
+		return vec4(0.533, 0.533, 0.533, BAMBOO_PLANT);
+	}
+	else if (id == GRAY_GOO)
+	{
+		return vec4(0.753, 0.753, 0.753, GRAY_GOO);
+	}
+	else if (id == MALWARE)
+	{
+		return vec4(0.533, 0.533, 0.533, MALWARE);
+	}
+	else if (id == CLONE_POWDER)
+	{
+		return vec4(0.941, 0.941, 0.000, CLONE_POWDER);
+	}
+	else if (id == FLOATING_CLONER)
+	{
+		return vec4(0.780, 0.780, 0.529, FLOATING_CLONER);
+	}
+	else if (id == VIRUS)
+	{
+		return vec4(0.800, 0.000, 1.000, VIRUS);
+	}
+	else if (id == ICE_NINE)
+	{
+		return vec4(0.533, 0.533, 0.533, ICE_NINE);
+	}
+	else if (id == PERMAFROST)
+	{
+		return vec4(0.533, 0.533, 0.533, PERMAFROST);
+	}
+	else if (id == MUSHROOM_SPORE)
+	{
+		return vec4(0.533, 0.533, 0.533, MUSHROOM_SPORE);
+	}
+	else if (id == MUSHROOM_STALK)
+	{
+		return vec4(0.820, 0.820, 0.820, MUSHROOM_STALK);
+	}
+	else if (id == MUSHROOM_GILL)
+	{
+		return vec4(0.831, 0.812, 0.663, MUSHROOM_GILL);
+	}
+	else if (id == MUSHROOM_CAP)
+	{
+		return vec4(0.533, 0.533, 0.533, MUSHROOM_CAP);
+	}
+	else if (id == HYPHAE)
+	{
+		return vec4(0.533, 0.533, 0.533, HYPHAE);
+	}
+	else if (id == MYCELIUM)
+	{
+		return vec4(0.533, 0.533, 0.533, MYCELIUM);
+	}
+	else if (id == MULCH)
+	{
+		return vec4(0.533, 0.533, 0.533, MULCH);
+	}
+	else if (id == ANT_WALL)
+	{
+		return vec4(0.533, 0.533, 0.533, ANT_WALL);
+	}
+	else if (id == LICHEN)
+	{
+		return vec4(0.533, 0.533, 0.533, LICHEN);
+	}
+	else if (id == PLASTIC)
+	{
+		return vec4(0.773, 0.871, 0.871, PLASTIC);
+	}
+	else if (id == CLOTH)
+	{
+		return vec4(0.533, 0.533, 0.533, CLOTH);
+	}
+	else if (id == WAX)
+	{
+		return vec4(1.000, 0.953, 0.839, WAX);
+	}
+	else if (id == INCENSE)
+	{
+		return vec4(0.212, 0.122, 0.098, INCENSE);
+	}
+	else if (id == INSULATION)
+	{
+		return vec4(0.722, 0.682, 0.647, INSULATION);
+	}
+	else if (id == SPONGE)
+	{
+		return vec4(0.533, 0.533, 0.533, SPONGE);
+	}
+	else if (id == BAMBOO)
+	{
+		return vec4(0.533, 0.533, 0.533, BAMBOO);
+	}
+	else if (id == PYRITE)
+	{
+		return vec4(0.533, 0.533, 0.533, PYRITE);
+	}
+	else if (id == EGG)
+	{
+		return vec4(0.878, 0.827, 0.671, EGG);
+	}
+	else if (id == HARD_YOLK)
+	{
+		return vec4(0.871, 0.678, 0.263, HARD_YOLK);
+	}
+	else if (id == DOUGH)
+	{
+		return vec4(0.749, 0.675, 0.569, DOUGH);
+	}
+	else if (id == HOMUNCULUS)
+	{
+		return vec4(0.533, 0.533, 0.533, HOMUNCULUS);
+	}
+	else if (id == BUTTER)
+	{
+		return vec4(1.000, 0.894, 0.420, BUTTER);
+	}
+	else if (id == CHEESE)
+	{
+		return vec4(0.988, 0.729, 0.012, CHEESE);
+	}
+	else if (id == ROTTEN_CHEESE)
+	{
+		return vec4(0.533, 0.533, 0.533, ROTTEN_CHEESE);
+	}
+	else if (id == CHEESE_POWDER)
+	{
+		return vec4(0.533, 0.533, 0.533, CHEESE_POWDER);
+	}
+	else if (id == CHOCOLATE)
+	{
+		return vec4(0.302, 0.157, 0.094, CHOCOLATE);
+	}
+	else if (id == CHOCOLATE_POWDER)
+	{
+		return vec4(0.533, 0.533, 0.533, CHOCOLATE_POWDER);
+	}
+	else if (id == GRAPE)
+	{
+		return vec4(0.533, 0.533, 0.533, GRAPE);
+	}
+	else if (id == HERB)
+	{
+		return vec4(0.533, 0.533, 0.533, HERB);
+	}
+	else if (id == LETTUCE)
+	{
+		return vec4(0.533, 0.533, 0.533, LETTUCE);
+	}
+	else if (id == PICKLE)
+	{
+		return vec4(0.533, 0.533, 0.533, PICKLE);
+	}
+	else if (id == TOMATO)
+	{
+		return vec4(0.533, 0.533, 0.533, TOMATO);
+	}
+	else if (id == PUMPKIN)
+	{
+		return vec4(0.533, 0.533, 0.533, PUMPKIN);
+	}
+	else if (id == PUMPKIN_SEED)
+	{
+		return vec4(0.533, 0.533, 0.533, PUMPKIN_SEED);
+	}
+	else if (id == CORN)
+	{
+		return vec4(0.533, 0.533, 0.533, CORN);
+	}
+	else if (id == POPCORN)
+	{
+		return vec4(0.533, 0.533, 0.533, POPCORN);
+	}
+	else if (id == CORN_SEED)
+	{
+		return vec4(0.533, 0.533, 0.533, CORN_SEED);
+	}
+	else if (id == POTATO)
+	{
+		return vec4(0.533, 0.533, 0.533, POTATO);
+	}
+	else if (id == BAKED_POTATO)
+	{
+		return vec4(0.533, 0.533, 0.533, BAKED_POTATO);
+	}
+	else if (id == MASHED_POTATO)
+	{
+		return vec4(0.533, 0.533, 0.533, MASHED_POTATO);
+	}
+	else if (id == POTATO_SEED)
+	{
+		return vec4(0.533, 0.533, 0.533, POTATO_SEED);
+	}
+	else if (id == ROOT)
+	{
+		return vec4(0.502, 0.443, 0.357, ROOT);
+	}
+	else if (id == FIBER)
+	{
+		return vec4(0.533, 0.533, 0.533, FIBER);
+	}
+	else if (id == YEAST)
+	{
+		return vec4(0.533, 0.533, 0.533, YEAST);
+	}
+	else if (id == BREAD)
+	{
+		return vec4(0.871, 0.741, 0.549, BREAD);
+	}
+	else if (id == TOAST)
+	{
+		return vec4(0.753, 0.525, 0.333, TOAST);
+	}
+	else if (id == GINGERBREAD)
+	{
+		return vec4(0.533, 0.533, 0.533, GINGERBREAD);
+	}
+	else if (id == CRUMB)
+	{
+		return vec4(0.533, 0.533, 0.533, CRUMB);
+	}
+	else if (id == BAKED_BATTER)
+	{
+		return vec4(0.988, 0.875, 0.494, BAKED_BATTER);
+	}
+	else if (id == WHEAT)
+	{
+		return vec4(0.533, 0.533, 0.533, WHEAT);
+	}
+	else if (id == RICE)
+	{
+		return vec4(0.533, 0.533, 0.533, RICE);
+	}
+	else if (id == CANDY)
+	{
+		return vec4(0.902, 0.792, 0.694, CANDY);
+	}
+	else if (id == COFFEE_BEAN)
+	{
+		return vec4(0.533, 0.533, 0.533, COFFEE_BEAN);
+	}
+	else if (id == COFFEE_GROUND)
+	{
+		return vec4(0.533, 0.533, 0.533, COFFEE_GROUND);
+	}
+	else if (id == NUT)
+	{
+		return vec4(0.533, 0.533, 0.533, NUT);
+	}
+	else if (id == NUT_MEAT)
+	{
+		return vec4(0.533, 0.533, 0.533, NUT_MEAT);
+	}
+	else if (id == BAKING_SODA)
+	{
+		return vec4(0.929, 0.929, 0.929, BAKING_SODA);
+	}
+	else if (id == ICE_CREAM)
+	{
+		return vec4(0.533, 0.533, 0.533, ICE_CREAM);
+	}
+	else if (id == DRY_ICE)
+	{
+		return vec4(0.902, 0.902, 0.902, DRY_ICE);
+	}
+	else if (id == NITROGEN_ICE)
+	{
+		return vec4(0.902, 0.902, 0.902, NITROGEN_ICE);
+	}
+	else if (id == PARTICLEBOARD)
+	{
+		return vec4(0.533, 0.533, 0.533, PARTICLEBOARD);
+	}
+	else if (id == SKIN)
+	{
+		return vec4(0.533, 0.533, 0.533, SKIN);
+	}
+	else if (id == HAIR)
+	{
+		return vec4(0.533, 0.533, 0.533, HAIR);
+	}
+	else if (id == BASALT)
+	{
+		return vec4(0.533, 0.533, 0.533, BASALT);
+	}
+	else if (id == TUFF)
+	{
+		return vec4(0.533, 0.533, 0.533, TUFF);
+	}
+	else if (id == SODIUM)
+	{
+		return vec4(0.533, 0.533, 0.533, SODIUM);
+	}
+	else if (id == CALCIUM)
+	{
+		return vec4(0.533, 0.533, 0.533, CALCIUM);
+	}
+	else if (id == LIMESTONE)
+	{
+		return vec4(0.533, 0.533, 0.533, LIMESTONE);
+	}
+	else if (id == QUICKLIME)
+	{
+		return vec4(0.914, 0.922, 0.906, QUICKLIME);
+	}
+	else if (id == SLAKED_LIME)
+	{
+		return vec4(0.659, 0.631, 0.616, SLAKED_LIME);
+	}
+	else if (id == POTASSIUM)
+	{
+		return vec4(0.533, 0.533, 0.533, POTASSIUM);
+	}
+	else if (id == MAGNESIUM)
+	{
+		return vec4(0.533, 0.533, 0.533, MAGNESIUM);
+	}
+	else if (id == LYE)
+	{
+		return vec4(0.773, 0.827, 0.922, LYE);
+	}
+	else if (id == THERMITE)
+	{
+		return vec4(0.533, 0.533, 0.533, THERMITE);
+	}
+	else if (id == SLAG)
+	{
+		return vec4(0.533, 0.533, 0.533, SLAG);
+	}
+	else if (id == AMALGAM)
+	{
+		return vec4(0.533, 0.533, 0.533, AMALGAM);
+	}
+	else if (id == SULFUR)
+	{
+		return vec4(0.533, 0.533, 0.533, SULFUR);
+	}
+	else if (id == COPPER_SULFATE)
+	{
+		return vec4(0.533, 0.533, 0.533, COPPER_SULFATE);
+	}
+	else if (id == FALLOUT)
+	{
+		return vec4(0.533, 0.533, 0.533, FALLOUT);
+	}
+	else if (id == URANIUM)
+	{
+		return vec4(0.533, 0.533, 0.533, URANIUM);
+	}
+	else if (id == DIAMOND)
+	{
+		return vec4(0.533, 0.533, 0.533, DIAMOND);
+	}
+	else if (id == GOLD_COIN)
+	{
+		return vec4(0.533, 0.533, 0.533, GOLD_COIN);
+	}
+	else if (id == RUST)
+	{
+		return vec4(0.533, 0.533, 0.533, RUST);
+	}
+	else if (id == OXIDIZED_COPPER)
+	{
+		return vec4(0.533, 0.533, 0.533, OXIDIZED_COPPER);
+	}
+	else if (id == ALGA)
+	{
+		return vec4(0.533, 0.533, 0.533, ALGA);
+	}
+	else if (id == METAL_SCRAP)
+	{
+		return vec4(0.533, 0.533, 0.533, METAL_SCRAP);
+	}
+	else if (id == GLASS_SHARD)
+	{
+		return vec4(0.533, 0.533, 0.533, GLASS_SHARD);
+	}
+	else if (id == RAD_SHARD)
+	{
+		return vec4(0.533, 0.533, 0.533, RAD_SHARD);
+	}
+	else if (id == BRICK_RUBBLE)
+	{
+		return vec4(0.533, 0.533, 0.533, BRICK_RUBBLE);
+	}
+	else if (id == BAKED_CLAY)
+	{
+		return vec4(0.722, 0.341, 0.275, BAKED_CLAY);
+	}
+	else if (id == CLAY_SHARD)
+	{
+		return vec4(0.533, 0.533, 0.533, CLAY_SHARD);
+	}
+	else if (id == PORCELAIN_SHARD)
+	{
+		return vec4(0.533, 0.533, 0.533, PORCELAIN_SHARD);
+	}
+	else if (id == FEATHER)
+	{
+		return vec4(0.533, 0.533, 0.533, FEATHER);
+	}
+	else if (id == CONFETTI)
+	{
+		return vec4(0.533, 0.533, 0.533, CONFETTI);
+	}
+	else if (id == GLITTER)
+	{
+		return vec4(0.533, 0.533, 0.533, GLITTER);
+	}
+	else if (id == BEAD)
+	{
+		return vec4(0.533, 0.533, 0.533, BEAD);
+	}
+	else if (id == COLOR_SAND)
+	{
+		return vec4(0.533, 0.533, 0.533, COLOR_SAND);
+	}
+	else if (id == CAUSTIC_POTASH)
+	{
+		return vec4(0.996, 1.000, 0.910, CAUSTIC_POTASH);
+	}
+	else if (id == SODIUM_ACETATE)
+	{
+		return vec4(0.533, 0.533, 0.533, SODIUM_ACETATE);
+	}
+	else if (id == BORAX)
+	{
+		return vec4(1.000, 1.000, 1.000, BORAX);
+	}
+	else if (id == EPSOM_SALT)
+	{
+		return vec4(0.533, 0.533, 0.533, EPSOM_SALT);
+	}
+	else if (id == POTASSIUM_SALT)
+	{
+		return vec4(0.533, 0.533, 0.533, POTASSIUM_SALT);
+	}
+	else if (id == TNT)
+	{
+		return vec4(0.788, 0.165, 0.165, TNT);
+	}
+	else if (id == C4)
+	{
+		return vec4(0.533, 0.533, 0.533, C4);
+	}
+	else if (id == GRENADE)
+	{
+		return vec4(0.369, 0.361, 0.341, GRENADE);
+	}
+	else if (id == DYNAMITE)
+	{
+		return vec4(0.533, 0.533, 0.533, DYNAMITE);
+	}
+	else if (id == GUNPOWDER)
+	{
+		return vec4(0.533, 0.533, 0.533, GUNPOWDER);
+	}
+	else if (id == FIREWORK)
+	{
+		return vec4(0.769, 0.310, 0.271, FIREWORK);
+	}
+	else if (id == NUKE)
+	{
+		return vec4(0.325, 0.275, 0.212, NUKE);
+	}
+	else if (id == H_BOMB)
+	{
+		return vec4(0.325, 0.212, 0.212, H_BOMB);
+	}
+	else if (id == DIRTY_BOMB)
+	{
+		return vec4(0.255, 0.325, 0.212, DIRTY_BOMB);
+	}
+	else if (id == EMP_BOMB)
+	{
+		return vec4(0.255, 0.510, 0.451, EMP_BOMB);
+	}
+	else if (id == FIREBALL)
+	{
+		return vec4(0.533, 0.533, 0.533, FIREBALL);
+	}
+	else if (id == ROCKET)
+	{
+		return vec4(1.000, 0.435, 0.278, ROCKET);
+	}
+	else if (id == ANTIBOMB)
+	{
+		return vec4(0.678, 0.702, 0.745, ANTIBOMB);
+	}
+	else if (id == COLD_BOMB)
+	{
+		return vec4(0.263, 0.392, 0.431, COLD_BOMB);
+	}
+	else if (id == HOT_BOMB)
+	{
+		return vec4(0.424, 0.263, 0.431, HOT_BOMB);
+	}
+	else if (id == ANTIMATTER_BOMB)
+	{
+		return vec4(0.431, 0.263, 0.263, ANTIMATTER_BOMB);
+	}
+	else if (id == PARTY_POPPER)
+	{
+		return vec4(0.533, 0.533, 0.533, PARTY_POPPER);
+	}
+	else if (id == FLASHBANG)
+	{
+		return vec4(0.396, 0.400, 0.361, FLASHBANG);
+	}
+	else if (id == SMOKE_GRENADE)
+	{
+		return vec4(0.396, 0.400, 0.361, SMOKE_GRENADE);
+	}
+	else if (id == LANDMINE)
+	{
+		return vec4(0.522, 0.424, 0.490, LANDMINE);
+	}
+	else if (id == EARTHQUAKE)
+	{
+		return vec4(0.533, 0.533, 0.533, EARTHQUAKE);
+	}
+	else if (id == BLASTER)
+	{
+		return vec4(0.533, 0.533, 0.533, BLASTER);
+	}
+	else if (id == ARMAGEDDON)
+	{
+		return vec4(0.651, 0.161, 0.000, ARMAGEDDON);
+	}
+	else if (id == PRESSURE_PLATE)
+	{
+		return vec4(0.541, 0.541, 0.518, PRESSURE_PLATE);
+	}
+	else if (id == PLASMA)
+	{
+		return vec4(0.533, 0.533, 0.533, PLASMA);
+	}
+	else if (id == COLD_FIRE)
+	{
+		return vec4(0.533, 0.533, 0.533, COLD_FIRE);
+	}
+	else if (id == SUN)
+	{
+		return vec4(1.000, 1.000, 0.741, SUN);
+	}
+	else if (id == PLAGUE)
+	{
+		return vec4(0.212, 0.000, 0.361, PLAGUE);
+	}
+	else if (id == ANTIFIRE)
+	{
+		return vec4(0.533, 0.533, 0.533, ANTIFIRE);
+	}
+	else if (id == ANTIGAS)
+	{
+		return vec4(0.902, 1.000, 0.988, ANTIGAS);
+	}
+	else if (id == LIGHT)
+	{
+		return vec4(1.000, 0.992, 0.812, LIGHT);
+	}
+	else if (id == LIQUID_LIGHT)
+	{
+		return vec4(0.741, 0.737, 0.616, LIQUID_LIGHT);
+	}
+	else if (id == LASER)
+	{
+		return vec4(1.000, 0.000, 0.000, LASER);
+	}
+	else if (id == POINTER)
+	{
+		return vec4(1.000, 0.000, 0.000, POINTER);
+	}
+	else if (id == HYDROGEN)
+	{
+		return vec4(0.333, 0.545, 0.812, HYDROGEN);
+	}
+	else if (id == OXYGEN)
+	{
+		return vec4(0.600, 0.780, 1.000, OXYGEN);
+	}
+	else if (id == NITROGEN)
+	{
+		return vec4(0.722, 0.820, 0.831, NITROGEN);
+	}
+	else if (id == HELIUM)
+	{
+		return vec4(0.651, 0.580, 0.580, HELIUM);
+	}
+	else if (id == ANESTHESIA)
+	{
+		return vec4(0.827, 0.882, 0.890, ANESTHESIA);
+	}
+	else if (id == CARBON_DIOXIDE)
+	{
+		return vec4(0.184, 0.184, 0.184, CARBON_DIOXIDE);
+	}
+	else if (id == BUBBLE)
+	{
+		return vec4(0.686, 0.780, 0.980, BUBBLE);
+	}
+	else if (id == AMMONIA)
+	{
+		return vec4(0.729, 0.714, 0.663, AMMONIA);
+	}
+	else if (id == PROPANE)
+	{
+		return vec4(0.812, 0.812, 0.812, PROPANE);
+	}
+	else if (id == METHANE)
+	{
+		return vec4(0.624, 0.624, 0.624, METHANE);
+	}
+	else if (id == FOAM)
+	{
+		return vec4(0.792, 0.824, 0.890, FOAM);
+	}
+	else if (id == ACID_GAS)
+	{
+		return vec4(0.533, 0.533, 0.533, ACID_GAS);
+	}
+	else if (id == ANTIMATTER)
+	{
+		return vec4(0.659, 0.608, 0.659, ANTIMATTER);
+	}
+	else if (id == DIOXIN)
+	{
+		return vec4(0.722, 0.722, 0.722, DIOXIN);
+	}
+	else if (id == CHLORINE)
+	{
+		return vec4(0.647, 0.675, 0.314, CHLORINE);
+	}
+	else if (id == NEON)
+	{
+		return vec4(0.729, 0.729, 0.729, NEON);
+	}
+	else if (id == SMOG)
+	{
+		return vec4(0.596, 0.576, 0.596, SMOG);
+	}
+	else if (id == STENCH)
+	{
+		return vec4(0.416, 0.690, 0.400, STENCH);
+	}
+	else if (id == FRAGRANCE)
+	{
+		return vec4(0.588, 0.482, 0.714, FRAGRANCE);
+	}
+	else if (id == OZONE)
+	{
+		return vec4(0.502, 0.643, 1.000, OZONE);
+	}
+	else if (id == CLOUD)
+	{
+		return vec4(0.835, 0.863, 0.902, CLOUD);
+	}
+	else if (id == RAIN_CLOUD)
+	{
+		return vec4(0.388, 0.420, 0.471, RAIN_CLOUD);
+	}
+	else if (id == SNOW_CLOUD)
+	{
+		return vec4(0.494, 0.525, 0.569, SNOW_CLOUD);
+	}
+	else if (id == HAIL_CLOUD)
+	{
+		return vec4(0.494, 0.525, 0.569, HAIL_CLOUD);
+	}
+	else if (id == THUNDER_CLOUD)
+	{
+		return vec4(0.286, 0.310, 0.357, THUNDER_CLOUD);
+	}
+	else if (id == ACID_CLOUD)
+	{
+		return vec4(0.388, 0.471, 0.396, ACID_CLOUD);
+	}
+	else if (id == SANDSTORM)
+	{
+		return vec4(0.761, 0.710, 0.463, SANDSTORM);
+	}
+	else if (id == PYROCUMULUS)
+	{
+		return vec4(0.180, 0.180, 0.180, PYROCUMULUS);
+	}
+	else if (id == FIRE_CLOUD)
+	{
+		return vec4(0.533, 0.533, 0.533, FIRE_CLOUD);
+	}
+	else if (id == RAD_CLOUD)
+	{
+		return vec4(0.533, 0.533, 0.533, RAD_CLOUD);
+	}
+	else if (id == RAD_STEAM)
+	{
+		return vec4(0.671, 1.000, 0.894, RAD_STEAM);
+	}
+	else if (id == COLOR_SMOKE)
+	{
+		return vec4(0.533, 0.533, 0.533, COLOR_SMOKE);
+	}
+	else if (id == SPRAY_PAINT)
+	{
+		return vec4(0.533, 0.533, 0.533, SPRAY_PAINT);
+	}
+	else if (id == RADIATION)
+	{
+		return vec4(0.533, 0.533, 0.533, RADIATION);
+	}
+	else if (id == NEUTRON)
+	{
+		return vec4(0.651, 1.000, 1.000, NEUTRON);
+	}
+	else if (id == PROTON)
+	{
+		return vec4(1.000, 0.651, 0.651, PROTON);
+	}
+	else if (id == ELECTRIC)
+	{
+		return vec4(1.000, 0.984, 0.651, ELECTRIC);
+	}
+	else if (id == LIGHTNING)
+	{
+		return vec4(1.000, 1.000, 0.929, LIGHTNING);
+	}
+	else if (id == BLESS)
+	{
+		return vec4(0.533, 0.533, 0.533, BLESS);
+	}
+	else if (id == GOD_RAY)
+	{
+		return vec4(0.533, 0.533, 0.533, GOD_RAY);
+	}
+	else if (id == HEAT_RAY)
+	{
+		return vec4(0.533, 0.533, 0.533, HEAT_RAY);
+	}
+	else if (id == FREEZE_RAY)
+	{
+		return vec4(0.533, 0.533, 0.533, FREEZE_RAY);
+	}
+	else if (id == POP)
+	{
+		return vec4(0.533, 0.533, 0.533, POP);
+	}
+	else if (id == EXPLOSION)
+	{
+		return vec4(0.533, 0.533, 0.533, EXPLOSION);
+	}
+	else if (id == N_EXPLOSION)
+	{
+		return vec4(0.533, 0.533, 0.533, N_EXPLOSION);
+	}
+	else if (id == SUPERNOVA)
+	{
+		return vec4(0.533, 0.533, 0.533, SUPERNOVA);
+	}
+	else if (id == POSITRON)
+	{
+		return vec4(0.651, 0.749, 1.000, POSITRON);
+	}
+	else if (id == EMBER)
+	{
+		return vec4(0.533, 0.533, 0.533, EMBER);
+	}
+	else if (id == FW_EMBER)
+	{
+		return vec4(0.533, 0.533, 0.533, FW_EMBER);
+	}
+	else if (id == FLASH)
+	{
+		return vec4(1.000, 0.992, 0.812, FLASH);
+	}
+	else if (id == TORNADO)
+	{
+		return vec4(0.533, 0.533, 0.533, TORNADO);
+	}
+	return vec4(0.0, 0.0, 0.0, AIR);
+}

@@ -1,0 +1,34 @@
+# Dependencies and install
+node_modules/
+
+# Build and cache
+dist/
+.vite/
+.wireit/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# IDE and OS
+.DS_Store
+.vscode/
+.idea/
+.cursor/
+
+# Logs and temp
+*.log
+npm-debug.log*
+tmp/
+temp/
+
+# Private / internal (not for public repo)
+private/
+sandboxels-main/
+web-extension/
+
+# Optional: uncomment to keep package-lock out of repo (reproducible installs prefer keeping it)
+# package-lock.json

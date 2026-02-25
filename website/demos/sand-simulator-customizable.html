@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customizable Sand Simulator</title>
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        min-height: 100%;
+        position: relative;
+        margin: 0;
+        overscroll-behavior: none;
+        background: #1a1a1a;
+        font-family: system-ui, -apple-system, sans-serif;
+        color: white;
+      }
+
+      folk-shape {
+        background: transparent;
+        position: absolute;
+        background-color: rgba(100, 100, 100, 0.8);
+        border-radius: 2px;
+      }
+
+      .controls-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 350px;
+        max-height: 100vh;
+        overflow-y: auto;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 20px;
+        z-index: 1000;
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.5);
+      }
+
+      .controls-panel h2 {
+        margin: 0 0 20px 0;
+        font-size: 20px;
+        color: #fff;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 10px;
+      }
+
+      .material-section {
+        margin-bottom: 25px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        border-left: 3px solid;
+      }
+
+      .material-section h3 {
+        margin: 0 0 15px 0;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .material-section[data-material="smoke"] { border-left-color: #666; }
+      .material-section[data-material="water"] { border-left-color: #3a7bd5; }
+      .material-section[data-material="lava"] { border-left-color: #ff4500; }
+      .material-section[data-material="sand"] { border-left-color: #d4a574; }
+      .material-section[data-material="plant"] { border-left-color: #228b22; }
+      .material-section[data-material="stone"] { border-left-color: #555; }
+      .material-section[data-material="ice"] { border-left-color: #87ceeb; }
+      .material-section[data-material="fire"] { border-left-color: #ff6347; }
+
+      .param-group {
+        margin-bottom: 12px;
+      }
+
+      .param-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+        font-size: 13px;
+      }
+
+      .param-label span:first-child {
+        flex: 1;
+      }
+
+      .param-value {
+        font-family: monospace;
+        color: #4a9eff;
+        margin-left: 10px;
+        min-width: 50px;
+        text-align: right;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.1);
+        outline: none;
+        -webkit-appearance: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #4a9eff;
+        cursor: pointer;
+      }
+
+      input[type="range"]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #4a9eff;
+        cursor: pointer;
+        border: none;
+      }
+
+      .global-params {
+        margin-bottom: 25px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+      }
+
+      .global-params h3 {
+        margin: 0 0 15px 0;
+        font-size: 16px;
+      }
+
+      .info-box {
+        margin-top: 20px;
+        padding: 12px;
+        background: rgba(74, 158, 255, 0.1);
+        border-left: 3px solid #4a9eff;
+        border-radius: 4px;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .info-box strong {
+        color: #4a9eff;
+      }
+
+      .material-selector {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .material-btn {
+        padding: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 12px;
+        transition: all 0.2s;
+      }
+
+      .material-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .material-btn.active {
+        background: rgba(74, 158, 255, 0.2);
+        border-color: #4a9eff;
+      }
+
+      .reset-btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        background: rgba(255, 100, 100, 0.2);
+        border: 2px solid rgba(255, 100, 100, 0.5);
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+
+      .reset-btn:hover {
+        background: rgba(255, 100, 100, 0.3);
+      }
+
+      .preset-btn {
+        transition: all 0.2s;
+      }
+
+      .preset-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+      <div class="controls-panel">
+      <h2>⚙️ Customizable Sand Simulator</h2>
+
+      <div class="preset-buttons" style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <button class="preset-btn" id="verdantPreset" style="flex: 1; padding: 12px; background: rgba(34, 139, 34, 0.3); border: 2px solid #228b22; color: white; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: bold;">
+          🌿 Verdant Setting
+        </button>
+        <button class="preset-btn" id="defaultPreset" style="flex: 1; padding: 12px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 6px; cursor: pointer; font-size: 14px;">
+          Default
+        </button>
+      </div>
+
+      <div class="global-params">
+        <h3>Global Settings</h3>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Initial Sand Density</span>
+            <span class="param-value" id="initialSandValue">0.15</span>
+          </div>
+          <input type="range" id="initialSand" min="0" max="1" step="0.01" value="0.15" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Brush Radius</span>
+            <span class="param-value" id="brushRadiusValue">5</span>
+          </div>
+          <input type="range" id="brushRadius" min="1" max="20" step="1" value="5" />
+        </div>
+      </div>
+
+      <div class="material-selector">
+        <button class="material-btn" data-material="1">Smoke</button>
+        <button class="material-btn" data-material="2">Water</button>
+        <button class="material-btn" data-material="3">Lava</button>
+        <button class="material-btn active" data-material="4">Sand</button>
+        <button class="material-btn" data-material="5">Plant</button>
+        <button class="material-btn" data-material="6">Stone</button>
+        <button class="material-btn" data-material="7">Wall</button>
+        <button class="material-btn" data-material="8">Ice</button>
+        <button class="material-btn" data-material="9">Fire</button>
+        <button class="material-btn" data-material="11" style="background: rgba(34, 139, 34, 0.2); border-color: #228b22;">Moss</button>
+      </div>
+
+      <!-- SMOKE Parameters -->
+      <div class="material-section" data-material="smoke">
+        <h3>💨 Smoke</h3>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Disappear Rate</span>
+            <span class="param-value" id="smokeDisappearValue">0.003</span>
+          </div>
+          <input type="range" id="smokeDisappear" min="0" max="0.01" step="0.0001" value="0.003" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Horizontal Spread</span>
+            <span class="param-value" id="smokeSpreadValue">0.25</span>
+          </div>
+          <input type="range" id="smokeSpread" min="0" max="1" step="0.01" value="0.25" />
+        </div>
+      </div>
+
+      <!-- WATER Parameters -->
+      <div class="material-section" data-material="water">
+        <h3>💧 Water</h3>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Fall Speed</span>
+            <span class="param-value" id="waterFallValue">0.95</span>
+          </div>
+          <input type="range" id="waterFall" min="0" max="1" step="0.01" value="0.95" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Horizontal Flow</span>
+            <span class="param-value" id="waterFlowValue">0.3</span>
+          </div>
+          <input type="range" id="waterFlow" min="0" max="1" step="0.01" value="0.3" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Freeze Rate (near Ice)</span>
+            <span class="param-value" id="waterFreezeValue">0.05</span>
+          </div>
+          <input type="range" id="waterFreeze" min="0" max="0.2" step="0.01" value="0.05" />
+        </div>
+      </div>
+
+      <!-- LAVA Parameters -->
+      <div class="material-section" data-material="lava">
+        <h3>🌋 Lava</h3>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Fall Speed</span>
+            <span class="param-value" id="lavaFallValue">0.8</span>
+          </div>
+          <input type="range" id="lavaFall" min="0" max="1" step="0.01" value="0.8" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Horizontal Spread</span>
+            <span class="param-value" id="lavaSpreadValue">0.2</span>
+          </div>
+          <input type="range" id="lavaSpread" min="0" max="1" step="0.01" value="0.2" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Plant Burn Chance</span>
+            <span class="param-value" id="lavaBurnPlantValue">0.03</span>
+          </div>
+          <input type="range" id="lavaBurnPlant" min="0" max="0.1" step="0.001" value="0.03" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Plant to Stone Chance</span>
+            <span class="param-value" id="lavaPlantStoneValue">0.04</span>
+          </div>
+          <input type="range" id="lavaPlantStone" min="0" max="0.1" step="0.001" value="0.04" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Ignite Plant Chance</span>
+            <span class="param-value" id="lavaIgniteValue">0.3</span>
+          </div>
+          <input type="range" id="lavaIgnite" min="0" max="1" step="0.01" value="0.3" />
+        </div>
+      </div>
+
+      <!-- SAND Parameters -->
+      <div class="material-section" data-material="sand">
+        <h3>🏜️ Sand</h3>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Horizontal Spread</span>
+            <span class="param-value" id="sandSpreadValue">0.4</span>
+          </div>
+          <input type="range" id="sandSpread" min="0" max="1" step="0.01" value="0.4" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Fall Speed</span>
+            <span class="param-value" id="sandFallValue">0.9</span>
+          </div>
+          <input type="range" id="sandFall" min="0" max="1" step="0.01" value="0.9" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Fall Through Water</span>
+            <span class="param-value" id="sandWaterValue">0.3</span>
+          </div>
+          <input type="range" id="sandWater" min="0" max="1" step="0.01" value="0.3" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Fall Through Lava</span>
+            <span class="param-value" id="sandLavaValue">0.15</span>
+          </div>
+          <input type="range" id="sandLava" min="0" max="0.5" step="0.01" value="0.15" />
+        </div>
+      </div>
+
+      <!-- PLANT Parameters -->
+      <div class="material-section" data-material="plant">
+        <h3>🌱 Plant</h3>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Water Absorption Rate</span>
+            <span class="param-value" id="plantAbsorbValue">0.1</span>
+          </div>
+          <input type="range" id="plantAbsorb" min="0" max="0.5" step="0.01" value="0.1" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Water Consumption Chance</span>
+            <span class="param-value" id="plantConsumeValue">0.1</span>
+          </div>
+          <input type="range" id="plantConsume" min="0" max="1" step="0.01" value="0.1" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Growth Water Threshold</span>
+            <span class="param-value" id="plantThresholdValue">0.4</span>
+          </div>
+          <input type="range" id="plantThreshold" min="0" max="1" step="0.01" value="0.4" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Growth Chance</span>
+            <span class="param-value" id="plantGrowthValue">0.01</span>
+          </div>
+          <input type="range" id="plantGrowth" min="0" max="0.1" step="0.001" value="0.01" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Growth Direction Bias</span>
+            <span class="param-value" id="plantDirectionValue">0.8</span>
+          </div>
+          <input type="range" id="plantDirection" min="0" max="1" step="0.01" value="0.8" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Water Cost on Growth</span>
+            <span class="param-value" id="plantCostValue">0.7</span>
+          </div>
+          <input type="range" id="plantCost" min="0" max="1" step="0.01" value="0.7" />
+        </div>
+      </div>
+
+      <!-- ICE Parameters -->
+      <div class="material-section" data-material="ice">
+        <h3>🧊 Ice</h3>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Melt Rate (near Lava)</span>
+            <span class="param-value" id="iceMeltValue">0.2</span>
+          </div>
+          <input type="range" id="iceMelt" min="0" max="1" step="0.01" value="0.2" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Steam Creation Chance</span>
+            <span class="param-value" id="iceSteamValue">0.5</span>
+          </div>
+          <input type="range" id="iceSteam" min="0" max="1" step="0.01" value="0.5" />
+        </div>
+      </div>
+
+      <!-- FIRE Parameters -->
+      <div class="material-section" data-material="fire">
+        <h3>🔥 Fire</h3>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Upward Spread</span>
+            <span class="param-value" id="fireUpwardValue">0.4</span>
+          </div>
+          <input type="range" id="fireUpward" min="0" max="1" step="0.01" value="0.4" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Horizontal Spread</span>
+            <span class="param-value" id="fireHorizontalValue">0.2</span>
+          </div>
+          <input type="range" id="fireHorizontal" min="0" max="1" step="0.01" value="0.2" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Plant Spread Chance</span>
+            <span class="param-value" id="firePlantSpreadValue">0.8</span>
+          </div>
+          <input type="range" id="firePlantSpread" min="0" max="1" step="0.01" value="0.8" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Heat Gain from Plants</span>
+            <span class="param-value" id="fireHeatGainValue">0.2</span>
+          </div>
+          <input type="range" id="fireHeatGain" min="0" max="1" step="0.01" value="0.2" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Heat Loss Rate</span>
+            <span class="param-value" id="fireHeatLossValue">0.01</span>
+          </div>
+          <input type="range" id="fireHeatLoss" min="0" max="0.1" step="0.001" value="0.01" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Smoke Production</span>
+            <span class="param-value" id="fireSmokeValue">0.1</span>
+          </div>
+          <input type="range" id="fireSmoke" min="0" max="0.5" step="0.01" value="0.1" />
+        </div>
+        <div class="param-group">
+          <div class="param-label">
+            <span>Smoke Creation Above</span>
+            <span class="param-value" id="fireSmokeAboveValue">0.2</span>
+          </div>
+          <input type="range" id="fireSmokeAbove" min="0" max="1" step="0.01" value="0.2" />
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Note:</strong> These parameters are currently for display/documentation. To make them functional, the shader code would need to be modified to accept these as uniform parameters. The current implementation has these values hardcoded in the GLSL shader.
+      </div>
+
+      <button class="reset-btn" id="resetBtn">Reset All to Defaults</button>
+    </div>
+
+    <folk-sand id="sandSim" style="margin-left: 350px;">
+      <folk-shape x="100" y="100" width="50" height="50"></folk-shape>
+      <folk-shape x="200" y="200" width="50" height="50"></folk-shape>
+      <folk-shape x="300" y="300" width="80" height="40"></folk-shape>
+    </folk-sand>
+
+    <script type="module">
+      import '@folkjs/labs/standalone/folk-shape';
+      import '@folkjs/labs/standalone/folk-sand';
+
+      const sandElement = document.querySelector('#sandSim');
+      const materialButtons = document.querySelectorAll('.material-btn');
+      let currentMaterial = 4;
+
+      // Update active material button
+      function setActiveMaterial(materialNumber) {
+        materialButtons.forEach((btn) => btn.classList.remove('active'));
+        const activeBtn = document.querySelector(`[data-material="${materialNumber}"]`);
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+        }
+        currentMaterial = materialNumber;
+      }
+
+      // Handle material change callback
+      sandElement.onMaterialChange = (materialNumber) => {
+        setActiveMaterial(materialNumber);
+      };
+
+      // Handle button clicks - directly set material type
+      materialButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const material = parseInt(button.dataset.material);
+          setActiveMaterial(material);
+          // Directly set material type on the sand element
+          if (sandElement.setMaterialType) {
+            sandElement.setMaterialType(material);
+          } else {
+            // Fallback: trigger keyboard event
+            const key = material === 11 ? 'm' : material.toString();
+            const keyEvent = new KeyboardEvent('keydown', {
+              key: key,
+              bubbles: true,
+              cancelable: true,
+            });
+            document.dispatchEvent(keyEvent);
+          }
+        });
+      });
+
+      // Handle keyboard input
+      document.addEventListener('keydown', (e) => {
+        const key = parseInt(e.key);
+        if (key >= 1 && key <= 9) {
+          setActiveMaterial(key);
+        } else if (e.key === '0' || e.key === 'm' || e.key === 'M') {
+          // 0, m, or M for moss (material 11)
+          setActiveMaterial(11);
+          const keyEvent = new KeyboardEvent('keydown', {
+            key: '11',
+            bubbles: true,
+            cancelable: true,
+          });
+          document.dispatchEvent(keyEvent);
+        }
+      });
+
+      // Update parameter value displays
+      function setupSlider(sliderId, valueId, defaultValue) {
+        const slider = document.getElementById(sliderId);
+        const valueDisplay = document.getElementById(valueId);
+        
+        if (slider && valueDisplay) {
+          slider.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            valueDisplay.textContent = value.toFixed(4).replace(/\.?0+$/, '');
+            // TODO: Apply parameter to shader when shader supports uniforms
+            console.log(`${sliderId}: ${value}`);
+          });
+        }
+      }
+
+      // Setup all sliders
+      setupSlider('initialSand', 'initialSandValue', 0.15);
+      setupSlider('brushRadius', 'brushRadiusValue', 5);
+      
+      // Smoke
+      setupSlider('smokeDisappear', 'smokeDisappearValue', 0.003);
+      setupSlider('smokeSpread', 'smokeSpreadValue', 0.25);
+      
+      // Water
+      setupSlider('waterFall', 'waterFallValue', 0.95);
+      setupSlider('waterFlow', 'waterFlowValue', 0.3);
+      setupSlider('waterFreeze', 'waterFreezeValue', 0.05);
+      
+      // Lava
+      setupSlider('lavaFall', 'lavaFallValue', 0.8);
+      setupSlider('lavaSpread', 'lavaSpreadValue', 0.2);
+      setupSlider('lavaBurnPlant', 'lavaBurnPlantValue', 0.03);
+      setupSlider('lavaPlantStone', 'lavaPlantStoneValue', 0.04);
+      setupSlider('lavaIgnite', 'lavaIgniteValue', 0.3);
+      
+      // Sand
+      setupSlider('sandSpread', 'sandSpreadValue', 0.4);
+      setupSlider('sandFall', 'sandFallValue', 0.9);
+      setupSlider('sandWater', 'sandWaterValue', 0.3);
+      setupSlider('sandLava', 'sandLavaValue', 0.15);
+      
+      // Plant
+      setupSlider('plantAbsorb', 'plantAbsorbValue', 0.1);
+      setupSlider('plantConsume', 'plantConsumeValue', 0.1);
+      setupSlider('plantThreshold', 'plantThresholdValue', 0.4);
+      setupSlider('plantGrowth', 'plantGrowthValue', 0.01);
+      setupSlider('plantDirection', 'plantDirectionValue', 0.8);
+      setupSlider('plantCost', 'plantCostValue', 0.7);
+      
+      // Ice
+      setupSlider('iceMelt', 'iceMeltValue', 0.2);
+      setupSlider('iceSteam', 'iceSteamValue', 0.5);
+      
+      // Fire
+      setupSlider('fireUpward', 'fireUpwardValue', 0.4);
+      setupSlider('fireHorizontal', 'fireHorizontalValue', 0.2);
+      setupSlider('firePlantSpread', 'firePlantSpreadValue', 0.8);
+      setupSlider('fireHeatGain', 'fireHeatGainValue', 0.2);
+      setupSlider('fireHeatLoss', 'fireHeatLossValue', 0.01);
+      setupSlider('fireSmoke', 'fireSmokeValue', 0.1);
+      setupSlider('fireSmokeAbove', 'fireSmokeAboveValue', 0.2);
+
+      // Function to apply preset values
+      function applyPreset(preset) {
+        const values = preset === 'verdant' ? {
+          initialSand: 0.1, // Less initial sand, more room for plants
+          brushRadius: 5,
+          smokeDisappear: 0.003,
+          smokeSpread: 0.25,
+          waterFall: 0.85, // Slower fall so water stays available longer
+          waterFlow: 0.5, // Better flow to reach plants
+          waterFreeze: 0.02, // Less freezing
+          lavaFall: 0.8,
+          lavaSpread: 0.2,
+          lavaBurnPlant: 0.01, // Less plant burning
+          lavaPlantStone: 0.02,
+          lavaIgnite: 0.1, // Less ignition
+          sandSpread: 0.4,
+          sandFall: 0.9,
+          sandWater: 0.2, // Less sand falling through water
+          sandLava: 0.15,
+          plantAbsorb: 0.5, // MAX - maximum water absorption
+          plantConsume: 1.0, // MAX - always consume water when available
+          plantThreshold: 0.1, // MIN - very low threshold, easy to grow
+          plantGrowth: 0.1, // MAX - maximum growth chance
+          plantDirection: 1.0, // MAX - always grow upward
+          plantCost: 0.3, // MIN - minimal water cost
+          iceMelt: 0.2,
+          iceSteam: 0.5,
+          fireUpward: 0.2, // Less fire spread
+          fireHorizontal: 0.1,
+          firePlantSpread: 0.3, // Less fire spreading to plants
+          fireHeatGain: 0.1,
+          fireHeatLoss: 0.02, // Faster heat loss
+          fireSmoke: 0.1,
+          fireSmokeAbove: 0.2
+        } : {
+          // Default values
+          initialSand: 0.15,
+          brushRadius: 5,
+          smokeDisappear: 0.003,
+          smokeSpread: 0.25,
+          waterFall: 0.95,
+          waterFlow: 0.3,
+          waterFreeze: 0.05,
+          lavaFall: 0.8,
+          lavaSpread: 0.2,
+          lavaBurnPlant: 0.03,
+          lavaPlantStone: 0.04,
+          lavaIgnite: 0.3,
+          sandSpread: 0.4,
+          sandFall: 0.9,
+          sandWater: 0.3,
+          sandLava: 0.15,
+          plantAbsorb: 0.1,
+          plantConsume: 0.1,
+          plantThreshold: 0.4,
+          plantGrowth: 0.01,
+          plantDirection: 0.8,
+          plantCost: 0.7,
+          iceMelt: 0.2,
+          iceSteam: 0.5,
+          fireUpward: 0.4,
+          fireHorizontal: 0.2,
+          firePlantSpread: 0.8,
+          fireHeatGain: 0.2,
+          fireHeatLoss: 0.01,
+          fireSmoke: 0.1,
+          fireSmokeAbove: 0.2
+        };
+
+        // Apply all values
+        Object.entries(values).forEach(([key, value]) => {
+          const slider = document.getElementById(key);
+          if (slider) {
+            slider.value = value;
+            slider.dispatchEvent(new Event('input'));
+          }
+        });
+      }
+
+      // Verdant preset button
+      document.getElementById('verdantPreset').addEventListener('click', () => {
+        applyPreset('verdant');
+        // Visual feedback
+        document.getElementById('verdantPreset').style.background = 'rgba(34, 139, 34, 0.5)';
+        document.getElementById('defaultPreset').style.background = 'rgba(255, 255, 255, 0.1)';
+      });
+
+      // Default preset button
+      document.getElementById('defaultPreset').addEventListener('click', () => {
+        applyPreset('default');
+        // Visual feedback
+        document.getElementById('defaultPreset').style.background = 'rgba(255, 255, 255, 0.2)';
+        document.getElementById('verdantPreset').style.background = 'rgba(34, 139, 34, 0.3)';
+      });
+
+      // Reset button
+      document.getElementById('resetBtn').addEventListener('click', () => {
+        applyPreset('default');
+        document.getElementById('defaultPreset').style.background = 'rgba(255, 255, 255, 0.1)';
+        document.getElementById('verdantPreset').style.background = 'rgba(34, 139, 34, 0.3)';
+      });
+
+      // Initialize
+      setActiveMaterial(4);
+    </script>
+  </body>
+</html>
+

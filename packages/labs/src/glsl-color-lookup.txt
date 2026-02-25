@@ -1,0 +1,17 @@
+vec3 getMaterialColor(float id) {
+	float h = hash13(vec3(id, id * 0.618, id * 0.382));
+	// Special cases for core materials
+	if (id == AIR) return vec3(0.0);
+	if (id == WATER) return vec3(0.2, 0.4, 0.8);
+	if (id == LAVA) return vec3(0.9, 0.3, 0.1);
+	if (id == SAND) return vec3(0.86, 0.62, 0.27);
+	if (id == PLANT) return vec3(0.13, 0.55, 0.13);
+	if (id == STONE) return vec3(0.08, 0.1, 0.12);
+	if (id == ICE) return vec3(0.8, 0.9, 1.0);
+	if (id == FIRE) return vec3(1.0, 0.3, 0.0);
+	if (id == SMOKE) return vec3(0.15);
+	if (id == STEAM) return vec3(0.8);
+	if (id == MOSS) return vec3(0.13, 0.55, 0.13);
+	// For all other materials, use hash-based color
+	return vec3(h, h * 0.8 + 0.2, h * 0.6 + 0.4);
+}

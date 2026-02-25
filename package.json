@@ -1,0 +1,19 @@
+{
+  "name": "image-to-materials-simulator",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "website"
+  ],
+  "scripts": {
+    "start": "cd website && SKIP_MKCERT=true npm run dev",
+    "build": "npm run build --workspace=website",
+    "clean": "find . -name 'dist' -o -name 'node_modules' -o -name '.wireit' -o -name 'tsconfig.tsbuildinfo' 2>/dev/null | xargs rm -rf 2>/dev/null; true"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "prettier": "^3.5.3",
+    "wireit": "^0.14.12"
+  }
+}

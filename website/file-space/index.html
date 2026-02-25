@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Space</title>
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        font-family: monospace;
+        min-height: 100%;
+        position: relative;
+        margin: 0;
+      }
+
+      folk-space {
+        position: absolute;
+        inset: 0;
+      }
+
+      button {
+        position: relative;
+        top: 1rem;
+        left: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <folk-space grid></folk-space>
+    <button id="open-directory">Open directory</button>
+    <button id="open-file">Open file</button>
+    <button id="save">Save</button>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

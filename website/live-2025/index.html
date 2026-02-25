@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Programming in Hostile Territory</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=4" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=4" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/color.css" />
+    <link rel="stylesheet" href="./css/md-syntax.css" />
+
+    <!-- KaTeX for LaTeX rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+
+    <!-- Social Meta Tags -->
+    <meta
+      name="description"
+      content="Live programming research gravitates towards the creation of isolated environments whose success is measured by domination: achieving adoption by displacing rather than integrating with existing tools and practices. To counter this tendency, we advocate that live programming research broaden its purview from the creation of new environments to the augmenting of existing ones and, through a selection of prototypes, explore three adversarial strategies for introducing programmatic capabilities into existing environments which are unfriendly or antagonistic to modification. We discuss how these strategies might promote more pluralistic futures and avoid aggregation into siloed platforms."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Live Programming in Hostile Territory" />
+    <meta
+      property="og:description"
+      content="Live programming research gravitates towards the creation of isolated environments whose success is measured by domination: achieving adoption by displacing rather than integrating with existing tools and practices. To counter this tendency, we advocate that live programming research broaden its purview from the creation of new environments to the augmenting of existing ones and, through a selection of prototypes, explore three adversarial strategies for introducing programmatic capabilities into existing environments which are unfriendly or antagonistic to modification. We discuss how these strategies might promote more pluralistic futures and avoid aggregation into siloed platforms."
+    />
+  </head>
+  <body>
+    <main class="post">
+            <header style="text-align: center; margin-top: 3rem; margin-bottom: 3rem;">
+        <h1 style="margin: 0 0 1rem 0; font-size: 2.5rem;">Live Programming in Hostile Territory</h1>
+        
+                   <div class="authors" style="display: flex; justify-content: center; gap: 4rem; margin-bottom: 1rem; flex-wrap: wrap;">
+          <span class="author" style="color: var(--text-primary); font-weight: 500;">Chris Shank</span><span class="author" style="color: var(--text-primary); font-weight: 500;">Orion Reed</span>
+        </div>
+        
+        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+          July 20, 2025 • <a href="/artifacts/live-2025.pdf" 
+             style="color: var(--text-secondary, #666); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;"
+             onmouseover="this.style.borderBottomColor='var(--text-secondary, #666)'"
+             onmouseout="this.style.borderBottomColor='transparent'">PDF</a>
+        </div>
+      </header>
+      
+      <style>
+        /* hide the auto-generated footnote heading */
+        #footnote-label {
+          display: none;
+        }
+        
+        @media (max-width: 767px) {
+          .post header h1 {
+            font-size: 2rem !important;
+          }
+          .post header {
+            margin-top: 2rem !important;
+          }
+        }
+      </style>
+      
+      <script>
+        // Randomize author order on page load
+        document.addEventListener('DOMContentLoaded', function() {
+          const authorsContainer = document.querySelector('.authors');
+          if (authorsContainer) {
+            const authorElements = Array.from(authorsContainer.children);
+            
+            // Fisher-Yates shuffle algorithm
+            for (let i = authorElements.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [authorElements[i], authorElements[j]] = [authorElements[j], authorElements[i]];
+            }
+            
+            // Clear container and append shuffled elements
+            authorsContainer.innerHTML = '';
+            authorElements.forEach(element => authorsContainer.appendChild(element));
+          }
+        });
+      </script>
+      
+      <div style="max-width: 600px; margin: 4rem auto 2rem auto;">
+
+<p><em>&quot;[People] make their own history, but they do not make it as they please; they do not make it under self-selected circumstances, but under circumstances existing already, given and transmitted from the past.&quot;</em>
+<span style="max-width: 600px; text-align: right; display: block;">— Karl Marx</span></p>
+</div>
+
+<h2 id="abstract">Abstract</h2><p>Live programming research gravitates towards the creation of isolated environments whose success is measured by domination: achieving adoption by displacing rather than integrating with existing tools and practices. To counter this tendency, we advocate that live programming research broaden its purview from the creation of new environments to the augmenting of existing ones and, through a selection of prototypes, explore three <em>adversarial strategies</em> for introducing programmatic capabilities into existing environments which are unfriendly or antagonistic to modification. We discuss how these strategies might promote more pluralistic futures and avoid aggregation into siloed platforms.</p>
+<h2 id="introduction">1. Introduction</h2><p>Live programming research is broadly concerned with the creation of programming systems which provide immediate feedback on the dynamic behavior of a program even while running <sup><a id="footnote-ref-Rein2018" href="#footnote-Rein2018" data-footnote-ref aria-describedby="footnote-label">1</a></sup>. This promise of immediate feedback requires the ability to modify, inspect, and manipulate programs while they execute—capabilities that established programming environments, designed around edit-compile-run cycles, cannot reliably provide. We believe this fundamental mismatch drives live programming research to face inwards, towards the <em>creation of fully circumscribed universes</em> — often viewed as the most pragmatic means to ensure the runtime malleability that liveness requires. This inward focus produces systems which can be operated on from within themselves, but neglect their participation in wider contexts of use <sup><a id="footnote-ref-Clark2017" href="#footnote-Clark2017" data-footnote-ref aria-describedby="footnote-label">2</a></sup>, encouraging what Kell describes as a success-by-domination strategy <sup><a id="footnote-ref-Kell2020" href="#footnote-Kell2020" data-footnote-ref aria-describedby="footnote-label">3</a></sup> where systems achieve adoption by displacing rather than integrating with existing tools and practices.</p>
+<p>Whereas traditional programming leverages ubiquitous plaintext infrastructures that resist single-system dominance through their simplicity and interoperability <sup><a id="footnote-ref-Hall2015" href="#footnote-Hall2015" data-footnote-ref aria-describedby="footnote-label">4</a></sup>, live programming&#39;s visual requirements largely preclude utilizing this pluralistic foundation. This threatens to shift the experience of programming into one mediated through siloed platforms, losing the freedom and plurality that plaintext infrastructures provide. Rather than accept this trajectory, we advocate for this community to extend its research from the creation of new environments to the augmenting of existing ones, situating new systems in their present contexts of use.</p>
+<p>We explore three strategies for live programming in &#39;hostile territory&#39;—environments that are unfriendly or antagonistic to modification. Central to these strategies is <em>free addressability</em>—a property we argue is essential for augmenting systems without requiring cooperation from their original creators. We demonstrate, through a selection of prototypes from the <em>folkjs</em> research project <sup><a id="footnote-ref-Shank2025" href="#footnote-Shank2025" data-footnote-ref aria-describedby="footnote-label">5</a></sup>, how we can exploit the addressable surfaces of user interfaces to situate new affordances in environments that were never designed to accommodate them. These interventions are not ends in themselves, but create fragile bridges that demonstrate the potential of more robust infrastructure and, by setting expectations of interoperability, make it harder to retreat into isolation.</p>
+<h2 id="free-addressability">2. Free Addressability</h2><p>The practice of information hiding—originally advocated by Parnas to support &quot;centralized management process for large, disconnected teams&quot; <sup><a id="footnote-ref-Tchernavskij2019" href="#footnote-Tchernavskij2019" data-footnote-ref aria-describedby="footnote-label">6</a></sup>—creates challenges for software evolution, particularly in contexts where multiple authors work across organizational boundaries rather than within coordinated teams. As Ostermann et al. observe, it is unclear how to decide up-front which design decisions should be hidden versus exposed, and software evolution often brings new stakeholders who need access to previously hidden information <sup><a id="footnote-ref-Ostermann2011" href="#footnote-Ostermann2011" data-footnote-ref aria-describedby="footnote-label">7</a></sup>. This results in what Basman et al. call &quot;hermetic&quot; systems—isolated environments that &quot;give insufficient consideration to what lies outside the system&quot; <sup><a id="footnote-ref-Basman2018a" href="#footnote-Basman2018a" data-footnote-ref aria-describedby="footnote-label">8</a></sup>. While information hiding serves its intended purpose within coordinated development teams, contemporary software ecosystems increasingly demand cross-system integration and external extensibility. Our approaches require reaching into systems whose internal components these design choices obscure.</p>
+<p>We believe <em>free addressability</em>—a term we adopt from Basman et al. <sup><a id="footnote-ref-Basman2018a-2" href="#footnote-Basman2018a" data-footnote-ref aria-describedby="footnote-label">8</a></sup>—is key to enabling outward-facing integration and moving beyond success-by-domination strategies. Free addressability embraces transparent, publicly addressable state through queries, selectors, names, or other mechanisms that make parts of a running system targetable from the outside without requiring permission or coordination from the original creators, seeking to &quot;maximally advertise the structure of the application via a transparent addressing scheme&quot; <sup><a id="footnote-ref-Basman2018a-3" href="#footnote-Basman2018a" data-footnote-ref aria-describedby="footnote-label">8</a></sup>.</p>
+<p>Our adversarial strategies exploit the fact that user interfaces often expose more addressable surfaces than the underlying program—through DOM elements, accessibility trees, and visual components. This disparity creates crucial leverage points for live programming interventions, allowing us to exploit addressability where it exists and demonstrating where additional addressability would be beneficial. These addressable surfaces provide the basis for working in hostile territory by offering ways to situate live programming capabilities within environments that were never designed to accommodate them.</p>
+<h2 id="strategies">3. Strategies</h2><p>Our strategies draw inspiration from what Doctorow calls <em>&quot;adversarial interoperability&quot;</em> - interfacing with systems without the permission of their original creators <sup><a id="footnote-ref-Doctorow2019" href="#footnote-Doctorow2019" data-footnote-ref aria-describedby="footnote-label">9</a></sup>. By exploiting the addressable surfaces of user interfaces, we can introduce live programming capabilities through three distinct approaches that work around, rather than require, system cooperation.</p>
+<p>We explore three approaches that differ in their relationship between <em>system</em> and <em>environment</em>:</p>
+<ul>
+<li><strong>Annotating</strong> existing environments with new affordances</li>
+<li><strong>Embedding</strong> systems into heterogenous host environments</li>
+<li><strong>Extending</strong> closed systems through re-appropriation of available addressing schemes.</li>
+</ul>
+<h3 id="adversarial-annotation">3.1. Adversarial Annotation</h3><p>Adversarial annotation challenges the assumption that live programming requires purpose-built universes, making it possible to embed new affordances where people already work. Rather than creating destinations for users to visit, annotation distributes programming capabilities as lightweight augmentations that attach to existing structure—demonstrating that environments are not the only path to liveness.</p>
+<p>While web-based systems often break when their DOM tree structure is modified, they often tolerate the addition of <em>new</em> attributes that encode interactive functionality. This tolerance creates one path for escaping isolated environments — annotations can introduce liveness without requiring users to abandon their tools or migrate their work.</p>
+<p>Our first prototype demonstrates how we can annotate regions of text with a custom HTML attribute that binds a Language Server Protocol (LSP) server—a standardized interface for providing language-specific programming assistance—directly to existing web content. This annotation adds syntax highlighting, diagnostics, and auto-completion to web pages or text editors that lack these capabilities, without requiring any structural modifications to the host document. The CSS Custom Highlight API enables syntax highlighting and diagnostic underlines to be rendered as visual overlays, while tooltips display auto-completion suggestions and error messages without altering the underlying text. Some LSP functionality, such as code folding, cannot be implemented through pure annotation since it requires structural changes, but this approach demonstrates how substantial programming capabilities can be introduced through minimally invasive interventions.</p>
+<p><figure style="margin: 1rem 0; text-align: center;">
+              <video controls><source src="./live/lsp.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+              <figcaption style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary, #666); font-size: 0.9rem;">A custom HTML attribute that binds an LSP server to an editable style tag</figcaption>
+            </figure></p>
+<p>The flexible pattern matching of CSS selectors enables these annotations to discover and interact with their surroundings, working opportunistically with available document structure rather than requiring pre-negotiated structural agreements. Unlike environments that must control their entire context, annotations can situate themselves within foreign systems and coexist with existing features.</p>
+<p>Our second prototype ports event propagators <sup><a id="footnote-ref-Reed2024" href="#footnote-Reed2024" data-footnote-ref aria-describedby="footnote-label">10</a></sup> to a custom HTML element, creating computational relationships between interface elements that enable spreadsheet-like reactivity between arbitrary UI components of existing websites. Through CSS selectors, these elements can define connections between DOM nodes, transforming static web pages into reactive documents where changes propagate automatically across components.</p>
+<p>Annotations can also encourage the decomposition of functionality trapped within monolithic systems, making it available as reusable components. Our folk-sync attribute exemplifies this approach by extracting collaborative editing capabilities from systems like Webstrates and exposing them through a simple HTML annotation. This attribute makes document subtrees collaborative across devices, enabling real-time shared editing of any web content without requiring migration to dedicated platforms.</p>
+<p>The composability of these annotations becomes apparent when multiple augmentations work together to create capabilities that exceed the sum of their parts. The figure below shows a chess board, event propagator, and spreadsheet—each authored as standard HTML with appropriate annotations—that not only synchronize state across multiple windows through folk-sync, but also react to each other&#39;s changes through event propagators. Moving a chess piece triggers the event propagator to log the move in the spreadsheet, creating a real-time game log that updates across all connected devices. This demonstrates how lightweight interventions can compose into rich, interactive systems that exhibit the computational relationships and collaborative capabilities typically associated with purpose-built environments, yet remain situated within ordinary web pages that can be inspected, modified, and extended through standard web technologies.</p>
+<p><figure style="margin: 1rem 0; text-align: center;">
+              <video controls><source src="./live/chess.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+              <figcaption style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary, #666); font-size: 0.9rem;">A chess board, event propagator, and spreadsheet</figcaption>
+            </figure></p>
+<p>These interventions succeed by creating the experience of an environment without requiring one — users encounter live programming capabilities that feel indigenous to their current tools rather than isolated systems forcing them to move elsewhere.</p>
+<h3 id="adversarial-embedding">3.2. Adversarial Embedding</h3><p><em>Adversarial embedding</em> focuses on changing the relationship between web-based software systems and their host environments. Unlike annotation, which augments existing systems in place, embedding makes whole systems composable within new contexts by altering how they interface with the outside world. This approach recognizes that software authors are constrained by tooling conventions, security policies like same-origin restrictions, and architectural assumptions that treat these systems as discrete, non-composable units and discourage unmediated cross-system communication. To make systems embeddable in new host environments, we can work <em>cooperatively</em> with software authors or <em>adversarially</em> by crossing the containment boundaries of iframe isolation, domain restrictions, and sandboxing policies.</p>
+<p>Web applets <sup><a id="footnote-ref-Rupert2025" href="#footnote-Rupert2025" data-footnote-ref aria-describedby="footnote-label">11</a></sup> demonstrate a cooperative approach, enabling any web-based software to be embedded within other web pages through a lightweight event-based protocol wrapped around an iframe, allowing web pages to externalize specific state and actions to their host environment. The applet author retains full control over what to expose and must opt-in to participating in a shared protocol. This requires minimal work to add to existing systems but becomes challenging when seeking to externalise rich or complex behavior, requiring great care to design interfaces which anticipate future interactions with the system.</p>
+<p>In some cases, we can create systems that expose their entire internal state through addressable surfaces like the DOM. Our HTML spreadsheet prototype implements the system as custom HTML elements where each cell is a DOM element with properties for its evaluated value, formula, and dependencies. This makes every aspect addressable through CSS selectors and enables permissionless augmentation—modifying behavior at runtime, using CSS to transform cell positions, performing graph layout of dependencies, or creating entirely new visualizations. External systems can query state, subscribe to changes, and extend functionality without requiring ongoing coordination between original and further authors, though this requires systems designed from the ground up with full addressability.</p>
+<p><figure style="margin: 1rem 0; text-align: center;">
+              <video controls><source src="./live/spreadsheet.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+              <figcaption style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary, #666); font-size: 0.9rem;">A freely-addressable HTML spreadsheet element</figcaption>
+            </figure></p>
+<p>When systems provide no embedding interfaces, our cross-iframe injection prototype demonstrates how adversarial techniques can force integration by circumventing the single-origin security model. The elevated privileges of web extensions allow us to bypass iframe containment boundaries and inject JavaScript code into both a host page and an embedded iframe from different domains and establish real-time bidirectional communication between systems that typically exist in isolation. This approach reveals how security models designed to prevent malicious interference also encumber interoperability and integration, suggesting a need for security architectures designed around composition rather than isolation.</p>
+<p><figure style="margin: 1rem 0; text-align: center;">
+              <video controls><source src="./live/cross-iframe-relationships.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+              <figcaption style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary, #666); font-size: 0.9rem;">Web extension injecting capabilities across iframe boundaries</figcaption>
+            </figure></p>
+<h3 id="adversarial-extension">3.3. Adversarial Extension</h3><p>When systems provide no addressable surfaces, adversarial extension creates addressability by re-purposing whatever infrastructure remains available. Unlike annotation, which works with systems designed to tolerate additions, or embedding which requires systems that allow runtime code injection, extension operates on closed systems which do not tolerate addition to their internal state or modification to their execution environment.</p>
+<p>Accessibility APIs represent an addressable infrastructure ripe for re-appropriation. Operating systems expose accessibility trees to support assistive technologies, creating a parallel addressable representation of every running application&#39;s interface. While this interface provides only a limited view of application state focused on user-facing elements rather than internal program logic, it offers near-universal coverage across all running applications.</p>
+<p>Our prototype demonstrates how this infrastructure can be repurposed for external augmentation—a WebSocket server connects web interfaces to accessibility and windowing APIs, making it possible to query, subscribe to, and modify the interface state of any running application. This creates an addressable surface where none existed before.</p>
+<p><figure style="margin: 1rem 0; text-align: center;">
+              <video controls><source src="./live/axtree.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+              <figcaption style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary, #666); font-size: 0.9rem;">Ivory app extended with editable accessibility tree and regex-based text editing UI</figcaption>
+            </figure></p>
+<p>The accessibility tree prototype shows the Ivory messaging application augmented with two external interfaces: an editable outline view of its accessibility tree and a regex-based find-and-replace interface for text editing. This regex functionality, absent from Ivory itself, demonstrates the kind of read-write querying possible across boundaries we usually consider closed—proprietary applications with no APIs, closed source code, or deliberate restrictions on extensibility. The positioning system leverages accessibility coordinate information to spatially attach these augmentations to their target elements, making them feel more like native features than external overlays. Since applications cannot opt out of accessibility infrastructure without breaking assistive technology compliance, this approach works even with systems designed to resist external intervention, and the same augmentations can work universally across any application.</p>
+<p>These three strategies are complementary rather than competing—each addresses different constraints in the landscape of existing systems. <em>Annotation</em> works with systems that tolerate additions, <em>embedding</em> enables portability across environments, and <em>extension</em> exploits mandatory addressable surfaces when no other options remain. The choice of strategy depends on the specific affordances and restrictions of the target environment.</p>
+<h2 id="related-work">4. Related Work</h2><p>Systems like Sifter <sup><a id="footnote-ref-Huynh2006" href="#footnote-Huynh2006" data-footnote-ref aria-describedby="footnote-label">12</a></sup>, Vegimite <sup><a id="footnote-ref-Lin2009" href="#footnote-Lin2009" data-footnote-ref aria-describedby="footnote-label">13</a></sup>, Rousillon <sup><a id="footnote-ref-Chasins2018" href="#footnote-Chasins2018" data-footnote-ref aria-describedby="footnote-label">14</a></sup>, Wildcard <sup><a id="footnote-ref-Litt2020" href="#footnote-Litt2020" data-footnote-ref aria-describedby="footnote-label">15</a></sup>, and Joker <sup><a id="footnote-ref-Katongo2022" href="#footnote-Katongo2022" data-footnote-ref aria-describedby="footnote-label">16</a></sup> exemplify adversarial strategies by enabling end-users to customize web pages, scraping data into spreadsheets and tables, and reflecting modifications back to the original page. By packaging themselves as web extensions rather than standalone applications, these systems situate themselves inside the environments they augment rather than requiring users to bring their data elsewhere.</p>
+<p>Whereas the systems above try to abstract away web technologies behind familiar interfaces, Webstrates <sup><a id="footnote-ref-Klokmose2015" href="#footnote-Klokmose2015" data-footnote-ref aria-describedby="footnote-label">17</a></sup> takes the opposite approach, creating a collaborative authoring environment where &quot;the state of the DOM itself corresponds to the authorial shared state&quot; <sup><a id="footnote-ref-Basman2018a-4" href="#footnote-Basman2018a" data-footnote-ref aria-describedby="footnote-label">8</a></sup>. Webstrates demonstrates the potential of exploiting the DOM&#39;s inherent addressability as a foundation for live programming in shared authorial environments. Our DOM sync attribute explores similar territory, enabling real-time collaborative editing of DOM structures without requiring migration to a dedicated platform.</p>
+<p>Engraft <sup><a id="footnote-ref-Horowitz2023" href="#footnote-Horowitz2023" data-footnote-ref aria-describedby="footnote-label">18</a></sup> explores composition between live programming tools by creating interfaces that allow different systems to be embedded within each other. While Engraft acknowledges that live programming systems should integrate with the outside world, its focus on inward composition—maintaining properties within controlled environments—contrasts with our emphasis on outward integration into hostile territory.</p>
+<h2 id="limitations-amp-future-work">5. Limitations &amp; Future Work</h2><p>Our current exploration focuses on additive modifications and does not address removing or replacing parts of running programs. The approaches we present also concentrate heavily on UI-level intervention points. Significant work remains in applying adversarial techniques at other levels of the software stack, from runtime systems to operating system primitives. Kell&#39;s work on liballocs suggests one promising direction for free addressability at the level of Unix processes <sup><a id="footnote-ref-Kell2018" href="#footnote-Kell2018" data-footnote-ref aria-describedby="footnote-label">19</a></sup>.</p>
+<p>A key limitation emerges around the relationship between addressability and modifiability. While <em>free addressability</em> focuses on making system parts targetable, it doesn&#39;t address how those parts can actually be modified. The DOM is exploitable because CSS selectors provide addressing while referenced elements expose clear manipulation interfaces—a relationship that remains undertheorized in our work.</p>
+<p>Most of our examples target web and browser contexts, limiting their applicability to the broader software ecosystem. Future work should explore how these strategies translate to desktop applications, mobile environments, and system-level software. The fragility of some approaches—such as relying on unstable CSS selectors or working around obfuscated DOM structures—highlights the need for more robust addressing schemes.</p>
+<p>An important direction for future research involves enabling interoperability and co-existence between different live programming models that may have conflicting guarantees or execution models. What primitives enable different computational paradigms to work together? These questions become urgent as we move toward ecosystems where multiple live programming systems must coexist and collaborate.</p>
+<p>Perhaps most ambitiously, we envision extending these principles to operating system design. What would it look like if accessibility trees provided stable, rich addressing schemes for all running applications? How might we design OS-level APIs that assume external composition rather than treating it as an afterthought?</p>
+<h2 id="conclusion">6. Conclusion</h2><p>When users experience live programming capabilities situated in place rather than sequestered in dedicated environments, we hope they begin to see such integration as normal rather than exceptional. We believe pluralistic practices that subvert intended boundaries create pressure like water finding cracks — persistent forces that gradually reshape systems toward openness.</p>
+<p>Much of live programming research focuses on creating better environments without considering how change actually happens in computing ecosystems. We believe the community needs to confront the question of <em>change</em>: how do isolated programming tools evolve into integrated, composable ecologies without falling into success-by-domination strategies? Our approach rests on the belief that fragile bridges and adversarial interventions create social pressures that drive systemic change. By demonstrating what becomes possible when addressable surfaces are exploited, we establish expectations of interoperability and integration. These prototypes point toward a future where external composition is a design assumption rather than an afterthought.</p>
+<p>The scale of this challenge becomes clear when we consider the difficulty of departing from tradition. Plaintext infrastructures resist single-system dominance, but this resistance was not inevitable. As Hall observes, what we think of as &quot;human-readable plaintext&quot; is actually the massive set of text encoding, display, manipulation, and processing artifacts currently ubiquitous in computing: <em>&quot;ASCII, UTF8, text editors, text-field or text-area UI widgets, terminals, keyboards, String types, object-to-String rendering functions, human-readable format libraries, tokenizers, parsers, escape sequences and input sanitization, Base64 encoding, line-ending and whitespace conventions, and the fallback data-flavor of the copy/paste clipboard&quot;</em> <sup><a id="footnote-ref-Hall2015-2" href="#footnote-Hall2015" data-footnote-ref aria-describedby="footnote-label">4</a></sup>. This ubiquity required decades of standardization, adoption, and gradual convergence—it did not emerge from any inherent philosophical commitment to openness. The challenge is achieving similar ubiquity for live programming systems. This is not to advocate that specialized environments like Blender or Ableton should be decomposed—such tools serve important purposes within their domains. Rather, we argue that <em>all systems</em> should consider their participation in broader ecosystems rather than operating in complete isolation.</p>
+<p>By working in hostile territory, we hope to demonstrate that live programming need not retreat into isolated environments to achieve its goals. The strategies we explore—annotation, embedding, and extension—offer different paths for engaging with the existing software landscape as it exists today. While our prototypes remain fragile and limited, they point to a future where live programming capabilities become as ubiquitous as plaintext itself. The question is not whether any single system will achieve domination, but whether we can work within our inherited circumstances. In this view, live programming research becomes work of <em>transformation</em> rather than <em>escape</em>.</p>
+<h2 id="references">References</h2><section class="footnotes" data-footnotes>
+<h2 id="footnote-label" class="sr-only">Footnotes</h2>
+<ol>
+<li id="footnote-Rein2018">
+<p>Patrick Rein, Stefan Ramson, Jens Lincke, Robert Hirschfeld, and Tobias Pape, &quot;Exploratory and Live, Programming and Coding: A Literature Study Comparing Perspectives on Liveness,&quot; The Art, Science, and Engineering of Programming, vol. 3, no. 1, 2018-07-23. doi: 10.22152/programming-journal.org/2019/3/1. <a href="#footnote-ref-Rein2018" data-footnote-backref aria-label="Back to reference Rein2018">↩</a></p>
+</li>
+<li id="footnote-Clark2017">
+<p>Colin Clark and Antranig Basman, &quot;Tracing a Paradigm for Externalization: Avatars and the GPII Nexus,&quot;, 2017. <a href="#footnote-ref-Clark2017" data-footnote-backref aria-label="Back to reference Clark2017">↩</a></p>
+</li>
+<li id="footnote-Kell2020">
+<p>Stephen Kell, &quot;Convivial design heuristics for software systems,&quot; in Conference Companion of the 4th International Conference on Art, Science, and Engineering of Programming, Porto Portugal: ACM, 2020-03-23. doi: 10.1145/3397537.3397543. <a href="#footnote-ref-Kell2020" data-footnote-backref aria-label="Back to reference Kell2020">↩</a></p>
+</li>
+<li id="footnote-Hall2015">
+<p>Christopher Hall, &quot;Rethinking the human-readability infrastructure,&quot; in Proceedings of the Workshop on Future Programming, New York, NY, USA: Association for Computing Machinery, 2015-10-26. doi: 10.1145/2846656.2846657. <a href="#footnote-ref-Hall2015" data-footnote-backref aria-label="Back to reference Hall2015">↩</a> <a href="#footnote-ref-Hall2015-2" data-footnote-backref aria-label="Back to reference Hall2015">↩<sup>2</sup></a></p>
+</li>
+<li id="footnote-Shank2025">
+<p>Chris Shank and Orion Reed, &quot;Folkjs&quot; Accessed: 2025-07-22. [Online]. Available: <a href="https://folkjs.org/">https://folkjs.org/</a> <a href="#footnote-ref-Shank2025" data-footnote-backref aria-label="Back to reference Shank2025">↩</a></p>
+</li>
+<li id="footnote-Tchernavskij2019">
+<p>Philip Tchernavskij, &quot;Designing and Programming Malleable Software,&quot; Thesis, 2019-12-03. <a href="#footnote-ref-Tchernavskij2019" data-footnote-backref aria-label="Back to reference Tchernavskij2019">↩</a></p>
+</li>
+<li id="footnote-Ostermann2011">
+<p>Klaus Ostermann, Paolo G. Giarrusso, Christian Kästner, and Tillmann Rendel, &quot;Revisiting information hiding: Reflections on classical and nonclassical modularity,&quot; in Proceedings of the 25th European conference on Object-oriented programming, Berlin, Heidelberg: Springer-Verlag, 2011-07-25. <a href="#footnote-ref-Ostermann2011" data-footnote-backref aria-label="Back to reference Ostermann2011">↩</a></p>
+</li>
+<li id="footnote-Basman2018a">
+<p>Antranig Basman, Clayton Lewis, and Colin Clark, &quot;The open authorial principle: Supporting networks of authors in creating externalisable designs,&quot; in Proceedings of the 2018 ACM SIGPLAN International Symposium on New Ideas, New Paradigms, and Reflections on Programming and Software, New York, NY, USA: Association for Computing Machinery, 2018-10-24. doi: 10.1145/3276954.3276963. <a href="#footnote-ref-Basman2018a" data-footnote-backref aria-label="Back to reference Basman2018a">↩</a> <a href="#footnote-ref-Basman2018a-2" data-footnote-backref aria-label="Back to reference Basman2018a">↩<sup>2</sup></a> <a href="#footnote-ref-Basman2018a-3" data-footnote-backref aria-label="Back to reference Basman2018a">↩<sup>3</sup></a> <a href="#footnote-ref-Basman2018a-4" data-footnote-backref aria-label="Back to reference Basman2018a">↩<sup>4</sup></a></p>
+</li>
+<li id="footnote-Doctorow2019">
+<p>Cory Doctorow, &quot;Adversarial Interoperability&quot; Accessed: 2020-08-09. [Online]. Available: <a href="https://www.eff.org/deeplinks/2019/10/adversarial-interoperability">https://www.eff.org/deeplinks/2019/10/adversarial-interoperability</a> <a href="#footnote-ref-Doctorow2019" data-footnote-backref aria-label="Back to reference Doctorow2019">↩</a></p>
+</li>
+<li id="footnote-Reed2024">
+<p>Orion Reed, &quot;Scoped Propagators&quot; Accessed: 2025-01-16. [Online]. Available: <a href="https://www.orionreed.com/posts/scoped-propagators">https://www.orionreed.com/posts/scoped-propagators</a> <a href="#footnote-ref-Reed2024" data-footnote-backref aria-label="Back to reference Reed2024">↩</a></p>
+</li>
+<li id="footnote-Rupert2025">
+<p>Manfredi Rupert and Vandevelde Steven, &quot;Unternet-co/web-applets,&quot; 2025-07-05T19:36:51Z. <a href="#footnote-ref-Rupert2025" data-footnote-backref aria-label="Back to reference Rupert2025">↩</a></p>
+</li>
+<li id="footnote-Huynh2006">
+<p>David F. Huynh, Robert C. Miller, and David R. Karger, &quot;Enabling web browsers to augment web sites&#39; filtering and sorting functionalities,&quot; in Proceedings of the 19th annual ACM symposium on User interface software and technology, Montreux Switzerland: ACM, 2006-10-15. doi: 10.1145/1166253.1166274. <a href="#footnote-ref-Huynh2006" data-footnote-backref aria-label="Back to reference Huynh2006">↩</a></p>
+</li>
+<li id="footnote-Lin2009">
+<p>James Lin, Jeffrey Wong, Jeffrey Nichols, Allen Cypher, and Tessa A. Lau, &quot;End-user programming of mashups with vegemite,&quot; in Proceedings of the 14th international conference on Intelligent user interfaces, Sanibel Island Florida USA: ACM, 2009-02-08. doi: 10.1145/1502650.1502667. <a href="#footnote-ref-Lin2009" data-footnote-backref aria-label="Back to reference Lin2009">↩</a></p>
+</li>
+<li id="footnote-Chasins2018">
+<p>Sarah E. Chasins, Maria Mueller, and Rastislav Bodik, &quot;Rousillon: Scraping Distributed Hierarchical Web Data,&quot; in Proceedings of the 31st Annual ACM Symposium on User Interface Software and Technology, Berlin Germany: ACM, 2018-10-11. doi: 10.1145/3242587.3242661. <a href="#footnote-ref-Chasins2018" data-footnote-backref aria-label="Back to reference Chasins2018">↩</a></p>
+</li>
+<li id="footnote-Litt2020">
+<p>Geoffrey Litt and Daniel Jackson, &quot;Wildcard: Spreadsheet-driven customization of web applications,&quot; in Conference Companion of the 4th International Conference on Art, Science, and Engineering of Programming, Porto Portugal: ACM, 2020-03-23. doi: 10.1145/3397537.3397541. <a href="#footnote-ref-Litt2020" data-footnote-backref aria-label="Back to reference Litt2020">↩</a></p>
+</li>
+<li id="footnote-Katongo2022">
+<p>Kapaya Katongo, Geoffrey Litt, Kathryn Jin, and Daniel Jackson, &quot;Joker: A Unified Interaction Model For Web Customization,&quot;, 2022. <a href="#footnote-ref-Katongo2022" data-footnote-backref aria-label="Back to reference Katongo2022">↩</a></p>
+</li>
+<li id="footnote-Klokmose2015">
+<p>Clemens N. Klokmose, James R. Eagan, Siemen Baader, Wendy Mackay, and Michel Beaudouin-Lafon, &quot;<i>Webstrates</i>: Shareable Dynamic Media,&quot; in Proceedings of the 28th Annual ACM Symposium on User Interface Software &amp; Technology, Charlotte NC USA: ACM, 2015-11-05. doi: 10.1145/2807442.2807446. <a href="#footnote-ref-Klokmose2015" data-footnote-backref aria-label="Back to reference Klokmose2015">↩</a></p>
+</li>
+<li id="footnote-Horowitz2023">
+<p>Joshua Horowitz and Jeffrey Heer, &quot;Engraft: An API for Live, Rich, and Composable Programming,&quot; in Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology, San Francisco CA USA: ACM, 2023-10-29. doi: 10.1145/3586183.3606733. <a href="#footnote-ref-Horowitz2023" data-footnote-backref aria-label="Back to reference Horowitz2023">↩</a></p>
+</li>
+<li id="footnote-Kell2018">
+<p>Stephen Kell, &quot;The inevitable death of VMs: a progress report,&quot; in Conference Companion of the 2nd International Conference on Art, Science, and Engineering of Programming, Nice France: ACM, 2018-04-09. doi: 10.1145/3191697.3191728. <a href="#footnote-ref-Kell2018" data-footnote-backref aria-label="Back to reference Kell2018">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </main>
+  </body>
+</html>

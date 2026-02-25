@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sandboxels Simulator</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overscroll-behavior: none;
+        background: #1a1a1a;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+      }
+
+      folk-shape {
+        background: transparent;
+        position: absolute;
+        background-color: rgba(100, 100, 100, 0.8);
+        border-radius: 2px;
+      }
+
+      .main-container {
+        display: flex;
+        height: 100vh;
+      }
+
+      .sidebar {
+        width: 300px;
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
+
+      .sidebar-header {
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-header h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #fff;
+      }
+
+      .search-box {
+        margin-top: 15px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        width: calc(100% - 22px);
+      }
+
+      .search-box::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .category-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        overflow-x: auto;
+        max-height: 120px;
+      }
+
+      .category-tab {
+        padding: 6px 12px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        white-space: nowrap;
+        transition: all 0.2s;
+      }
+
+      .category-tab:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .category-tab.active {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .materials-container {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+      }
+
+      .material-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 8px;
+      }
+
+      .material-button {
+        all: unset;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+        min-height: 80px;
+        position: relative;
+      }
+
+      .material-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .material-button.active {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(100, 150, 255, 0.8);
+        box-shadow: 0 0 10px rgba(100, 150, 255, 0.5);
+      }
+
+      .material-color {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-bottom: 8px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .material-name {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.9);
+        word-break: break-word;
+        line-height: 1.2;
+      }
+
+      .material-id {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.5);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
+
+      .canvas-container {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .info-panel {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 12px;
+        z-index: 1000;
+        min-width: 200px;
+      }
+
+      .info-panel h3 {
+        margin: 0 0 10px 0;
+        font-size: 14px;
+      }
+
+      .info-panel p {
+        margin: 5px 0;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 40px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h1>🎮 Sandboxels</h1>
+          <input type="text" class="search-box" placeholder="Search materials..." id="searchInput">
+        </div>
+        <div class="category-tabs" id="categoryTabs"></div>
+        <div class="materials-container">
+          <div class="material-grid" id="materialGrid"></div>
+        </div>
+      </div>
+      <div class="canvas-container">
+        <div class="info-panel">
+          <h3>Selected Material</h3>
+          <p id="selectedMaterial">Sand (ID: 4)</p>
+          <p style="margin-top: 10px; font-size: 11px; color: rgba(255, 255, 255, 0.6);">
+            Click and drag to place materials
+          </p>
+        </div>
+        <folk-sand id="sandElement">
+          <!-- Obstacle shapes -->
+          <folk-shape x="100" y="100" width="50" height="50"></folk-shape>
+          <folk-shape x="200" y="200" width="50" height="50"></folk-shape>
+        </folk-sand>
+      </div>
+    </div>
+
+    <script type="module">
+      import '@folkjs/labs/standalone/folk-shape';
+      import '@folkjs/labs/standalone/folk-sand';
+
+      // Load material map
+      const materialMapResponse = await fetch('/material-map.json');
+      const materialData = await materialMapResponse.json();
+
+      const sandElement = document.getElementById('sandElement');
+      const categoryTabs = document.getElementById('categoryTabs');
+      const materialGrid = document.getElementById('materialGrid');
+      const searchInput = document.getElementById('searchInput');
+      const selectedMaterialDisplay = document.getElementById('selectedMaterial');
+
+      let currentCategory = 'all';
+      let currentMaterial = 4; // Default to sand
+      let allMaterials = [];
+
+      // Flatten materials from all categories, removing duplicates
+      const materialSet = new Set();
+      Object.entries(materialData.categories).forEach(([category, materials]) => {
+        materials.forEach(m => {
+          // Use material ID as unique key to avoid duplicates
+          const key = `${m.id}-${m.name}`;
+          if (!materialSet.has(key)) {
+            materialSet.add(key);
+            allMaterials.push({ ...m, category });
+          }
+        });
+      });
+
+      // Sort materials by ID
+      allMaterials.sort((a, b) => a.id - b.id);
+
+      // Create category tabs
+      const categories = ['all', ...Object.keys(materialData.categories).sort()];
+      categories.forEach(category => {
+        const tab = document.createElement('div');
+        tab.className = 'category-tab';
+        tab.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+        tab.dataset.category = category;
+        if (category === 'all') {
+          tab.classList.add('active');
+        }
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentCategory = category;
+          renderMaterials();
+        });
+        categoryTabs.appendChild(tab);
+      });
+
+      // Render materials
+      function renderMaterials() {
+        materialGrid.innerHTML = '';
+        
+        let filtered = allMaterials;
+        
+        // Filter by category
+        if (currentCategory !== 'all') {
+          filtered = filtered.filter(m => m.category === currentCategory);
+        }
+        
+        // Filter by search
+        const searchTerm = searchInput.value.toLowerCase();
+        if (searchTerm) {
+          filtered = filtered.filter(m => 
+            m.name.toLowerCase().includes(searchTerm)
+          );
+        }
+
+        if (filtered.length === 0) {
+          materialGrid.innerHTML = '<div class="no-results">No materials found</div>';
+          return;
+        }
+
+        filtered.forEach(material => {
+          const button = document.createElement('button');
+          button.className = 'material-button';
+          button.dataset.material = material.id;
+          
+          if (material.id === currentMaterial) {
+            button.classList.add('active');
+          }
+
+          const colorDiv = document.createElement('div');
+          colorDiv.className = 'material-color';
+          colorDiv.style.backgroundColor = material.color;
+
+          const nameDiv = document.createElement('div');
+          nameDiv.className = 'material-name';
+          nameDiv.textContent = material.name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+          const idDiv = document.createElement('div');
+          idDiv.className = 'material-id';
+          idDiv.textContent = material.id;
+
+          button.appendChild(colorDiv);
+          button.appendChild(nameDiv);
+          button.appendChild(idDiv);
+
+          button.addEventListener('click', () => {
+            document.querySelectorAll('.material-button').forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+            currentMaterial = material.id;
+            sandElement.setMaterialType(material.id);
+            selectedMaterialDisplay.textContent = `${nameDiv.textContent} (ID: ${material.id})`;
+          });
+
+          materialGrid.appendChild(button);
+        });
+      }
+
+      // Search functionality
+      searchInput.addEventListener('input', () => {
+        renderMaterials();
+      });
+
+      // Handle material change callback
+      sandElement.onMaterialChange = (materialNumber) => {
+        currentMaterial = materialNumber;
+        document.querySelectorAll('.material-button').forEach(b => {
+          b.classList.toggle('active', parseInt(b.dataset.material) === materialNumber);
+        });
+        const material = allMaterials.find(m => m.id === materialNumber);
+        if (material) {
+          selectedMaterialDisplay.textContent = `${material.name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} (ID: ${materialNumber})`;
+        }
+      };
+
+      // Initialize
+      renderMaterials();
+      sandElement.setMaterialType(4); // Default to sand
+    </script>
+  </body>
+</html>
+

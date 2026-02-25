@@ -1,0 +1,1171 @@
+{
+  "liquids": [
+    {
+      "name": "slime",
+      "state": "liquid",
+      "color": "#81cf63",
+      "category": "liquids",
+      "behavior": "behaviors.LIQUID",
+      "density": 1450,
+      "tempHigh": 120,
+      "tempLow": 0,
+      "stateHigh": "steam"
+    },
+    {
+      "name": "antimolten",
+      "state": "liquid",
+      "color": "#888888",
+      "category": "special",
+      "behavior": "[\n\t\t\"M1|M1|M1\",\n\t\t\"M2|XX|M2\",\n\t\t\"XX|CR:antifire%2.5|XX\"\n\t]",
+      "density": 1000,
+      "tempLow": 1750,
+      "stateLow": "antipowder"
+    },
+    {
+      "name": "antifluid",
+      "state": "liquid",
+      "color": "#d1dbeb",
+      "category": "special",
+      "behavior": "behaviors.AGLIQUID",
+      "density": 1000,
+      "tempHigh": 100,
+      "tempLow": 0,
+      "stateHigh": "antigas"
+    },
+    {
+      "name": "melted_wax",
+      "state": "liquid",
+      "color": "#d4c196",
+      "category": "liquids",
+      "behavior": "behaviors.LIQUID",
+      "density": 900,
+      "tempHigh": 1000,
+      "tempLow": 57,
+      "stateLow": "wax"
+    },
+    {
+      "name": "nut_milk",
+      "state": "liquid",
+      "color": "#D7D1C3",
+      "category": "liquids",
+      "behavior": "behaviors.LIQUID",
+      "density": 1107.41,
+      "tempHigh": 100,
+      "tempLow": 0,
+      "stateHigh": "steam",
+      "stateLow": "ice"
+    },
+    {
+      "name": "jelly",
+      "state": "liquid",
+      "color": "#A35298",
+      "category": "food",
+      "behavior": "behaviors.LIQUID",
+      "density": 1245,
+      "tempHigh": 200,
+      "tempLow": -5
+    },
+    {
+      "name": "yogurt",
+      "state": "liquid",
+      "color": "#f0efe6",
+      "category": "food",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2%5|M1|M2%5\"\n\t]",
+      "density": 820.33,
+      "tempHigh": 1000,
+      "tempLow": 0
+    },
+    {
+      "name": "beans",
+      "state": "liquid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.LIQUID",
+      "density": 721,
+      "tempHigh": 350
+    },
+    {
+      "name": "molten_tuff",
+      "state": "liquid",
+      "color": "#888888",
+      "category": "states",
+      "behavior": "behaviors.MOLTEN",
+      "density": 2725,
+      "tempLow": 1000,
+      "stateLow": "tuff"
+    },
+    {
+      "name": "molasses",
+      "state": "liquid",
+      "color": "#888888",
+      "category": "liquids",
+      "behavior": "behaviors.LIQUID",
+      "density": 1600,
+      "tempHigh": 1000,
+      "tempLow": 0,
+      "stateLow": "candy"
+    },
+    {
+      "name": "melted_chocolate",
+      "state": "liquid",
+      "color": "#3b160b",
+      "category": "states",
+      "behavior": "behaviors.LIQUID",
+      "density": 1325,
+      "tempHigh": 99,
+      "tempLow": 0,
+      "stateLow": "chocolate"
+    },
+    {
+      "name": "liquid_nitrogen",
+      "state": "liquid",
+      "color": "#d3e1e3",
+      "category": "liquids",
+      "behavior": "behaviors.LIQUID",
+      "density": 804,
+      "tempLow": -259.86,
+      "stateHigh": "nitrogen",
+      "stateLow": "nitrogen_ice"
+    },
+    {
+      "name": "liquid_helium",
+      "state": "liquid",
+      "color": "#e3d3d3",
+      "category": "states",
+      "behavior": "behaviors.SUPERFLUID",
+      "density": 145,
+      "stateHigh": "helium"
+    },
+    {
+      "name": "liquid_neon",
+      "state": "liquid",
+      "color": "#d1d1d1",
+      "category": "states",
+      "behavior": "behaviors.LIQUID",
+      "density": 1207,
+      "tempLow": -248.6,
+      "stateHigh": "neon"
+    }
+  ],
+  "solids": [
+    {
+      "name": "mudstone",
+      "state": "solid",
+      "color": "#4a341e",
+      "category": "land",
+      "behavior": "behaviors.SUPPORT",
+      "density": 1250,
+      "tempHigh": 1200,
+      "tempLow": -50,
+      "stateHigh": "molten_dirt",
+      "stateLow": "permafrost"
+    },
+    {
+      "name": "packed_sand",
+      "state": "solid",
+      "color": "#888888",
+      "category": "land",
+      "behavior": "behaviors.SUPPORT",
+      "density": 1682,
+      "tempHigh": 1700,
+      "stateHigh": "molten_glass"
+    },
+    {
+      "name": "dead_plant",
+      "state": "solid",
+      "color": "#888888",
+      "category": "life",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1|M2\"\n\t]",
+      "density": 1050,
+      "tempHigh": 300,
+      "tempLow": -2,
+      "stateHigh": "fire",
+      "stateLow": "frozen_plant"
+    },
+    {
+      "name": "frozen_plant",
+      "state": "solid",
+      "color": "#00bf8c",
+      "category": "life",
+      "behavior": "behaviors.WALL",
+      "density": 1050,
+      "tempHigh": 7,
+      "stateHigh": "dead_plant"
+    },
+    {
+      "name": "concrete",
+      "state": "solid",
+      "color": "#ababab",
+      "category": "powders",
+      "behavior": "behaviors.SUPPORT",
+      "density": 2400,
+      "tempHigh": 1500,
+      "stateHigh": "magma"
+    },
+    {
+      "name": "bomb",
+      "state": "solid",
+      "color": "#524c41",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|EX:10|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:10|M2\"\n\t]",
+      "density": 1300
+    },
+    {
+      "name": "ice",
+      "state": "solid",
+      "color": "#b2daeb",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 917,
+      "tempHigh": 5,
+      "stateHigh": "water"
+    },
+    {
+      "name": "rime",
+      "state": "solid",
+      "color": "#e6f2f7",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 250,
+      "tempHigh": 20,
+      "stateHigh": "water"
+    },
+    {
+      "name": "packed_snow",
+      "state": "solid",
+      "color": "#bcdde3",
+      "category": "land",
+      "behavior": "behaviors.SUPPORTPOWDER",
+      "density": 400,
+      "tempHigh": 20,
+      "tempLow": -200,
+      "stateHigh": "water",
+      "stateLow": "ice"
+    },
+    {
+      "name": "wood",
+      "state": "solid",
+      "color": "#a0522d",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "tempHigh": 400
+    },
+    {
+      "name": "frozen_meat",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 1067.5,
+      "tempHigh": 0,
+      "stateHigh": "meat"
+    },
+    {
+      "name": "dust",
+      "state": "solid",
+      "color": "#666666",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 1490,
+      "tempHigh": 425,
+      "stateHigh": "fire"
+    },
+    {
+      "name": "frozen_worm",
+      "state": "solid",
+      "color": "#37d3b6",
+      "category": "life",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 1050,
+      "tempHigh": 5,
+      "stateHigh": "worm"
+    },
+    {
+      "name": "body",
+      "state": "solid",
+      "color": "#888888",
+      "category": "life",
+      "behavior": "WALL",
+      "density": 1500,
+      "tempHigh": 150,
+      "tempLow": -30,
+      "stateHigh": "cooked_meat",
+      "stateLow": "frozen_meat"
+    },
+    {
+      "name": "head",
+      "state": "solid",
+      "color": "#888888",
+      "category": "life",
+      "behavior": "WALL",
+      "density": 1080,
+      "tempHigh": 150,
+      "tempLow": -30,
+      "stateHigh": "cooked_meat",
+      "stateLow": "frozen_meat"
+    },
+    {
+      "name": "frozen_frog",
+      "state": "solid",
+      "color": "#007349",
+      "category": "life",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 1500,
+      "tempHigh": 5,
+      "stateHigh": "frog"
+    },
+    {
+      "name": "frozen_fish",
+      "state": "solid",
+      "color": "#50ac86",
+      "category": "life",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 1050,
+      "tempHigh": 5,
+      "stateHigh": "fish"
+    },
+    {
+      "name": "ball",
+      "state": "solid",
+      "color": "#e35693",
+      "category": "special",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|FY:0%5|XX\",\n\t\t\"XX|M1 AND BO|XX\"\n\t]",
+      "density": 1052,
+      "tempHigh": 250,
+      "stateHigh": "molten_plastic"
+    },
+    {
+      "name": "antipowder",
+      "state": "solid",
+      "color": "#ebd1d8",
+      "category": "special",
+      "behavior": "behaviors.AGPOWDER",
+      "density": 1850,
+      "tempHigh": 1850,
+      "stateHigh": "antimolten"
+    },
+    {
+      "name": "tinder",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 23,
+      "tempHigh": 400,
+      "stateHigh": "fire"
+    },
+    {
+      "name": "grass_seed",
+      "state": "solid",
+      "color": "#888888",
+      "category": "life",
+      "behavior": "[\n\t\t\"XX|M2%0.05|XX\",\n\t\t\"XX|L2:grass|XX\",\n\t\t\"XX|M1|XX\"\n\t]",
+      "density": 1400,
+      "tempHigh": 100,
+      "tempLow": -2,
+      "stateHigh": "dead_plant",
+      "stateLow": "frozen_plant"
+    },
+    {
+      "name": "wheat_seed",
+      "state": "solid",
+      "color": "#b6c981",
+      "category": "life",
+      "behavior": "[\n\t\t\"XX|M2%0.25|XX\",\n\t\t\"XX|L2:wheat AND C2:wheat%30|XX\",\n\t\t\"XX|M1|XX\"\n\t]",
+      "density": 769,
+      "tempHigh": 400,
+      "tempLow": -2,
+      "stateHigh": "fire",
+      "stateLow": "frozen_plant"
+    },
+    {
+      "name": "straw",
+      "state": "solid",
+      "color": "#888888",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 67.5,
+      "tempHigh": 400,
+      "stateHigh": "fire"
+    },
+    {
+      "name": "porcelain",
+      "state": "solid",
+      "color": "#e1e4dd",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 2403
+    },
+    {
+      "name": "flower_seed",
+      "state": "solid",
+      "color": "#0e990e",
+      "category": "life",
+      "behavior": "[\n\t\t\"XX|M2%1.5|XX\",\n\t\t\"XX|L2:plant AND C2:pistil%30|XX\",\n\t\t\"XX|M1|XX\"\n\t]",
+      "density": 1400,
+      "tempHigh": 100,
+      "tempLow": -2,
+      "stateHigh": "dead_plant",
+      "stateLow": "frozen_plant"
+    },
+    {
+      "name": "bamboo_plant",
+      "state": "solid",
+      "color": "#888888",
+      "category": "life",
+      "behavior": "[\n\t\t\"XX|M2%2|XX\",\n\t\t\"XX|L2:bamboo AND C2:bamboo%10|XX\",\n\t\t\"XX|M1|XX\"\n\t]",
+      "density": 686,
+      "tempHigh": 100,
+      "tempLow": -2,
+      "stateHigh": "dead_plant",
+      "stateLow": "bamboo"
+    },
+    {
+      "name": "permafrost",
+      "state": "solid",
+      "color": "#888888",
+      "category": "land",
+      "behavior": "behaviors.SUPPORT",
+      "density": 700,
+      "tempHigh": 10,
+      "stateHigh": "mudstone"
+    },
+    {
+      "name": "mulch",
+      "state": "solid",
+      "color": "#888888",
+      "category": "land",
+      "behavior": "behaviors.POWDER",
+      "density": 380,
+      "tempHigh": 400
+    },
+    {
+      "name": "plastic",
+      "state": "solid",
+      "color": "#c5dede",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 1052,
+      "tempHigh": 250
+    },
+    {
+      "name": "wax",
+      "state": "solid",
+      "color": "#fff3d6",
+      "category": "powders",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 900,
+      "tempHigh": 57,
+      "stateHigh": "melted_wax"
+    },
+    {
+      "name": "incense",
+      "state": "solid",
+      "color": "#361f19",
+      "category": "powders",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 686,
+      "tempHigh": 2320
+    },
+    {
+      "name": "insulation",
+      "state": "solid",
+      "color": "#b8aea5",
+      "category": "solids",
+      "behavior": "behaviors.WALL"
+    },
+    {
+      "name": "bamboo",
+      "state": "solid",
+      "color": "#888888",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 686,
+      "tempHigh": 380
+    },
+    {
+      "name": "pyrite",
+      "state": "solid",
+      "color": "#888888",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 4900,
+      "tempHigh": 1182.5
+    },
+    {
+      "name": "hard_yolk",
+      "state": "solid",
+      "color": "#dead43",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 1031,
+      "tempHigh": 400,
+      "stateHigh": "smoke"
+    },
+    {
+      "name": "rotten_cheese",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "[\n\t\t\"XX|CR:plague,stench,stench,stench,fly%0.25 AND CH:cheese,cheese_powder>rotten_cheese%1|XX\",\n\t\t\"CH:cheese,cheese_powder>rotten_cheese%1|XX|CH:cheese,cheese_powder>rotten_cheese%1\",\n\t\t\"XX|M1 AND CH:cheese,cheese_powder>rotten_cheese%1|XX\"\n\t]",
+      "density": 470,
+      "tempHigh": 54
+    },
+    {
+      "name": "cheese_powder",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.POWDER",
+      "density": 470,
+      "tempHigh": 54,
+      "stateHigh": "melted_cheese"
+    },
+    {
+      "name": "chocolate",
+      "state": "solid",
+      "color": "#4d2818",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 1325,
+      "tempHigh": 31,
+      "stateHigh": "melted_chocolate"
+    },
+    {
+      "name": "chocolate_powder",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.POWDER",
+      "density": 1325,
+      "tempHigh": 31,
+      "stateHigh": "melted_chocolate"
+    },
+    {
+      "name": "lettuce",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.POWDER",
+      "density": 1400,
+      "tempHigh": 300
+    },
+    {
+      "name": "pickle",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 625,
+      "tempHigh": 300
+    },
+    {
+      "name": "popcorn",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.POWDER",
+      "density": 360.5,
+      "tempHigh": 500,
+      "stateHigh": "ash"
+    },
+    {
+      "name": "corn_seed",
+      "state": "solid",
+      "color": "#888888",
+      "category": "life",
+      "behavior": "[\n\t\t\"XX|M2%0.25|XX\",\n\t\t\"XX|L2:plant,corn AND C2:corn%30|XX\",\n\t\t\"XX|M1|XX\"\n\t]",
+      "density": 721,
+      "tempHigh": 400,
+      "tempLow": -2,
+      "stateHigh": "fire",
+      "stateLow": "frozen_plant"
+    },
+    {
+      "name": "baked_potato",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 675,
+      "tempHigh": 400,
+      "stateHigh": "ash"
+    },
+    {
+      "name": "mashed_potato",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 675,
+      "tempHigh": 400
+    },
+    {
+      "name": "potato_seed",
+      "state": "solid",
+      "color": "#888888",
+      "category": "life",
+      "behavior": "[\n\t\t\"XX|CH:dirt>fiber|XX\",\n\t\t\"CH:dirt>potato%5|CH:potato%1|CH:dirt>potato%5\",\n\t\t\"XX|SW:dirt%3 AND M1|XX\"\n\t]",
+      "density": 675,
+      "tempHigh": 400,
+      "tempLow": -2,
+      "stateHigh": "fire",
+      "stateLow": "frozen_plant"
+    },
+    {
+      "name": "fiber",
+      "state": "solid",
+      "color": "#888888",
+      "category": "life",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 462,
+      "tempHigh": 275,
+      "tempLow": -50,
+      "stateHigh": "dirt",
+      "stateLow": "permafrost"
+    },
+    {
+      "name": "toast",
+      "state": "solid",
+      "color": "#c08655",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 233.96,
+      "tempHigh": 550,
+      "stateHigh": "ash"
+    },
+    {
+      "name": "gingerbread",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.SUPPORT",
+      "density": 233.96,
+      "tempHigh": 875,
+      "stateHigh": "ash"
+    },
+    {
+      "name": "crumb",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.POWDER",
+      "density": 233.96,
+      "tempHigh": 550,
+      "stateHigh": "ash"
+    },
+    {
+      "name": "baked_batter",
+      "state": "solid",
+      "color": "#fcdf7e",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 233.96,
+      "tempHigh": 550,
+      "stateHigh": "ash"
+    },
+    {
+      "name": "candy",
+      "state": "solid",
+      "color": "#e6cab1",
+      "category": "food",
+      "behavior": "behaviors.WALL",
+      "density": 900,
+      "tempHigh": 186,
+      "stateHigh": "caramel"
+    },
+    {
+      "name": "ice_cream",
+      "state": "solid",
+      "color": "#888888",
+      "category": "food",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 1096,
+      "tempHigh": 15,
+      "stateHigh": "cream"
+    },
+    {
+      "name": "dry_ice",
+      "state": "solid",
+      "color": "#e6e6e6",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 1562,
+      "stateHigh": "carbon_dioxide"
+    },
+    {
+      "name": "nitrogen_ice",
+      "state": "solid",
+      "color": "#e6e6e6",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "density": 1562,
+      "stateHigh": "liquid_nitrogen"
+    },
+    {
+      "name": "particleboard",
+      "state": "solid",
+      "color": "#888888",
+      "category": "solids",
+      "behavior": "behaviors.WALL",
+      "tempHigh": 500
+    },
+    {
+      "name": "limestone",
+      "state": "solid",
+      "color": "#888888",
+      "category": "land",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 2100,
+      "tempHigh": 825
+    },
+    {
+      "name": "slag",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 2400,
+      "tempHigh": 1380
+    },
+    {
+      "name": "fallout",
+      "state": "solid",
+      "color": "#888888",
+      "category": "energy",
+      "behavior": "[\n\t\t\"XX|CR:radiation%2|XX\",\n\t\t\"CR:radiation%2|CH:radiation%0.5|CR:radiation%2\",\n\t\t\"M2|M1 AND CR:radiation%2|M2\"\n\t]",
+      "density": 1490
+    },
+    {
+      "name": "gold_coin",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 19300,
+      "tempHigh": 1064,
+      "stateHigh": "molten_gold"
+    },
+    {
+      "name": "rust",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.SUPPORT",
+      "density": 5250,
+      "tempHigh": 1538,
+      "stateHigh": "molten_iron"
+    },
+    {
+      "name": "rad_shard",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.RADPOWDER",
+      "density": 2500,
+      "tempHigh": 1500,
+      "stateHigh": "molten_rad_glass"
+    },
+    {
+      "name": "brick_rubble",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 1650,
+      "tempHigh": 1540,
+      "stateHigh": "molten_brick"
+    },
+    {
+      "name": "baked_clay",
+      "state": "solid",
+      "color": "#b85746",
+      "category": "powders",
+      "behavior": "behaviors.SUPPORT",
+      "density": 2000,
+      "tempHigh": 1300,
+      "stateHigh": "porcelain"
+    },
+    {
+      "name": "clay_shard",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 2000,
+      "tempHigh": 1300,
+      "stateHigh": "porcelain_shard"
+    },
+    {
+      "name": "porcelain_shard",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 2000
+    },
+    {
+      "name": "feather",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.LIGHTWEIGHT",
+      "density": 500,
+      "tempHigh": 400
+    },
+    {
+      "name": "glitter",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 1450,
+      "tempHigh": 100
+    },
+    {
+      "name": "bead",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 1052,
+      "tempHigh": 185,
+      "stateHigh": "molten_plastic"
+    },
+    {
+      "name": "caustic_potash",
+      "state": "solid",
+      "color": "#feffe8",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 2044,
+      "tempHigh": 410
+    },
+    {
+      "name": "epsom_salt",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 1680,
+      "tempHigh": 1124
+    },
+    {
+      "name": "potassium_salt",
+      "state": "solid",
+      "color": "#888888",
+      "category": "powders",
+      "behavior": "behaviors.POWDER",
+      "density": 3980,
+      "tempHigh": 292
+    },
+    {
+      "name": "tnt",
+      "state": "solid",
+      "color": "#c92a2a",
+      "category": "weapons",
+      "behavior": "behaviors.WALL",
+      "density": 1630,
+      "tempHigh": 600,
+      "stateHigh": "explosion"
+    },
+    {
+      "name": "c4",
+      "state": "solid",
+      "color": "#888888",
+      "category": "weapons",
+      "behavior": "behaviors.STURDYPOWDER",
+      "density": 1630
+    },
+    {
+      "name": "grenade",
+      "state": "solid",
+      "color": "#5e5c57",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|EX:6>metal_scrap,fire,fire,fire%1|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:6>metal_scrap,fire,fire,fire%1|M2\"\n\t]",
+      "density": 1300,
+      "tempHigh": 1455.5,
+      "stateHigh": "molten_steel"
+    },
+    {
+      "name": "dynamite",
+      "state": "solid",
+      "color": "#888888",
+      "category": "weapons",
+      "behavior": "behaviors.POWDER",
+      "density": 1300,
+      "tempHigh": 600,
+      "stateHigh": "explosion"
+    },
+    {
+      "name": "gunpowder",
+      "state": "solid",
+      "color": "#888888",
+      "category": "weapons",
+      "behavior": "behaviors.POWDER",
+      "density": 1700,
+      "tempHigh": 600,
+      "stateHigh": "explosion"
+    },
+    {
+      "name": "nuke",
+      "state": "solid",
+      "color": "#534636",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:60>plasma,plasma,plasma,plasma,radiation,rad_steam|M2\"\n\t]",
+      "density": 1500
+    },
+    {
+      "name": "h_bomb",
+      "state": "solid",
+      "color": "#533636",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:90>plasma,plasma,plasma,plasma,fire|M2\"\n\t]",
+      "density": 1600
+    },
+    {
+      "name": "dirty_bomb",
+      "state": "solid",
+      "color": "#415336",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:40>radiation,radiation,radiation,rad_steam|M2\"\n\t]",
+      "density": 1400
+    },
+    {
+      "name": "cold_bomb",
+      "state": "solid",
+      "color": "#43646e",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|EX:10>cold_fire|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:10>cold_fire|M2\"\n\t]",
+      "density": 1300,
+      "tempHigh": 1455.5,
+      "stateHigh": "molten_steel"
+    },
+    {
+      "name": "hot_bomb",
+      "state": "solid",
+      "color": "#6c436e",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|HT:20000 AND EX:15>plasma|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND HT:20000 AND EX:15>plasma|M2\"\n\t]",
+      "density": 1300
+    },
+    {
+      "name": "antimatter_bomb",
+      "state": "solid",
+      "color": "#6e4343",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|EX:20>antimatter|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:20>antimatter|M2\"\n\t]",
+      "density": 1300,
+      "tempHigh": 10455.5,
+      "stateHigh": "molten_steel"
+    },
+    {
+      "name": "party_popper",
+      "state": "solid",
+      "color": "#888888",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|EX:15>confetti,flash,flash,smoke|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:15>confetti,flash,flash,smoke|M2\"\n\t]",
+      "density": 1300
+    },
+    {
+      "name": "flashbang",
+      "state": "solid",
+      "color": "#65665c",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|EX:20>flash%1|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"M2|M1 AND EX:20>flash%1|M2\"\n\t]",
+      "density": 1300,
+      "tempHigh": 1455.5,
+      "stateHigh": "molten_steel"
+    },
+    {
+      "name": "smoke_grenade",
+      "state": "solid",
+      "color": "#65665c",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|CR:smoke|XX\",\n\t\t\"XX|EX:4>smoke%1|XX\",\n\t\t\"M2|M1|M2\"\n\t]",
+      "density": 7300,
+      "tempHigh": 1455.5,
+      "stateHigh": "molten_steel"
+    },
+    {
+      "name": "landmine",
+      "state": "solid",
+      "color": "#856c7d",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|EX:20|XX\",\n\t\t\"XX|XX|XX\",\n\t\t\"XX|M1|XX\"\n\t]",
+      "density": 1300,
+      "tempHigh": 1455.5,
+      "stateHigh": "molten_steel"
+    },
+    {
+      "name": "armageddon",
+      "state": "solid",
+      "color": "#a62900",
+      "category": "weapons",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|EX:10>armageddon,fire,fire,fire,fire,fire,fire,fire,fire,fire,fire,fire,fire%25 AND DL%10|XX\",\n\t\t\"XX|XX|XX\"\n\t]",
+      "density": 1300
+    }
+  ],
+  "gases": [
+    {
+      "name": "antigas",
+      "state": "gas",
+      "color": "#e6fffc",
+      "category": "special",
+      "behavior": "[\n\t\t\"M2|M2|M2\",\n\t\t\"M2|XX|M2\",\n\t\t\"M1|M1|M1\"\n\t]",
+      "density": 10,
+      "tempHigh": 1000,
+      "tempLow": 100,
+      "stateHigh": "antifire",
+      "stateLow": "antifluid"
+    },
+    {
+      "name": "laser",
+      "state": "gas",
+      "color": "#ff0000",
+      "category": "energy",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|DL%0.25|XX\",\n\t\t\"XX|XX|XX\"\n\t]",
+      "density": 0.00001,
+      "tempLow": -273
+    },
+    {
+      "name": "helium",
+      "state": "gas",
+      "color": "#a69494",
+      "category": "gases",
+      "behavior": "behaviors.GAS",
+      "density": 0.1786,
+      "tempLow": -272.2,
+      "stateLow": "liquid_helium"
+    },
+    {
+      "name": "anesthesia",
+      "state": "gas",
+      "color": "#d3e1e3",
+      "category": "gases",
+      "behavior": "behaviors.GAS",
+      "density": 1.9781,
+      "tempHigh": 600,
+      "tempLow": -88.48
+    },
+    {
+      "name": "propane",
+      "state": "gas",
+      "color": "#cfcfcf",
+      "category": "gases",
+      "behavior": "behaviors.GAS",
+      "density": 2.0098,
+      "tempHigh": 600,
+      "tempLow": -43,
+      "stateHigh": "fire"
+    },
+    {
+      "name": "methane",
+      "state": "gas",
+      "color": "#9f9f9f",
+      "category": "gases",
+      "behavior": "behaviors.GAS",
+      "density": 0.554,
+      "tempHigh": 537,
+      "tempLow": -161.5,
+      "stateHigh": "fire"
+    },
+    {
+      "name": "neon",
+      "state": "gas",
+      "color": "#bababa",
+      "category": "gases",
+      "behavior": "behaviors.GAS",
+      "density": 0.9002,
+      "tempLow": -246,
+      "stateLow": "liquid_neon"
+    },
+    {
+      "name": "snow_cloud",
+      "state": "gas",
+      "color": "#7e8691",
+      "category": "gases",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|CH:snow%0.05|M1%2.5 AND BO\",\n\t\t\"XX|XX|XX\"\n\t]",
+      "density": 0.55,
+      "tempHigh": 30,
+      "tempLow": -200,
+      "stateHigh": "rain_cloud",
+      "stateLow": "hail_cloud"
+    },
+    {
+      "name": "hail_cloud",
+      "state": "gas",
+      "color": "#7e8691",
+      "category": "gases",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|CH:hail%0.05|M1%2.5 AND BO\",\n\t\t\"XX|XX|XX\"\n\t]",
+      "density": 0.6,
+      "stateHigh": "snow_cloud"
+    },
+    {
+      "name": "rad_cloud",
+      "state": "gas",
+      "color": "#888888",
+      "category": "gases",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|CH:fallout,radiation%0.025|M1%2.5 AND BO\",\n\t\t\"CR:radiation%0.05|CR:radiation%0.05|CR:radiation%0.05\"\n\t]",
+      "density": 0.5
+    },
+    {
+      "name": "color_smoke",
+      "state": "gas",
+      "color": "#888888",
+      "category": "gases",
+      "behavior": "behaviors.GAS",
+      "density": 1.977
+    },
+    {
+      "name": "spray_paint",
+      "state": "gas",
+      "color": "#888888",
+      "category": "gases",
+      "behavior": "behaviors.GAS",
+      "density": 1.977
+    },
+    {
+      "name": "electric",
+      "state": "gas",
+      "color": "#fffba6",
+      "category": "energy",
+      "behavior": "[\n\t\t\"CL%5|CL%5 AND SH|CL%5\",\n\t\t\"CL%5 AND SH|SH%5 AND DL%50|CL%5 AND SH\",\n\t\t\"M1%15 AND CL%6|M1%50 AND CL%13 AND SH|M1%15 AND CL%6\"\n\t]",
+      "density": 2.1
+    },
+    {
+      "name": "pop",
+      "state": "gas",
+      "color": "#888888",
+      "category": "energy",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|EX:3|XX\",\n\t\t\"XX|XX|XX\"\n\t]",
+      "density": 1000
+    },
+    {
+      "name": "n_explosion",
+      "state": "gas",
+      "color": "#888888",
+      "category": "energy",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|EX:40>plasma,plasma,plasma,plasma,radiation,rad_steam|XX\",\n\t\t\"XX|XX|XX\"\n\t]",
+      "density": 1000
+    },
+    {
+      "name": "supernova",
+      "state": "gas",
+      "color": "#888888",
+      "category": "energy",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|EX:80>plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,plasma,molten_iron,molten_uranium,molten_lead,oxygen,molten_sodium,sulfur_gas,neon,chlorine,molten_calcium,molten_nickel,molten_copper,molten_zinc,gallium_gas,molten_potassium,mercury,molten_aluminum AND CH:void|XX\",\n\t\t\"XX|XX|XX\"\n\t]",
+      "density": 1000
+    },
+    {
+      "name": "fw_ember",
+      "state": "gas",
+      "color": "#888888",
+      "category": "energy",
+      "behavior": "[\n\t\t\"XX|XX|XX\",\n\t\t\"XX|DL%25|M2\",\n\t\t\"XX|M2|M1\"\n\t]",
+      "density": 700,
+      "tempLow": 0,
+      "stateLow": "carbon_dioxide"
+    }
+  ]
+}

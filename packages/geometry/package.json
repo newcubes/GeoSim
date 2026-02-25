@@ -1,0 +1,66 @@
+{
+  "name": "@folkjs/geometry",
+  "version": "0.0.7",
+  "description": "Geometry utilities",
+  "keywords": [
+    "matrix",
+    "matrices",
+    "vector"
+  ],
+  "author": "Christopher Shank <chris.shank.23@gmail.com>",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    "./*": {
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "wireit",
+    "test": "wireit",
+    "publish": "wireit",
+    "test:dev": "npm run test --watch"
+  },
+  "wireit": {
+    "build": {
+      "command": "tsc --build --pretty",
+      "clean": "if-file-deleted",
+      "files": [
+        "src/**",
+        "package.json",
+        "tsconfig.json"
+      ],
+      "output": [
+        "dist/**",
+        "tsconfig.tsbuildinfo"
+      ]
+    },
+    "test": {
+      "command": "node --experimental-strip-types --test './__tests__/*.test.ts'",
+      "dependencies": [
+        "build"
+      ],
+      "files": [
+        "__tests__/*.test.ts"
+      ],
+      "output": []
+    },
+    "publish": {
+      "command": "npm publish --access public",
+      "dependencies": [
+        "build",
+        "test"
+      ]
+    }
+  },
+  "devDependencies": {
+    "expect": "^29.7.0",
+    "mitata": "^1.0.34",
+    "typescript": "^5.8.2"
+  }
+}

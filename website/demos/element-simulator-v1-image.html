@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Simulator v1 - Image Upload</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-top: 0;
+            color: #fff;
+        }
+        .info {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .info h2 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        .info p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .simulator-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #1f2224;
+            border: 2px solid #444;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls h3 {
+            margin: 20px 0 10px 0;
+            font-size: 16px;
+        }
+        .controls > h3:first-child {
+            margin-top: 0;
+        }
+        .material-buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .material-button {
+            padding: 10px 15px;
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .material-button:hover {
+            background: #444;
+            border-color: #666;
+        }
+        .material-button.active {
+            background: #4CAF50;
+            border-color: #66BB6A;
+        }
+        .material-button::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .material-button[data-material="0"]::before { background: #1f2224; }
+        .material-button[data-material="1"]::before { background: #383838; }
+        .material-button[data-material="2"]::before { background: #2167ff; }
+        .material-button[data-material="3"]::before { background: #ff6f00; }
+        .material-button[data-material="4"]::before { background: #e6d577; }
+        .material-button[data-material="5"]::before { background: #228b22; }
+        .material-button[data-material="6"]::before { background: #808080; }
+        .material-button[data-material="7"]::before { background: #1a1a1a; }
+        .material-button[data-material="8"]::before { background: #b0e0e6; }
+        .material-button[data-material="9"]::before { background: #ff4400; }
+        .material-button[data-material="10"]::before { background: #c8c8c8; }
+        .material-button[data-material="11"]::before { background: #228b22; }
+        /* Extended materials will use inline style set dynamically */
+        .material-button[data-material-name]::before {
+            background: #888888; /* Default fallback */
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .experiment-info {
+            background: #3a3a3a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        .experiment-info h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Element Simulator v1 - Physics Experiments</h1>
+        
+        <div class="experiment-info">
+            <h3>🔬 Experiment: Material Physics Parameters</h3>
+            <p><strong>Purpose:</strong> Test and understand material parameters: ID, density, viscosity, and angle of repose.</p>
+            <p><strong>Key Insight:</strong> Material IDs are sequential (0,1,2,3...) and don't represent density. Angle of repose is controlled by behavior pattern, not a separate parameter.</p>
+            <p><strong>Note:</strong> This is an experimental version. The original is preserved at <code>sand-simulator-hybrid.html</code>.</p>
+        </div>
+
+        <div class="info">
+            <h2>Material Properties Reference</h2>
+            <p><strong>Material ID:</strong> Sequential assignment (0-11 for core, 12+ for extended). <strong>NOT directly related to density.</strong></p>
+            <p><strong>Density:</strong> Physical property stored in material definitions. Used for density-based swapping.</p>
+            <p><strong>Viscosity:</strong> Controls liquid flow rate. Formula: <code>moveChance = 100 / (viscosity^0.25)</code></p>
+            <p><strong>Angle of Repose:</strong> Maximum angle a pile can form. Controlled by behavior pattern (POWDER vs STURDYPOWDER), not a separate parameter. For powders, this is like viscosity for liquids.</p>
+        </div>
+
+        <div class="simulator-container">
+            <folk-sand-hybrid id="simulator"></folk-sand-hybrid>
+        </div>
+
+        <div class="controls" style="margin-top: 20px;">
+            <h3>📸 Image Upload</h3>
+            <input type="file" id="imageUpload" accept="image/*" style="margin-bottom: 10px; color: #fff;">
+            <button id="loadImageBtn" style="padding: 10px 20px; background: #4CAF50; border: none; border-radius: 5px; color: white; cursor: pointer; margin-left: 10px;">Load Image</button>
+            <button id="pauseButton" style="padding: 10px 20px; background: #FF9800; border: none; border-radius: 5px; color: white; font-size: 14px; cursor: pointer; font-weight: bold; margin-left: 10px;">
+                ⏸️ Pause
+            </button>
+            <button id="playButton" style="padding: 10px 20px; background: #4CAF50; border: none; border-radius: 5px; color: white; font-size: 14px; cursor: pointer; font-weight: bold; display: none; margin-left: 10px;">
+                ▶️ Play
+            </button>
+            <p style="margin-top: 10px; color: #aaa; font-size: 12px;">
+                Upload an image to convert it to materials based on color matching. The image will be scaled to fit the canvas with minimal downsampling.
+            </p>
+        </div>
+
+        <div class="controls">
+            <h3>Core Materials</h3>
+            <div class="material-buttons-group">
+                <button class="material-button" data-material="0">Air</button>
+                <button class="material-button" data-material="1">Smoke</button>
+                <button class="material-button" data-material="2">Water</button>
+                <button class="material-button" data-material="3">Lava</button>
+                <button class="material-button active" data-material="4">Sand</button>
+                <button class="material-button" data-material="5">Plant</button>
+                <button class="material-button" data-material="6">Stone</button>
+                <button class="material-button" data-material="7">Wall</button>
+                <button class="material-button" data-material="8">Ice</button>
+                <button class="material-button" data-material="9">Fire</button>
+                <button class="material-button" data-material="10">Steam</button>
+                <button class="material-button" data-material="11">Moss</button>
+            </div>
+            
+            <h3>Extended Powders</h3>
+            <div class="material-buttons-group">
+                <button class="material-button" data-material-name="dirt">Dirt</button>
+                <button class="material-button" data-material-name="rock">Rock</button>
+                <button class="material-button" data-material-name="gravel">Gravel</button>
+                <button class="material-button" data-material-name="clay">Clay</button>
+                <button class="material-button" data-material-name="salt">Salt</button>
+                <button class="material-button" data-material-name="sugar">Sugar</button>
+                <button class="material-button" data-material-name="charcoal">Charcoal</button>
+                <button class="material-button" data-material-name="snow">Snow</button>
+                <button class="material-button" data-material-name="mud">Mud</button>
+                <button class="material-button" data-material-name="concrete">Concrete</button>
+                <button class="material-button" data-material-name="flour">Flour</button>
+                <button class="material-button" data-material-name="ash">Ash</button>
+                <button class="material-button" data-material-name="dust">Dust</button>
+                <button class="material-button" data-material-name="pollen">Pollen</button>
+                <button class="material-button" data-material-name="brick">Brick</button>
+            </div>
+            
+            <h3>Extended Liquids</h3>
+            <div class="material-buttons-group">
+                <button class="material-button" data-material-name="oil">Oil</button>
+                <button class="material-button" data-material-name="alcohol">Alcohol</button>
+                <button class="material-button" data-material-name="honey">Honey</button>
+                <button class="material-button" data-material-name="acid">Acid</button>
+                <button class="material-button" data-material-name="mercury">Mercury</button>
+                <button class="material-button" data-material-name="blood">Blood</button>
+                <button class="material-button" data-material-name="slime">Slime</button>
+                <button class="material-button" data-material-name="glue">Glue</button>
+                <button class="material-button" data-material-name="soap">Soap</button>
+                <button class="material-button" data-material-name="ink">Ink</button>
+                <button class="material-button" data-material-name="dye">Dye</button>
+                <button class="material-button" data-material-name="milk">Milk</button>
+                <button class="material-button" data-material-name="coffee">Coffee</button>
+            </div>
+            
+            <h3>Gases</h3>
+            <div class="material-buttons-group">
+                <button class="material-button" data-material-name="carbon_dioxide">CO₂</button>
+                <button class="material-button" data-material-name="oxygen">Oxygen</button>
+                <button class="material-button" data-material-name="hydrogen">Hydrogen</button>
+                <button class="material-button" data-material-name="nitrogen">Nitrogen</button>
+                <button class="material-button" data-material-name="helium">Helium</button>
+                <button class="material-button" data-material-name="methane">Methane</button>
+                <button class="material-button" data-material-name="chlorine">Chlorine</button>
+            </div>
+            
+            <h3>Metals & Special</h3>
+            <div class="material-buttons-group">
+                <button class="material-button" data-material-name="glass">Glass</button>
+                <button class="material-button" data-material-name="wood">Wood</button>
+                <button class="material-button" data-material-name="plastic">Plastic</button>
+                <button class="material-button" data-material-name="wax">Wax</button>
+                <button class="material-button" data-material-name="diamond">Diamond</button>
+                <button class="material-button" data-material-name="sulfur">Sulfur</button>
+                <button class="material-button" data-material-name="uranium">Uranium</button>
+                <button class="material-button" data-material-name="rust">Rust</button>
+            </div>
+        </div>
+
+        <div class="status" id="status">
+            Selected: Sand (ID: 4)
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button id="randomFillButton" style="padding: 15px 30px; background: #4CAF50; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; margin-right: 10px;">
+                🎲 Random Fill (Lower 2/3)
+            </button>
+            <button id="specificFillButton" style="padding: 15px 30px; background: #2196F3; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; margin-right: 10px;">
+                🎨 Specific Materials Fill
+            </button>
+            <button id="highContrastFillButton" style="padding: 15px 30px; background: #FF6B35; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; margin-right: 10px;">
+                🌈 High Contrast Fill
+            </button>
+            <button id="removeSolidBlocksButton" style="padding: 15px 30px; background: #9C27B0; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; margin-right: 10px;">
+                🗑️ Remove Solid Blocks
+            </button>
+            <button id="coreMaterialsFillButton" style="padding: 15px 30px; background: #00BCD4; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; margin-right: 10px;">
+                🎯 Core Materials Fill
+            </button>
+            <button id="allMaterialsFillButton" style="padding: 15px 30px; background: #E91E63; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; font-weight: bold; margin-right: 10px;">
+                🌍 All Materials Fill
+            </button>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button id="colorSchemeButton" style="padding: 15px 30px; background: #9E9E9E; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; font-weight: bold;">
+                🎨 Original Colors
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { FolkSandHybrid } from '../../packages/labs/dist/folk-sand-hybrid.js';
+
+        const simulator = document.getElementById('simulator');
+        const buttons = document.querySelectorAll('.material-button');
+        const status = document.getElementById('status');
+
+        let selectedMaterial = 4; // Sand
+
+        // Function to set up colored dots for extended materials
+        function setupExtendedMaterialColors() {
+            if (!simulator || !simulator.getMaterialColor) {
+                console.warn('Simulator not ready for color setup');
+                return;
+            }
+            
+            const extendedButtons = document.querySelectorAll('.material-button[data-material-name]');
+            console.log(`Setting up colors for ${extendedButtons.length} extended material buttons`);
+            
+            let successCount = 0;
+            let failCount = 0;
+            
+            extendedButtons.forEach(button => {
+                const materialName = button.dataset.materialName;
+                if (materialName) {
+                    try {
+                        const color = simulator.getMaterialColor(materialName);
+                        if (color) {
+                            // Set the color using inline style for the ::before pseudo-element
+                            // We need to add a style element with a specific selector for each button
+                            const buttonId = `material-btn-${materialName}`;
+                            if (!button.id) {
+                                button.id = buttonId;
+                            }
+                            
+                            // Add style for this specific button
+                            let styleEl = document.getElementById('extended-material-colors-style');
+                            if (!styleEl) {
+                                styleEl = document.createElement('style');
+                                styleEl.id = 'extended-material-colors-style';
+                                document.head.appendChild(styleEl);
+                            }
+                            
+                            // Add or update the style for this button
+                            const selector = `#${buttonId}::before`;
+                            const rule = `${selector} { background: ${color} !important; }`;
+                            
+                            // Remove existing rule for this button if it exists
+                            const sheet = styleEl.sheet;
+                            if (sheet) {
+                                const rules = Array.from(sheet.cssRules);
+                                const existingIndex = rules.findIndex(function(rule) { 
+                                    return rule.selectorText === selector;
+                                });
+                                if (existingIndex >= 0) {
+                                    sheet.deleteRule(existingIndex);
+                                }
+                                sheet.insertRule(rule, sheet.cssRules.length);
+                            }
+                            successCount++;
+                            console.log(`Set color for ${materialName}: ${color}`);
+                        } else {
+                            failCount++;
+                            console.warn(`No color found for material: ${materialName}`);
+                        }
+                    } catch (error) {
+                        failCount++;
+                        console.error(`Error getting color for ${materialName}:`, error);
+                    }
+                }
+            });
+            
+            console.log(`Color setup complete: ${successCount} succeeded, ${failCount} failed`);
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                button.classList.add('active');
+                
+                const materialName = button.dataset.materialName;
+                if (materialName) {
+                    // Extended material - use name
+                    simulator.setMaterialTypeByName(materialName);
+                    const materialID = simulator.getMaterialID(materialName);
+                    status.textContent = `Selected: ${materialName} (ID: ${materialID !== undefined ? materialID : '?'})`;
+                } else {
+                    // Core material - use ID
+                    selectedMaterial = parseInt(button.dataset.material);
+                    const materialNames = ['Air', 'Smoke', 'Water', 'Lava', 'Sand', 'Plant', 'Stone', 'Wall', 'Ice', 'Fire', 'Steam', 'Moss'];
+                    status.textContent = `Selected: ${materialNames[selectedMaterial]} (ID: ${selectedMaterial})`;
+                    simulator.setMaterialType(selectedMaterial);
+                }
+            });
+        });
+
+        // Set up extended material colors after simulator is ready
+        function initializeExtendedMaterialColors() {
+            if (simulator && typeof simulator.getMaterialColor === 'function') {
+                // Test if material system is ready by checking a known material
+                const testColor = simulator.getMaterialColor('dirt');
+                if (testColor !== undefined || simulator.getAllMaterials().length > 0) {
+                    // Material system is ready
+                    setTimeout(() => {
+                        setupExtendedMaterialColors();
+                    }, 200);
+                } else {
+                    // Wait a bit more and try again
+                    setTimeout(initializeExtendedMaterialColors, 200);
+                }
+            } else {
+                // Wait a bit and try again
+                setTimeout(initializeExtendedMaterialColors, 100);
+            }
+        }
+
+        // Wait for simulator to be ready
+        function setupButtons() {
+            if (!simulator) {
+                console.error('Simulator element not found');
+                return;
+            }
+
+            // Random fill button
+            const randomFillButton = document.getElementById('randomFillButton');
+            if (randomFillButton) {
+                randomFillButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Random fill button clicked');
+                    fillLowerTwoThirdsWithRandomMaterials(simulator);
+                });
+                console.log('Random fill button event listeners attached');
+            } else {
+                console.error('Random fill button not found');
+            }
+
+            // Specific materials fill button
+            const specificFillButton = document.getElementById('specificFillButton');
+            if (specificFillButton) {
+                specificFillButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Specific materials fill button clicked');
+                    fillLowerTwoThirdsWithSpecificMaterials(simulator);
+                });
+                console.log('Specific materials fill button event listeners attached');
+            } else {
+                console.error('Specific materials fill button not found');
+            }
+
+            // High contrast fill button
+            const highContrastFillButton = document.getElementById('highContrastFillButton');
+            if (highContrastFillButton) {
+                highContrastFillButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('High contrast fill button clicked');
+                    fillLowerTwoThirdsWithHighContrastMaterials(simulator);
+                });
+                console.log('High contrast fill button event listeners attached');
+            } else {
+                console.error('High contrast fill button not found');
+            }
+
+            // Remove solid blocks button
+            const removeSolidBlocksButton = document.getElementById('removeSolidBlocksButton');
+            if (removeSolidBlocksButton) {
+                removeSolidBlocksButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Remove solid blocks button clicked');
+                    removeSolidBlocks(simulator);
+                });
+                console.log('Remove solid blocks button event listeners attached');
+            } else {
+                console.error('Remove solid blocks button not found');
+            }
+
+            // Core materials fill button
+            const coreMaterialsFillButton = document.getElementById('coreMaterialsFillButton');
+            if (coreMaterialsFillButton) {
+                coreMaterialsFillButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Core materials fill button clicked');
+                    fillLowerTwoThirdsWithCoreMaterials(simulator);
+                });
+                console.log('Core materials fill button event listeners attached');
+            } else {
+                console.error('Core materials fill button not found');
+            }
+
+            // All materials fill button
+            const allMaterialsFillButton = document.getElementById('allMaterialsFillButton');
+            if (allMaterialsFillButton) {
+                allMaterialsFillButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('All materials fill button clicked');
+                    fillLowerTwoThirdsWithAllMaterials(simulator);
+                });
+                console.log('All materials fill button event listeners attached');
+            } else {
+                console.error('All materials fill button not found');
+            }
+
+            // Image upload button
+            const imageUpload = document.getElementById('imageUpload');
+            const loadImageBtn = document.getElementById('loadImageBtn');
+            if (imageUpload && loadImageBtn) {
+                loadImageBtn.addEventListener('click', () => {
+                    const file = imageUpload.files?.[0];
+                    if (!file) {
+                        alert('Please select an image file first');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            // Get canvas dimensions from simulator
+                            if (!simulator || !simulator.fillRegionFromImage) {
+                                alert('Simulator not ready. Please wait a moment and try again.');
+                                return;
+                            }
+                            
+                            // Create a temporary canvas to get ImageData
+                            const tempCanvas = document.createElement('canvas');
+                            const ctx = tempCanvas.getContext('2d');
+                            if (!ctx) {
+                                alert('Could not create canvas context');
+                                return;
+                            }
+                            
+                            // Get simulator buffer dimensions
+                            const bufferDims = simulator.getBufferDimensions();
+                            if (!bufferDims) {
+                                alert('Simulator not initialized. Please wait a moment and try again.');
+                                return;
+                            }
+                            
+                            // Scale image to fit buffer (minimal downsampling - maintain aspect ratio)
+                            const scale = Math.min(bufferDims.width / img.width, bufferDims.height / img.height);
+                            const scaledWidth = Math.floor(img.width * scale);
+                            const scaledHeight = Math.floor(img.height * scale);
+                            
+                            // Create canvas with original image size to get full quality ImageData
+                            tempCanvas.width = img.width;
+                            tempCanvas.height = img.height;
+                            ctx.drawImage(img, 0, 0);
+                            
+                            const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                            
+                            // Calculate position to center the image
+                            const startX = Math.floor((bufferDims.width - scaledWidth) / 2);
+                            const startY = Math.floor((bufferDims.height - scaledHeight) / 2);
+                            
+                            console.log(`Loading image: ${img.width}x${img.height} -> ${scaledWidth}x${scaledHeight} at (${startX}, ${startY})`);
+                            
+                            try {
+                                simulator.fillRegionFromImage(
+                                    imageData,
+                                    startX,
+                                    startY,
+                                    scaledWidth,
+                                    scaledHeight,
+                                    img.width,
+                                    img.height
+                                );
+                                status.textContent = `Image loaded! Converted ${scaledWidth}x${scaledHeight} pixels to materials.`;
+                            } catch (error) {
+                                console.error('Error loading image:', error);
+                                alert('Error loading image: ' + error.message);
+                            }
+                        };
+                        img.src = e.target?.result || '';
+                    };
+                    reader.readAsDataURL(file);
+                });
+                console.log('Image upload button event listeners attached');
+            }
+
+            // Pause button
+            const pauseButton = document.getElementById('pauseButton');
+            const playButton = document.getElementById('playButton');
+            if (pauseButton && playButton) {
+                pauseButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    simulator.pause();
+                    pauseButton.style.display = 'none';
+                    playButton.style.display = 'inline-block';
+                    console.log('Simulation paused');
+                });
+                playButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    simulator.play();
+                    pauseButton.style.display = 'inline-block';
+                    playButton.style.display = 'none';
+                    console.log('Simulation resumed');
+                });
+                console.log('Pause/Play button event listeners attached');
+            } else {
+                console.error('Pause/Play buttons not found');
+            }
+
+            // Color scheme toggle button
+            const colorSchemeButton = document.getElementById('colorSchemeButton');
+            if (colorSchemeButton) {
+                let useAlternate = false;
+                colorSchemeButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    useAlternate = !useAlternate;
+                    simulator.setColorScheme(useAlternate);
+                    colorSchemeButton.textContent = useAlternate ? '🎨 Alternate Colors' : '🎨 Original Colors';
+                    colorSchemeButton.style.background = useAlternate ? '#FF6B35' : '#9E9E9E';
+                    console.log(`Switched to ${useAlternate ? 'alternate' : 'original'} color scheme`);
+                });
+                console.log('Color scheme button event listeners attached');
+            } else {
+                console.error('Color scheme button not found');
+            }
+        }
+
+        // Try to set up buttons immediately, and also wait for custom element to be defined
+        if (customElements.get('folk-sand-hybrid')) {
+            setupButtons();
+            // Enable alternate colors by default for better image sampling (fewer grey/white materials)
+            setTimeout(() => {
+                simulator.setColorScheme(true);
+                const colorSchemeButton = document.getElementById('colorSchemeButton');
+                if (colorSchemeButton) {
+                    colorSchemeButton.textContent = '🎨 Alternate Colors';
+                    colorSchemeButton.style.background = '#FF6B35';
+                }
+            }, 100);
+            initializeExtendedMaterialColors();
+        } else {
+            customElements.whenDefined('folk-sand-hybrid').then(() => {
+                setupButtons();
+                // Enable alternate colors by default for better image sampling (fewer grey/white materials)
+                setTimeout(() => {
+                    simulator.setColorScheme(true);
+                    const colorSchemeButton = document.getElementById('colorSchemeButton');
+                    if (colorSchemeButton) {
+                        colorSchemeButton.textContent = '🎨 Alternate Colors';
+                        colorSchemeButton.style.background = '#FF6B35';
+                    }
+                }, 100);
+                initializeExtendedMaterialColors();
+            });
+        }
+        
+        /**
+         * Fill the lower half of the canvas with random materials (no air)
+         */
+        function fillLowerTwoThirdsWithRandomMaterials(simulator) {
+            try {
+                if (!simulator) {
+                    throw new Error('Simulator not found');
+                }
+                
+                if (typeof simulator.fillLowerTwoThirdsWithRandomMaterials !== 'function') {
+                    throw new Error('fillLowerTwoThirdsWithRandomMaterials method not available');
+                }
+                
+                console.log('Calling fillLowerTwoThirdsWithRandomMaterials...');
+                simulator.fillLowerTwoThirdsWithRandomMaterials(0.25); // 25% air, 75% materials
+                status.textContent = 'Random fill complete! Lower 2/3 filled with random materials (25% air).';
+                console.log('Random fill completed successfully');
+            } catch (error) {
+                console.error('Error filling region:', error);
+                status.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function fillLowerTwoThirdsWithSpecificMaterials(simulator) {
+            try {
+                if (!simulator) {
+                    throw new Error('Simulator not found');
+                }
+                
+                if (typeof simulator.fillLowerTwoThirdsWithSpecificMaterials !== 'function') {
+                    throw new Error('fillLowerTwoThirdsWithSpecificMaterials method not available');
+                }
+                
+                console.log('Calling fillLowerTwoThirdsWithSpecificMaterials...');
+                simulator.fillLowerTwoThirdsWithSpecificMaterials(0.25); // 25% air, 75% materials
+                status.textContent = 'Specific materials fill complete! Lower 2/3 filled with clustered materials.';
+                console.log('Specific materials fill completed successfully');
+            } catch (error) {
+                console.error('Error filling region:', error);
+                status.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function fillLowerTwoThirdsWithHighContrastMaterials(simulator) {
+            try {
+                if (!simulator) {
+                    throw new Error('Simulator not found');
+                }
+                
+                if (typeof simulator.fillLowerTwoThirdsWithHighContrastMaterials !== 'function') {
+                    throw new Error('fillLowerTwoThirdsWithHighContrastMaterials method not available');
+                }
+                
+                console.log('Calling fillLowerTwoThirdsWithHighContrastMaterials...');
+                simulator.fillLowerTwoThirdsWithHighContrastMaterials(0.25); // 25% air, 75% materials
+                status.textContent = 'High contrast fill complete! Lower 2/3 filled with visually distinct materials.';
+                console.log('High contrast fill completed successfully');
+            } catch (error) {
+                console.error('Error filling region:', error);
+                status.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function removeSolidBlocks(simulator) {
+            try {
+                if (!simulator) {
+                    throw new Error('Simulator not found');
+                }
+                
+                if (typeof simulator.removeSolidBlocks !== 'function') {
+                    throw new Error('removeSolidBlocks method not available');
+                }
+                
+                console.log('Calling removeSolidBlocks...');
+                simulator.removeSolidBlocks();
+                status.textContent = 'Solid blocks removed! All wall and support materials replaced with air.';
+                console.log('Remove solid blocks completed successfully');
+            } catch (error) {
+                console.error('Error removing solid blocks:', error);
+                status.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function fillLowerTwoThirdsWithCoreMaterials(simulator) {
+            try {
+                if (!simulator) {
+                    throw new Error('Simulator not found');
+                }
+                
+                if (typeof simulator.fillLowerTwoThirdsWithCoreMaterials !== 'function') {
+                    throw new Error('fillLowerTwoThirdsWithCoreMaterials method not available');
+                }
+                
+                console.log('Calling fillLowerTwoThirdsWithCoreMaterials...');
+                simulator.fillLowerTwoThirdsWithCoreMaterials(0.25); // 25% air, 75% core materials
+                status.textContent = 'Core materials fill complete! Lower 2/3 filled with evenly distributed core materials (25% air).';
+                console.log('Core materials fill completed successfully');
+            } catch (error) {
+                console.error('Error filling region:', error);
+                status.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function fillLowerTwoThirdsWithAllMaterials(simulator) {
+            try {
+                if (!simulator) {
+                    throw new Error('Simulator not found');
+                }
+                
+                if (typeof simulator.fillLowerTwoThirdsWithAllMaterials !== 'function') {
+                    throw new Error('fillLowerTwoThirdsWithAllMaterials method not available');
+                }
+                
+                console.log('Calling fillLowerTwoThirdsWithAllMaterials...');
+                simulator.fillLowerTwoThirdsWithAllMaterials(0.25); // 25% air, 75% all materials
+                status.textContent = 'All materials fill complete! Lower 2/3 filled with all available materials (25% air).';
+                console.log('All materials fill completed successfully');
+            } catch (error) {
+                console.error('Error filling region:', error);
+                status.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
+

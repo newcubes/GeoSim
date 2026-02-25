@@ -1,0 +1,125 @@
+{
+  "name": "@folkjs/labs",
+  "version": "0.0.7",
+  "description": "Labs",
+  "keywords": [
+    "labs"
+  ],
+  "author": "Christopher Shank <chris.shank.23@gmail.com>",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    "./*": {
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    },
+    "./standalone/*": {
+      "import": "./dist/standalone/*.js",
+      "types": "./dist/standalone/*.d.ts"
+    },
+    "./interactions/*": {
+      "import": "./dist/interactions/*.js",
+      "types": "./dist/interactions/*.d.ts"
+    },
+    "./intl-elements/*": {
+      "import": "./dist/intl-elements/*.js",
+      "types": "./dist/intl-elements/*.d.ts"
+    },
+    "./lsp/*": {
+      "import": "./dist/lsp/*.js",
+      "types": "./dist/lsp/*.d.ts"
+    },
+    "./utils/*": {
+      "import": "./dist/utils/*.js",
+      "types": "./dist/utils/*.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "wireit",
+    "test": "wireit",
+    "publish": "wireit"
+  },
+  "wireit": {
+    "build": {
+      "command": "tsc --build --pretty",
+      "clean": "if-file-deleted",
+      "dependencies": [
+        "../dom:build",
+        "../collab:build",
+        "../geometry:build",
+        "../canvas:build",
+        "../propagators:build"
+      ],
+      "files": [
+        "src/**",
+        "package.json",
+        "tsconfig.json"
+      ],
+      "output": [
+        "dist/**",
+        "tsconfig.tsbuildinfo"
+      ]
+    },
+    "test": {
+      "command": "node --experimental-strip-types --test './__tests__/*.test.ts'",
+      "dependencies": [
+        "build"
+      ],
+      "files": [
+        "__tests__/*.test.ts"
+      ],
+      "output": []
+    },
+    "publish": {
+      "command": "npm publish --access public",
+      "dependencies": [
+        "build",
+        "test"
+      ]
+    }
+  },
+  "dependencies": {
+    "@automerge/vanillajs": "^2.5.0",
+    "@codemirror/lang-javascript": "^6.2.3",
+    "@codemirror/view": "^6.36.5",
+    "@dimforge/rapier2d": "^0.15.0",
+    "@folkjs/canvas": "0.0.7",
+    "@folkjs/collab": "0.0.7",
+    "@folkjs/dom": "0.0.7",
+    "@folkjs/geometry": "0.0.7",
+    "@folkjs/propagators": "0.0.7",
+    "@mlc-ai/web-llm": "^0.2.78",
+    "@typescript/vfs": "^1.6.1",
+    "@volar/typescript-language-service": "^1.0.1",
+    "codemirror": "^6.0.1",
+    "eventemitter3": "^5.0.1",
+    "gun": "^0.2020.1240",
+    "inspector-elements": "^0.1.0",
+    "leaflet": "^1.9.4",
+    "luby-transform": "^0.2.0",
+    "peerjs": "^1.5.4",
+    "perfect-arrows": "^0.3.7",
+    "perfect-freehand": "^1.2.2",
+    "prism-esm": "^1.29.0-fix.6",
+    "qr-scanner": "^1.4.2",
+    "recast": "^0.23.11",
+    "uhtml": "^4.5.11",
+    "vscode-css-languageservice": "^6.3.5",
+    "vscode-html-languageservice": "^5.4.0",
+    "vscode-json-languageservice": "^5.5.0",
+    "vscode-languageserver-protocol": "^3.17.5",
+    "vscode-markdown-languageservice": "^0.5.0-alpha.9",
+    "webcola": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/hast": "^3.0.4",
+    "@types/wicg-file-system-access": "^2023.10.7",
+    "expect": "^29.7.0",
+    "mitata": "^1.0.34",
+    "typescript": "^5.8.2"
+  }
+}

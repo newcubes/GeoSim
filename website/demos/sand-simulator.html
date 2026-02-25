@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sand Simulator Game</title>
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        min-height: 100%;
+        position: relative;
+        margin: 0;
+        overscroll-behavior: none;
+        background: #1a1a1a;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      folk-shape {
+        background: transparent;
+        position: absolute;
+        background-color: rgba(100, 100, 100, 0.8);
+        border-radius: 2px;
+      }
+
+      .controls {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        font-family: monospace;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 200px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
+
+      .controls h2 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        color: #fff;
+      }
+
+      .material-button {
+        all: unset;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.2s;
+        gap: 10px;
+      }
+
+      .material-color {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        flex-shrink: 0;
+      }
+
+      .material-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .material-button[active] {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .material-button[active] .key-number {
+        background: rgba(255, 255, 255, 0.6);
+      }
+
+      .key-number {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 4px 10px;
+        border-radius: 4px;
+        min-width: 24px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .material-name {
+        flex: 1;
+      }
+
+      .instructions {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.5;
+      }
+
+      .instructions strong {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <h2>🎮 Sand Simulator</h2>
+      <button class="material-button" data-material="1">
+        <span class="material-color" style="background: rgb(38, 38, 38);"></span>
+        <span class="key-number">1</span>
+        <span class="material-name">Smoke</span>
+      </button>
+      <button class="material-button" data-material="2">
+        <span class="material-color" style="background: rgb(51, 102, 204);"></span>
+        <span class="key-number">2</span>
+        <span class="material-name">Water</span>
+      </button>
+      <button class="material-button" data-material="3">
+        <span class="material-color" style="background: rgb(230, 77, 26);"></span>
+        <span class="key-number">3</span>
+        <span class="material-name">Lava</span>
+      </button>
+      <button class="material-button active" data-material="4">
+        <span class="material-color" style="background: rgb(219, 158, 69);"></span>
+        <span class="key-number">4</span>
+        <span class="material-name">Sand</span>
+      </button>
+      <button class="material-button" data-material="5">
+        <span class="material-color" style="background: rgb(33, 140, 33);"></span>
+        <span class="key-number">5</span>
+        <span class="material-name">Plant</span>
+      </button>
+      <button class="material-button" data-material="6">
+        <span class="material-color" style="background: rgb(20, 26, 31);"></span>
+        <span class="key-number">6</span>
+        <span class="material-name">Stone</span>
+      </button>
+      <button class="material-button" data-material="7">
+        <span class="material-color" style="background: rgb(80, 80, 80);"></span>
+        <span class="key-number">7</span>
+        <span class="material-name">Wall</span>
+      </button>
+      <button class="material-button" data-material="8">
+        <span class="material-color" style="background: rgb(204, 230, 255);"></span>
+        <span class="key-number">8</span>
+        <span class="material-name">Ice</span>
+      </button>
+      <button class="material-button" data-material="9">
+        <span class="material-color" style="background: rgb(255, 77, 0);"></span>
+        <span class="key-number">9</span>
+        <span class="material-name">Fire</span>
+      </button>
+      <button class="material-button" data-material="10">
+        <span class="material-color" style="background: rgb(204, 204, 204);"></span>
+        <span class="key-number">0</span>
+        <span class="material-name">Steam</span>
+      </button>
+      <button class="material-button" data-material="11">
+        <span class="material-color" style="background: rgb(33, 140, 33);"></span>
+        <span class="key-number">M</span>
+        <span class="material-name">Moss</span>
+      </button>
+      <div class="instructions">
+        <strong>How to play:</strong><br />
+        Click and drag to place materials<br />
+        Use number keys (1-9) to switch materials<br />
+        Add shapes below to create obstacles
+      </div>
+    </div>
+
+    <folk-sand>
+      <!-- Obstacle shapes -->
+      <folk-shape x="100" y="100" width="50" height="50"></folk-shape>
+      <folk-shape x="200" y="200" width="50" height="50"></folk-shape>
+      <folk-shape x="300" y="300" width="80" height="40"></folk-shape>
+      <folk-shape x="400" y="150" width="60" height="90"></folk-shape>
+      <folk-shape x="500" y="250" width="100" height="100"></folk-shape>
+      <folk-shape x="600" y="100" width="30" height="70"></folk-shape>
+    </folk-sand>
+
+    <script type="module">
+      import '@folkjs/labs/standalone/folk-shape';
+      import '@folkjs/labs/standalone/folk-sand';
+
+      const sandElement = document.querySelector('folk-sand');
+      const buttons = document.querySelectorAll('.material-button');
+      let currentMaterial = 4;
+
+      // Update active button
+      function setActiveMaterial(materialNumber) {
+        buttons.forEach((btn) => btn.classList.remove('active'));
+        const activeBtn = document.querySelector(`[data-material="${materialNumber}"]`);
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+        }
+        currentMaterial = materialNumber;
+      }
+
+      // Handle material change callback
+      sandElement.onMaterialChange = (materialNumber) => {
+        setActiveMaterial(materialNumber);
+      };
+
+      // Handle button clicks - directly set material type
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const material = parseInt(button.dataset.material);
+          setActiveMaterial(material);
+          // Directly set material type on the sand element
+          if (sandElement.setMaterialType) {
+            sandElement.setMaterialType(material);
+          } else {
+            // Fallback: trigger keyboard event
+            const key = material === 11 ? 'm' : material.toString();
+            const keyEvent = new KeyboardEvent('keydown', {
+              key: key,
+              bubbles: true,
+              cancelable: true,
+            });
+            document.dispatchEvent(keyEvent);
+          }
+        });
+      });
+
+      // Handle keyboard input
+      document.addEventListener('keydown', (e) => {
+        const key = parseInt(e.key);
+        if (key >= 1 && key <= 9) {
+          setActiveMaterial(key);
+        } else if (e.key === '0') {
+          // 0 for Steam (material 10)
+          setActiveMaterial(10);
+        } else if (e.key === 'm' || e.key === 'M') {
+          // m or M for moss (material 11)
+          setActiveMaterial(11);
+        }
+      });
+
+      // Initialize with sand (material 4)
+      setActiveMaterial(4);
+    </script>
+  </body>
+</html>
+

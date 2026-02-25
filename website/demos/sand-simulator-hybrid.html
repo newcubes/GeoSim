@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sand Simulator - Hybrid Version</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-top: 0;
+            color: #fff;
+        }
+        .info {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .info h2 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        .info p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .simulator-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #1f2224;
+            border: 2px solid #444;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .material-button {
+            padding: 10px 15px;
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .material-button:hover {
+            background: #444;
+            border-color: #666;
+        }
+        .material-button.active {
+            background: #4CAF50;
+            border-color: #66BB6A;
+        }
+        .material-button::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .material-button[data-material="0"]::before { background: #1f2224; }
+        .material-button[data-material="1"]::before { background: #383838; }
+        .material-button[data-material="2"]::before { background: #2167ff; }
+        .material-button[data-material="3"]::before { background: #ff6f00; }
+        .material-button[data-material="4"]::before { background: #e6d577; }
+        .material-button[data-material="5"]::before { background: #228b22; }
+        .material-button[data-material="6"]::before { background: #808080; }
+        .material-button[data-material="7"]::before { background: #1a1a1a; }
+        .material-button[data-material="8"]::before { background: #b0e0e6; }
+        .material-button[data-material="9"]::before { background: #ff4400; }
+        .material-button[data-material="10"]::before { background: #c8c8c8; }
+        .material-button[data-material="11"]::before { background: #228b22; }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sand Simulator - Hybrid Version</h1>
+        
+        <div class="info">
+            <h2>🧪 Testing Hybrid Material System</h2>
+            <p><strong>Status:</strong> Hybrid version with texture-based material system - WORKING!</p>
+            <p><strong>Core Materials (0-11):</strong> Working with original physics</p>
+            <p><strong>Extended Materials (12+):</strong> Available via texture lookups - test below!</p>
+            <p><strong>Note:</strong> Extended materials use generic behavior-based physics (powder/liquid/gas)</p>
+        </div>
+
+        <div class="simulator-container">
+            <folk-sand-hybrid id="sandElement" initial-sand="0.15"></folk-sand-hybrid>
+        </div>
+
+        <div class="controls">
+            <div style="width: 100%; margin-bottom: 10px;">
+                <strong>Core Materials (0-11):</strong>
+            </div>
+            <button class="material-button" data-material="0">Air (0)</button>
+            <button class="material-button" data-material="1">Smoke (1)</button>
+            <button class="material-button" data-material="2">Water (2)</button>
+            <button class="material-button" data-material="3">Lava (3)</button>
+            <button class="material-button active" data-material="4">Sand (4)</button>
+            <button class="material-button" data-material="5">Plant (5)</button>
+            <button class="material-button" data-material="6">Stone (6)</button>
+            <button class="material-button" data-material="7">Wall (7)</button>
+            <button class="material-button" data-material="8">Ice (8)</button>
+            <button class="material-button" data-material="9">Fire (9)</button>
+            <button class="material-button" data-material="10">Steam (10)</button>
+            <button class="material-button" data-material="11">Moss (11)</button>
+            
+            <div style="width: 100%; margin-top: 20px; margin-bottom: 10px;">
+                <strong>Extended Materials (12+):</strong>
+            </div>
+            
+            <div style="width: 100%; margin-top: 10px; margin-bottom: 5px; font-size: 0.9em; color: #888;">
+                <strong>Powders & Solids:</strong>
+            </div>
+            <button class="material-button" data-material-name="dirt">Dirt</button>
+            <button class="material-button" data-material-name="rock">Rock</button>
+            <button class="material-button" data-material-name="wood">Wood</button>
+            <button class="material-button" data-material-name="glass">Glass</button>
+            <button class="material-button" data-material-name="mud">Mud</button>
+            <button class="material-button" data-material-name="snow">Snow</button>
+            <button class="material-button" data-material-name="concrete">Concrete</button>
+            <button class="material-button" data-material-name="gravel">Gravel</button>
+            <button class="material-button" data-material-name="clay">Clay</button>
+            <button class="material-button" data-material-name="salt">Salt</button>
+            <button class="material-button" data-material-name="sugar">Sugar</button>
+            <button class="material-button" data-material-name="charcoal">Charcoal</button>
+            <button class="material-button" data-material-name="brick">Brick</button>
+            
+            <div style="width: 100%; margin-top: 10px; margin-bottom: 5px; font-size: 0.9em; color: #888;">
+                <strong>Liquids:</strong>
+            </div>
+            <button class="material-button" data-material-name="oil">Oil</button>
+            <button class="material-button" data-material-name="alcohol">Alcohol</button>
+            <button class="material-button" data-material-name="honey">Honey</button>
+            <button class="material-button" data-material-name="acid">Acid</button>
+            
+            <div style="width: 100%; margin-top: 10px; margin-bottom: 5px; font-size: 0.9em; color: #888;">
+                <strong>Gases:</strong>
+            </div>
+            <button class="material-button" data-material-name="carbon_dioxide">CO₂</button>
+            <button class="material-button" data-material-name="oxygen">O₂</button>
+            <button class="material-button" data-material-name="hydrogen">H₂</button>
+        </div>
+
+        <div class="status" id="status">
+            Initializing hybrid material system...
+        </div>
+    </div>
+
+    <script type="module">
+        import '@folkjs/labs/standalone/folk-sand-hybrid';
+
+        const sandElement = document.getElementById('sandElement');
+        const statusDiv = document.getElementById('status');
+        let activeMaterial = 4; // Sand
+
+        // Update status
+        function updateStatus(message) {
+            statusDiv.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+        }
+
+        // Material button handlers
+        document.querySelectorAll('.material-button').forEach(button => {
+            button.addEventListener('click', () => {
+                let material;
+                if (button.dataset.materialName) {
+                    // Look up by name
+                    material = sandElement.getMaterialID(button.dataset.materialName);
+                    if (material === undefined) {
+                        updateStatus(`Material "${button.dataset.materialName}" not found`);
+                        return;
+                    }
+                } else {
+                    // Use numeric ID
+                    material = parseInt(button.dataset.material);
+                }
+                
+                sandElement.setMaterialType(material);
+                activeMaterial = material;
+                
+                // Update active button
+                document.querySelectorAll('.material-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                
+                const materialName = button.dataset.materialName || getMaterialName(material);
+                updateStatus(`Material set to: ${material} (${materialName})`);
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            const key = parseInt(e.key);
+            if (!isNaN(key) && key >= 0 && key <= 9) {
+                const materialType = key === 0 ? 10 : key;
+                sandElement.setMaterialType(materialType);
+                activeMaterial = materialType;
+                updateActiveButton(materialType);
+                updateStatus(`Material set to: ${materialType} (${getMaterialName(materialType)})`);
+            } else if (e.key === 'm' || e.key === 'M') {
+                sandElement.setMaterialType(11);
+                activeMaterial = 11;
+                updateActiveButton(11);
+                updateStatus(`Material set to: 11 (Moss)`);
+            }
+        });
+
+        function updateActiveButton(material) {
+            document.querySelectorAll('.material-button').forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.material) === material) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function getMaterialName(id) {
+            const names = {
+                0: 'Air', 1: 'Smoke', 2: 'Water', 3: 'Lava', 4: 'Sand',
+                5: 'Plant', 6: 'Stone', 7: 'Wall', 8: 'Ice', 9: 'Fire',
+                10: 'Steam', 11: 'Moss',
+                23: 'Oil', 87: 'Dirt', 88: 'Mud', 90: 'Rock', 97: 'Concrete',
+                100: 'Snow', 102: 'Wood', 103: 'Glass'
+            };
+            return names[id] || `Material ${id}`;
+        }
+
+        // Monitor material system initialization
+        sandElement.addEventListener('connected', () => {
+            updateStatus('Hybrid material system connected');
+            
+            // Try to get material info (if available)
+            setTimeout(() => {
+                try {
+                    const materialCount = sandElement.getMaterialID ? 'Available' : 'Initializing...';
+                    updateStatus(`Material system: ${materialCount} | Current: ${activeMaterial} (${getMaterialName(activeMaterial)})`);
+                } catch (e) {
+                    updateStatus(`Material system initialized | Current: ${activeMaterial} (${getMaterialName(activeMaterial)})`);
+                }
+            }, 1000);
+        });
+
+        // Initial status
+        updateStatus('Ready - Click materials or use keyboard (0-9, M for Moss)');
+    </script>
+</body>
+</html>
+
