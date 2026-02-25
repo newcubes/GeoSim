@@ -1,4 +1,4 @@
-# Image-to-Materials Simulator
+# GeoSim — Image-to-Materials Simulator
 
 Upload an image and watch it turn into a physics sandbox: pixels are mapped to materials (gases, liquids, powders, solids) by color, then simulated in real time.
 
