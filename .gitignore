@@ -17,7 +17,6 @@ tsconfig.tsbuildinfo
 .DS_Store
 .vscode/
 .idea/
-.cursor/
 
 # Logs and temp
 *.log
