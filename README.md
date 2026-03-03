@@ -1,8 +1,10 @@
-# GeoSim — Image-to-Materials Simulator
+# GeoSim — Sand Simulators
 
-Upload an image and watch it turn into a physics sandbox: pixels are mapped to materials (gases, liquids, powders, solids) by color, then simulated in real time.
+Physics sand simulators: upload an image to turn it into materials (gases, liquids, powders, solids), or run the various sand / element simulators.
 
-**Live app:** [Element Simulator v2 – Image Upload](http://localhost:5173/demos/element-simulator-v1-image-v2) (after running locally).
+**Main app:** [Element Simulator v2 – Image Upload](http://localhost:5173/demos/element-simulator-v1-image-v2) (after running locally).
+
+Demos included: element-simulator (v1, clamp, image, image-v2), sand-simulator, sand-simulator-hybrid, sand-simulator-customizable, sandboxels-simulator, and shader demos (falling-sand, distance-field, radiance-cascade, cross-iframe-sand).
 
 ## Run locally
 

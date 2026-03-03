@@ -49,10 +49,8 @@
       "clean": "if-file-deleted",
       "dependencies": [
         "../dom:build",
-        "../collab:build",
         "../geometry:build",
-        "../canvas:build",
-        "../propagators:build"
+        "../canvas:build"
       ],
       "files": [
         "src/**",
@@ -88,10 +86,8 @@
     "@codemirror/view": "^6.36.5",
     "@dimforge/rapier2d": "^0.15.0",
     "@folkjs/canvas": "0.0.7",
-    "@folkjs/collab": "0.0.7",
     "@folkjs/dom": "0.0.7",
     "@folkjs/geometry": "0.0.7",
-    "@folkjs/propagators": "0.0.7",
     "@mlc-ai/web-llm": "^0.2.78",
     "@typescript/vfs": "^1.6.1",
     "@volar/typescript-language-service": "^1.0.1",

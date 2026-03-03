@@ -7,7 +7,6 @@ import wasm from 'vite-plugin-wasm';
 // Local plugins
 import { cleanUrlHandler } from './__scripts__/vite-clean-urls';
 import { getCanvasFiles as getDemoFiles, linkGenerator } from './__scripts__/vite-link-generator';
-import { remark } from './__scripts__/vite-remark-md';
 
 const websiteDir = resolve(__dirname, '.');
 const demoWebsiteDir = resolve(__dirname, './demos');
@@ -18,12 +17,7 @@ function getEntryPoints() {
     index: resolve(websiteDir, 'index.html'),
   };
 
-  // Add site-level folders
-  ['file-space', 'hyperzoom', 'chess', 'canvas', 'live-2025', 'frello'].forEach((section) => {
-    entries[section] = resolve(websiteDir, section, 'index.html');
-  });
-
-  // Add all canvas files
+  // Add all sand-simulator demos
   getDemoFiles(demoWebsiteDir).forEach((file) => {
     const key = `demos/${file.relativePath.replace('.html', '')}`;
     entries[key] = resolve(demoWebsiteDir, file.fullPath);
@@ -39,7 +33,6 @@ export default defineConfig({
     ...(process.env.SKIP_MKCERT !== 'true' ? [mkcert()] : []),
     wasm(),
     topLevelAwait(),
-    remark(),
   ],
   build: {
     target: 'esnext',
