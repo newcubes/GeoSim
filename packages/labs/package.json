@@ -50,7 +50,8 @@
       "dependencies": [
         "../dom:build",
         "../geometry:build",
-        "../canvas:build"
+        "../canvas:build",
+        "../propagators:build"
       ],
       "files": [
         "src/**",
@@ -88,6 +89,7 @@
     "@folkjs/canvas": "0.0.7",
     "@folkjs/dom": "0.0.7",
     "@folkjs/geometry": "0.0.7",
+    "@folkjs/propagators": "0.0.7",
     "@mlc-ai/web-llm": "^0.2.78",
     "@typescript/vfs": "^1.6.1",
     "@volar/typescript-language-service": "^1.0.1",
@@ -113,6 +115,7 @@
   },
   "devDependencies": {
     "@types/hast": "^3.0.4",
+    "@types/leaflet": "^1.9.14",
     "@types/wicg-file-system-access": "^2023.10.7",
     "expect": "^29.7.0",
     "mitata": "^1.0.34",
