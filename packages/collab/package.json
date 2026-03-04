@@ -1,0 +1,8 @@
+{
+  "name": "@folkjs/collab-placeholder",
+  "private": true,
+  "description": "Placeholder so Vercel Root Directory packages/collab still builds from repo root",
+  "scripts": {
+    "build": "cd ../.. && npm run build --workspace=website"
+  }
+}
